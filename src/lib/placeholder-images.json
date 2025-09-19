@@ -1,3 +1,4 @@
+
 {
   "placeholderImages": [
     {
@@ -107,6 +108,20 @@
       "description": "A jar of organic wild honey.",
       "imageUrl": "https://picsum.photos/seed/honey/400/400",
       "imageHint": "honey jar"
-    }
+    },
+    { "id": "gallery-adventure", "description": "Adventure activities", "imageUrl": "https://picsum.photos/seed/adv/400/500", "imageHint": "rock climbing" },
+    { "id": "gallery-art-culture", "description": "Art and Culture", "imageUrl": "https://picsum.photos/seed/art/400/500", "imageHint": "tribal painting" },
+    { "id": "gallery-crafts", "description": "Handicrafts", "imageUrl": "https://picsum.photos/seed/craft/400/500", "imageHint": "pottery making" },
+    { "id": "gallery-cuisine", "description": "Local Cuisine", "imageUrl": "https://picsum.photos/seed/cui/400/500", "imageHint": "indian food" },
+    { "id": "gallery-festivals", "description": "Festivals of Jharkhand", "imageUrl": "https://picsum.photos/seed/fest/400/500", "imageHint": "colorful festival" },
+    { "id": "gallery-forts", "description": "Ancient Forts", "imageUrl": "https://picsum.photos/seed/fort/400/500", "imageHint": "old fort" },
+    { "id": "gallery-hills", "description": "Lush green hills", "imageUrl": "https://picsum.photos/seed/hill/400/500", "imageHint": "green hills" },
+    { "id": "gallery-lakes", "description": "Serene Lakes", "imageUrl": "https://picsum.photos/seed/lake/400/500", "imageHint": "calm lake" },
+    { "id": "gallery-monuments", "description": "Historical Monuments", "imageUrl": "https://picsum.photos/seed/monu/400/500", "imageHint": "ancient monument" },
+    { "id": "gallery-museums", "description": "State Museums", "imageUrl": "https://picsum.photos/seed/muse/400/500", "imageHint": "museum interior" },
+    { "id": "gallery-pilgrim", "description": "Pilgrimage sites", "imageUrl": "https://picsum.photos/seed/pilg/400/500", "imageHint": "hindu temple" },
+    { "id": "gallery-waterfalls", "description": "Majestic Waterfalls", "imageUrl": "https://picsum.photos/seed/wfall/400/500", "imageHint": "waterfall jungle" },
+    { "id": "gallery-wellness", "description": "Wellness and Retreats", "imageUrl": "https://picsum.photos/seed/well/400/500", "imageHint": "yoga meditation" },
+    { "id": "gallery-wildlife", "description": "Wildlife Sanctuaries", "imageUrl": "https://picsum.photos/seed/wild/400/500", "imageHint": "elephant forest" }
   ]
 }

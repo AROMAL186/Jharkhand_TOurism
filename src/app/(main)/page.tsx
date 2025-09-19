@@ -1,4 +1,5 @@
 
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -10,7 +11,7 @@ import {
 } from '@/components/ui/carousel';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Trees, Landmark, Leaf, Mountain, Quote, Gem } from 'lucide-react';
+import { ArrowRight, Trees, Landmark, Leaf, Mountain, Quote, Gem, Search } from 'lucide-react';
 import { culturalHighlights, topDestinations } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
@@ -34,9 +35,26 @@ const facts = [
     }
 ];
 
+const galleryCategories = [
+    { name: 'Adventure', imageId: 'gallery-adventure' },
+    { name: 'Art & Culture', imageId: 'gallery-art-culture' },
+    { name: 'Crafts', imageId: 'gallery-crafts' },
+    { name: 'Cuisine', imageId: 'gallery-cuisine' },
+    { name: 'Festivals', imageId: 'gallery-festivals' },
+    { name: 'Forts', imageId: 'gallery-forts' },
+    { name: 'Hills', imageId: 'gallery-hills' },
+    { name: 'Lakes', imageId: 'gallery-lakes' },
+    { name: 'Monuments', imageId: 'gallery-monuments' },
+    { name: 'Museums', imageId: 'gallery-museums' },
+    { name: 'Pilgrim Centres', imageId: 'gallery-pilgrim' },
+    { name: 'Waterfalls', imageId: 'gallery-waterfalls' },
+    { name: 'Wellness', imageId: 'gallery-wellness' },
+    { name: 'Wildlife', imageId: 'gallery-wildlife' },
+];
+
 export default function HomePage() {
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-16">
       <section className="relative h-[60vh] w-full rounded-lg overflow-hidden">
         {heroImage && (
           <Image
@@ -133,6 +151,49 @@ export default function HomePage() {
           <CarouselPrevious className="ml-12" />
           <CarouselNext className="mr-12" />
         </Carousel>
+      </section>
+
+      <section>
+        <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold font-headline flex items-center justify-center gap-2">
+                <Search className="text-primary" /> Explore Jharkhand
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto mt-2">Discover the experiences that await you in this beautiful state.</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            {galleryCategories.map(category => {
+                const img = PlaceHolderImages.find(p => p.id === category.imageId);
+                return (
+                    <Link href="#" key={category.name} className="block group">
+                        <Card className="overflow-hidden relative h-56">
+                             {img && (
+                                <Image
+                                    src={img.imageUrl}
+                                    alt={category.name}
+                                    fill
+                                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                                    data-ai-hint={img.imageHint}
+                                />
+                             )}
+                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                             <div className="absolute bottom-0 left-0 p-4">
+                                 <h3 className="text-white font-bold font-headline text-lg drop-shadow-md">{category.name}</h3>
+                             </div>
+                        </Card>
+                    </Link>
+                )
+            })}
+             <Link href="/itinerary" className="block group">
+                <Card className="overflow-hidden relative h-56 bg-primary/10 flex flex-col items-center justify-center text-center p-4 hover:bg-primary/20 transition-colors">
+                     <div className="absolute inset-0" />
+                     <div className="relative">
+                         <h3 className="text-primary font-bold font-headline text-lg">Start Planning</h3>
+                         <p className="text-sm text-primary/80 mt-1">Create your custom trip now</p>
+                         <Button variant="link" className="mt-2 text-primary">Go <ArrowRight className="ml-1"/></Button>
+                     </div>
+                </Card>
+            </Link>
+        </div>
       </section>
 
       <section>
