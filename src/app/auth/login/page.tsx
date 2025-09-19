@@ -27,6 +27,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Loader2, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import AppLogo from '@/components/app-logo';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address.'),
@@ -37,6 +38,7 @@ const formSchema = z.object({
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,6 +57,7 @@ export default function LoginPage() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     // Replace with actual login logic
     setLoading(false);
+    router.push('/');
   }
 
   return (
