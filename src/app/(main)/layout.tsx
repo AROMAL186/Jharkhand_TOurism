@@ -1,17 +1,7 @@
+
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarHeader,
-  SidebarContent,
-  SidebarMenu,
-  SidebarMenuItem,
-  SidebarMenuButton,
-  SidebarInset,
-  SidebarTrigger,
-} from '@/components/ui/sidebar';
 import {
   LayoutDashboard,
   ClipboardList,
@@ -21,11 +11,15 @@ import {
   MessageSquare,
   LogIn,
   LogOut,
+  Menu,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { MobileNav } from '@/components/mobile-nav';
 
-const navItems = [
+export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
   { href: '/itinerary', label: 'Itinerary Planner', icon: ClipboardList },
   { href: '/map', label: 'Interactive Map', icon: Map },
@@ -59,65 +53,48 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   }
 
   return (
-    <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader>
-          <div className="flex items-center gap-2 p-1">
+    <div className="flex min-h-screen w-full flex-col">
+      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-50">
+        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-lg font-semibold md:text-base"
+          >
             <AppLogo />
-          </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            {navItems.map((item) => (
-              <SidebarMenuItem key={item.label}>
-                <Link href={item.href} passHref legacyBehavior>
-                  <SidebarMenuButton
-                    isActive={pathname === item.href}
-                    tooltip={item.label}
-                  >
-                    <item.icon />
-                    <span>{item.label}</span>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-            ))}
+            <span className="sr-only">Jharkhand Explorer</span>
+          </Link>
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className={`transition-colors hover:text-foreground ${
+                pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <MobileNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        <div className="flex w-full items-center justify-end gap-4 md:ml-auto md:gap-2 lg:gap-4">
+           <div className="hidden md:flex items-center gap-4">
             {isLoggedIn ? (
-               <SidebarMenuItem>
-                 <SidebarMenuButton
-                   onClick={handleLogout}
-                   tooltip={"Logout"}
-                 >
-                   <LogOut />
-                   <span>{"Logout"}</span>
-                 </SidebarMenuButton>
-               </SidebarMenuItem>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4" /> Logout
+                </Button>
             ) : (
-             <SidebarMenuItem>
-                <Link href="/auth/login" passHref legacyBehavior>
-                  <SidebarMenuButton
-                    isActive={pathname === "/auth/login"}
-                    tooltip={"Login"}
-                  >
-                    <LogIn />
-                    <span>{"Login"}</span>
-                  </SidebarMenuButton>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/auth/login">
+                  <LogIn className="mr-2 h-4 w-4" /> Login
                 </Link>
-              </SidebarMenuItem>
+              </Button>
             )}
-          </SidebarMenu>
-        </SidebarContent>
-      </Sidebar>
-      <SidebarInset>
-        <header className="sticky top-0 z-10 flex h-14 items-center justify-between gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:h-16 sm:px-6">
-          <div className="flex items-center gap-2">
-            <SidebarTrigger className="md:hidden" />
-            <div className="hidden md:block">
-              <AppLogo />
-            </div>
-          </div>
-        </header>
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
-      </SidebarInset>
-    </SidebarProvider>
+           </div>
+        </div>
+      </header>
+      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+        {children}
+      </main>
+    </div>
   );
 }
