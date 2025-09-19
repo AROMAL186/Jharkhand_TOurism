@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar as CalendarIcon, Users, Mountain, Camera, Sparkles, Utensils, MapPin, Building, Sprout, Handshake } from 'lucide-react';
+import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar as CalendarIcon, Users, Mountain, Camera, Sparkles, Utensils, MapPin, Building, Sprout, Handshake, Clock, Flag } from 'lucide-react';
 import { generatePersonalizedItinerary, PersonalizedItineraryOutput } from '@/ai/flows/personalized-itinerary';
 import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -65,6 +65,34 @@ const formSchema = z.object({
   }),
   pace: z.enum(['relaxed', 'moderate', 'packed']), // Keep pace from previous version
 });
+
+const ItineraryTimeline = ({ itinerary }: { itinerary: PersonalizedItineraryOutput['itinerary'] }) => {
+  if (!itinerary || itinerary.length === 0) return null;
+
+  return (
+    <div className="space-y-8">
+      {itinerary.map((day) => (
+        <div key={day.day}>
+          <h3 className="text-2xl font-bold font-headline text-primary mb-4 flex items-center gap-2">
+            <CalendarIcon className="h-6 w-6" />
+            Day {day.day}: {day.title}
+          </h3>
+          <div className="border-l-2 border-primary/20 pl-6 space-y-6">
+            {day.activities.map((activity, index) => (
+              <div key={index} className="relative">
+                <div className="absolute -left-[34px] top-1.5 h-4 w-4 rounded-full bg-primary/20 border-4 border-background" />
+                <p className="font-semibold text-green-600 flex items-center gap-2"><Clock className="h-4 w-4" />{activity.time}</p>
+                <p className="font-semibold text-foreground mt-1 flex items-center gap-2"><MapPin className="h-4 w-4 text-muted-foreground" />{activity.location}</p>
+                <p className="text-muted-foreground mt-1 ml-6 flex items-start gap-2"><Flag className="h-4 w-4 mt-1 flex-shrink-0" />{activity.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 
 export function ItineraryForm() {
   const [loading, setLoading] = useState(false);
@@ -349,9 +377,7 @@ export function ItineraryForm() {
                     <CardTitle>Detailed Plan</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="prose prose-stone dark:prose-invert max-w-none whitespace-pre-wrap">
-                        {result.itinerary}
-                    </div>
+                   <ItineraryTimeline itinerary={result.itinerary} />
                 </CardContent>
             </Card>
         </div>

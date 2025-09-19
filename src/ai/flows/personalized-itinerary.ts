@@ -29,10 +29,21 @@ export type PersonalizedItineraryInput = z.infer<
   typeof PersonalizedItineraryInputSchema
 >;
 
+const ItineraryActivitySchema = z.object({
+    time: z.string().describe("The time of day for the activity (e.g., Morning, Late Morning, Afternoon, Evening)."),
+    location: z.string().describe("The name of the location or destination for the activity."),
+    description: z.string().describe("A short description of the activity to be performed.")
+});
+
+const ItineraryDaySchema = z.object({
+    day: z.number().describe("The day number of the itinerary (e.g., 1, 2, 3)."),
+    title: z.string().describe("A catchy title for the day's plan."),
+    activities: z.array(ItineraryActivitySchema).describe("A list of activities for the day.")
+});
+
+
 const PersonalizedItineraryOutputSchema = z.object({
-  itinerary: z
-    .string()
-    .describe('A day-by-day, detailed travel itinerary for the tourist, including destinations, activities, and estimated time for each activity. Use Markdown for formatting.'),
+  itinerary: z.array(ItineraryDaySchema).describe("A day-by-day, detailed travel itinerary for the tourist."),
   overallTheme: z.string().describe('A short summary of the overall theme of the itinerary.'),
   estimatedCost: z
     .string()
@@ -62,7 +73,8 @@ const prompt = ai.definePrompt({
   Location Preferences: {{{locationPreferences}}}
   Pace: {{{pace}}}
 
-  Provide a detailed, day-by-day itinerary, including destinations, activities, and estimated time for each activity. Use Markdown for clear formatting (e.g., headings for days, bullet points for activities). Also, provide a short summary of the overall theme of the itinerary and an estimated cost for the entire trip.
+  Provide a detailed, day-by-day itinerary. For each day, provide a title and a list of activities. Each activity should have a time (like Morning, Afternoon), a location, and a description.
+  Also, provide a short summary of the overall theme of the itinerary and an estimated cost for the entire trip.
   If no location preferences provided, focus on the most popular tourism locations.`,
 });
 
