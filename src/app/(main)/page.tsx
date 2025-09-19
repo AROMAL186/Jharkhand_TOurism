@@ -89,7 +89,7 @@ export default function HomePage() {
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-3xl font-bold font-headline flex items-center gap-2">
-            <Trees className="text-accent" /> Top Destinations
+            <Trees className="text-accent" /> Places to Visit
           </h2>
           <Button variant="link" asChild>
             <Link href="/map">View all on map <ArrowRight className="ml-1" /></Link>
