@@ -139,7 +139,7 @@ export function ItineraryForm() {
                         </FormControl>
                         </FormItem>
                     )}
-                    />
+                    />,
                 <FormField
                     control={form.control}
                     name="groupSize"
@@ -149,7 +149,6 @@ export function ItineraryForm() {
                         <FormControl>
                             <Slider
                                 value={[field.value]}
-                                onValue.nodeValue="[field.value]"
                                 onValueChange={(value) => field.onChange(value[0])}
                                 min={1}
                                 max={20}
@@ -316,5 +315,3 @@ export function ItineraryForm() {
     </>
   );
 }
-
-    
