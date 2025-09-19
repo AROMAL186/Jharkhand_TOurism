@@ -89,7 +89,7 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          {navItems.slice(2).map((item) => (
+          {navItems.slice(1).map((item) => (
             <Link
               key={item.label}
               href={item.href}

@@ -11,6 +11,7 @@ import {
   MessageSquare,
   LogIn,
   LogOut,
+  GalleryHorizontal,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ import { PlanTripMenu } from '@/components/plan-trip-menu';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
+  { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
   { href: '/itinerary', label: 'Itinerary Planner', icon: ClipboardList },
   { href: '/map', label: 'Interactive Map', icon: Map },
   { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
@@ -80,7 +82,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             ))}
             <DestinationsMenu />
             <PlanTripMenu />
-            {navItems.slice(2).map((item) => (
+            {navItems.slice(1).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
