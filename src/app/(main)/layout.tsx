@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { MobileNav } from '@/components/mobile-nav';
 import { DestinationsMenu } from '@/components/destinations-menu';
+import { PlanTripMenu } from '@/components/plan-trip-menu';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
@@ -78,6 +79,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               </Link>
             ))}
             <DestinationsMenu />
+            <PlanTripMenu />
             {navItems.slice(2).map((item) => (
               <Link
                 key={item.label}
