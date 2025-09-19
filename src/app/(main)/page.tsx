@@ -107,23 +107,25 @@ export default function HomePage() {
               const img = PlaceHolderImages.find((p) => p.id === dest.imageId);
               return (
                 <CarouselItem key={dest.name} className="md:basis-1/2 lg:basis-1/3">
-                  <Card className="overflow-hidden h-full">
-                    <div className="relative h-56 w-full">
-                      {img && (
-                        <Image
-                          src={img.imageUrl}
-                          alt={dest.name}
-                          fill
-                          className="object-cover transition-transform duration-300 hover:scale-105"
-                          data-ai-hint={img.imageHint}
-                        />
-                      )}
-                    </div>
-                    <CardHeader>
-                      <CardTitle>{dest.name}</CardTitle>
-                      <CardDescription>{dest.shortDescription}</CardDescription>
-                    </CardHeader>
-                  </Card>
+                  <Link href={`/destinations/${dest.slug}`} className="block h-full">
+                    <Card className="overflow-hidden h-full group">
+                      <div className="relative h-56 w-full">
+                        {img && (
+                          <Image
+                            src={img.imageUrl}
+                            alt={dest.name}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            data-ai-hint={img.imageHint}
+                          />
+                        )}
+                      </div>
+                      <CardHeader>
+                        <CardTitle>{dest.name}</CardTitle>
+                        <CardDescription>{dest.shortDescription}</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  </Link>
                 </CarouselItem>
               );
             })}

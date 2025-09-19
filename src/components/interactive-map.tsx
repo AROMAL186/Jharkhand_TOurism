@@ -1,17 +1,14 @@
 "use client";
 
-import { APIProvider, Map, AdvancedMarker, InfoWindow } from '@vis.gl/react-google-maps';
-import { useState } from 'react';
+import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
+import { useRouter } from 'next/navigation';
 import { topDestinations } from '@/lib/data';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './ui/card';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import Image from 'next/image';
 
 type Location = typeof topDestinations[0];
 
 export default function InteractiveMap() {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-    const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+    const router = useRouter();
 
     if (!apiKey) {
         return (
@@ -26,7 +23,9 @@ export default function InteractiveMap() {
     // Jharkhand's approximate center
     const position = { lat: 23.6345, lng: 85.3847 };
 
-    const selectedImage = PlaceHolderImages.find((p) => p.id === selectedLocation?.imageId);
+    const handleMarkerClick = (slug: string) => {
+        router.push(`/destinations/${slug}`);
+    }
 
     return (
         <APIProvider apiKey={apiKey}>
@@ -41,39 +40,9 @@ export default function InteractiveMap() {
                     <AdvancedMarker
                         key={loc.name}
                         position={loc.coordinates}
-                        onClick={() => setSelectedLocation(loc)}
+                        onClick={() => handleMarkerClick(loc.slug)}
                     />
                 ))}
-
-                {selectedLocation && (
-                    <InfoWindow
-                        position={selectedLocation.coordinates}
-                        onCloseClick={() => setSelectedLocation(null)}
-                        minWidth={200}
-                    >
-                        <Card className="border-none shadow-none max-w-sm">
-                             {selectedImage && (
-                                <div className="relative h-40 w-full">
-                                    <Image
-                                        src={selectedImage.imageUrl}
-                                        alt={selectedLocation.name}
-                                        fill
-                                        className="object-cover rounded-t-lg"
-                                        data-ai-hint={selectedImage.imageHint}
-                                    />
-                                </div>
-                            )}
-                            <CardHeader>
-                                <CardTitle>{selectedLocation.name}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-sm text-muted-foreground">
-                                    {selectedLocation.shortDescription}
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </InfoWindow>
-                )}
             </Map>
         </APIProvider>
     );
