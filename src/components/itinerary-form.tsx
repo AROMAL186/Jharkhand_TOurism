@@ -18,7 +18,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, DollarSign, Lightbulb } from 'lucide-react';
+import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar, Gauge, MapPin } from 'lucide-react';
 import { generatePersonalizedItinerary, PersonalizedItineraryOutput } from '@/ai/flows/personalized-itinerary';
 
 const formSchema = z.object({
@@ -72,9 +72,9 @@ export function ItineraryForm() {
                   name="interests"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Your Interests</FormLabel>
+                      <FormLabel className="flex items-center gap-2"><Leaf /> Your Interests</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="e.g., Waterfalls, trekking, temples, local art..." {...field} />
+                        <Textarea placeholder="e.g., Waterfalls, trekking, temples, local art..." {...field} rows={4} />
                       </FormControl>
                       <FormDescription>What do you love to do?</FormDescription>
                       <FormMessage />
@@ -86,9 +86,9 @@ export function ItineraryForm() {
                   name="preferences"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Travel Preferences</FormLabel>
+                      <FormLabel className="flex items-center gap-2"><Heart /> Travel Preferences</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="e.g., Budget, accommodation type, food..." {...field} />
+                        <Textarea placeholder="e.g., Budget, accommodation type, food..." {...field} rows={4} />
                       </FormControl>
                       <FormDescription>How do you like to travel?</FormDescription>
                       <FormMessage />
@@ -102,7 +102,7 @@ export function ItineraryForm() {
                   name="availableTime"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Available Time</FormLabel>
+                      <FormLabel className="flex items-center gap-2"><Calendar /> Available Time</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., 3 days, 1 week" {...field} />
                       </FormControl>
@@ -115,7 +115,7 @@ export function ItineraryForm() {
                   name="pace"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Pace</FormLabel>
+                      <FormLabel className="flex items-center gap-2"><Gauge /> Pace</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
@@ -137,9 +137,9 @@ export function ItineraryForm() {
                   name="locationPreferences"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Location Preferences (Optional)</FormLabel>
+                      <FormLabel className="flex items-center gap-2"><MapPin /> Location Preferences</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., Ranchi, Netarhat" {...field} />
+                        <Input placeholder="e.g., Ranchi, Netarhat (Optional)" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
