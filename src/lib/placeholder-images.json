@@ -1,3 +1,112 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-background",
+      "description": "A scenic view of Jharkhand's landscape.",
+      "imageUrl": "https://picsum.photos/seed/hero/1920/1080",
+      "imageHint": "landscape valley"
+    },
+    {
+      "id": "dest-netarhat",
+      "description": "Netarhat, the Queen of Chotanagpur.",
+      "imageUrl": "https://picsum.photos/seed/netarhat/600/400",
+      "imageHint": "sunrise hill"
+    },
+    {
+      "id": "dest-patratu",
+      "description": "The winding roads of Patratu Valley.",
+      "imageUrl": "https://picsum.photos/seed/patratu/600/400",
+      "imageHint": "winding road"
+    },
+    {
+      "id": "dest-betla",
+      "description": "Wildlife in Betla National Park.",
+      "imageUrl": "https://picsum.photos/seed/betla/600/400",
+      "imageHint": "wildlife deer"
+    },
+    {
+      "id": "dest-hundru",
+      "description": "The majestic Hundru Falls.",
+      "imageUrl": "https://picsum.photos/seed/hundru/600/400",
+      "imageHint": "waterfall cliff"
+    },
+    {
+      "id": "dest-deoghar",
+      "description": "The Baidyanath Temple in Deoghar.",
+      "imageUrl": "https://picsum.photos/seed/deoghar/600/400",
+      "imageHint": "temple architecture"
+    },
+    {
+      "id": "dest-dassam",
+      "description": "The cascading Dassam Falls.",
+      "imageUrl": "https://picsum.photos/seed/dassam/600/400",
+      "imageHint": "waterfall rocks"
+    },
+    {
+      "id": "culture-sohrai",
+      "description": "Traditional Sohrai mural art.",
+      "imageUrl": "https://picsum.photos/seed/sohrai/600/400",
+      "imageHint": "tribal art"
+    },
+    {
+      "id": "culture-chhau",
+      "description": "A vibrant Chhau dancer with a mask.",
+      "imageUrl": "https://picsum.photos/seed/chhau/600/400",
+      "imageHint": "dance mask"
+    },
+    {
+      "id": "culture-cuisine",
+      "description": "A plate of delicious Jharkhandi cuisine.",
+      "imageUrl": "https://picsum.photos/seed/cuisine/600/400",
+      "imageHint": "food plate"
+    },
+    {
+      "id": "market-dokra",
+      "description": "A Dokra art elephant figurine.",
+      "imageUrl": "https://picsum.photos/seed/dokra/400/400",
+      "imageHint": "metal statue"
+    },
+    {
+      "id": "market-sohrai-vase",
+      "description": "A vase painted with Sohrai art.",
+      "imageUrl": "https://picsum.photos/seed/sohraivase/400/400",
+      "imageHint": "painted pottery"
+    },
+    {
+      "id": "market-bamboo",
+      "description": "A handcrafted bamboo pen stand.",
+      "imageUrl": "https://picsum.photos/seed/bamboo/400/400",
+      "imageHint": "bamboo craft"
+    },
+    {
+      "id": "market-shawl",
+      "description": "A handwoven tribal shawl.",
+      "imageUrl": "https://picsum.photos/seed/shawl/400/400",
+      "imageHint": "textile pattern"
+    },
+    {
+      "id": "market-tour-netarhat",
+      "description": "An eco-tourism package for Netarhat.",
+      "imageUrl": "https://picsum.photos/seed/tournetarhat/400/400",
+      "imageHint": "mountain landscape"
+    },
+    {
+      "id": "market-chhau-mask",
+      "description": "A wooden Chhau dance mask.",
+      "imageUrl": "https://picsum.photos/seed/chhaumask/400/400",
+      "imageHint": "wooden mask"
+    },
+    {
+      "id": "market-homestay",
+      "description": "A homestay in a tribal village.",
+      "imageUrl": "https://picsum.photos/seed/homestay/400/400",
+      "imageHint": "village hut"
+    },
+    {
+      "id": "market-honey",
+      "description": "A jar of organic wild honey.",
+      "imageUrl": "https://picsum.photos/seed/honey/400/400",
+      "imageHint": "honey jar"
+    }
+  ]
 }

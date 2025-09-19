@@ -1,0 +1,59 @@
+import Image from 'next/image';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { marketplaceItems } from '@/lib/data';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { ShoppingBasket, ShoppingCart } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+export default function MarketplacePage() {
+  return (
+    <div className="container mx-auto">
+       <Card className="border-none shadow-none mb-8">
+        <CardHeader className="text-center">
+          <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit mb-4">
+             <ShoppingBasket className="h-8 w-8 text-primary" />
+          </div>
+          <CardTitle className="text-3xl font-headline font-bold">Local Marketplace</CardTitle>
+          <CardDescription className="text-lg">
+            Support local artisans and take home a piece of Jharkhand's culture.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {marketplaceItems.map((item) => {
+          const img = PlaceHolderImages.find((p) => p.id === item.imageId);
+          return (
+            <Card key={item.id} className="flex flex-col overflow-hidden group">
+              <div className="relative h-64 w-full">
+                {img && (
+                  <Image
+                    src={img.imageUrl}
+                    alt={item.name}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    data-ai-hint={img.imageHint}
+                  />
+                )}
+                <Badge variant="secondary" className="absolute top-2 right-2">{item.category}</Badge>
+              </div>
+              <CardHeader>
+                <CardTitle>{item.name}</CardTitle>
+                <CardDescription>by {item.artisan}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-2xl font-semibold text-primary">{item.price}</p>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full">
+                  <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+                </Button>
+              </CardFooter>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
