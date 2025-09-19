@@ -19,7 +19,7 @@ import {
   ShoppingBasket,
   Bus,
   MessageSquare,
-  Trees,
+  LogIn,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 
@@ -34,6 +34,10 @@ const navItems = [
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
+  if (pathname.startsWith('/auth')) {
+    return <>{children}</>;
+  }
 
   return (
     <SidebarProvider>
@@ -58,6 +62,17 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               </SidebarMenuItem>
             ))}
+             <SidebarMenuItem>
+                <Link href="/auth/login" passHref legacyBehavior>
+                  <SidebarMenuButton
+                    isActive={pathname === "/auth/login"}
+                    tooltip={"Login"}
+                  >
+                    <LogIn />
+                    <span>{"Login"}</span>
+                  </SidebarMenuButton>
+                </Link>
+              </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
       </Sidebar>
