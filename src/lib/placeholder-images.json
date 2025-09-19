@@ -126,6 +126,10 @@
     { "id": "adventure-parasnath", "description": "Parasnath Hills", "imageUrl": "https://picsum.photos/seed/parasnath/600/400", "imageHint": "mountain temple" },
     { "id": "adventure-trikut", "description": "Trikut Pahar Ropeway", "imageUrl": "https://picsum.photos/seed/trikut/600/400", "imageHint": "ropeway mountain" },
     { "id": "adventure-canary", "description": "Canary Hill", "imageUrl": "https://picsum.photos/seed/canary/600/400", "imageHint": "hilltop view" },
-    { "id": "adventure-khandoli", "description": "Khandoli Park", "imageUrl": "https://picsum.photos/seed/khandoli/600/400", "imageHint": "parasailing lake" }
+    { "id": "adventure-khandoli", "description": "Khandoli Park", "imageUrl": "https://picsum.photos/seed/khandoli/600/400", "imageHint": "parasailing lake" },
+    { "id": "art-sohrai-khovar", "description": "Sohrai Khovar Painting", "imageUrl": "https://picsum.photos/seed/sohraikhovar/600/400", "imageHint": "mural painting" },
+    { "id": "art-chhau", "description": "Chhau Dance of Seraikela", "imageUrl": "https://picsum.photos/seed/chhaudance/600/400", "imageHint": "masked dance" },
+    { "id": "art-dokra", "description": "Dokra Art of Dumka", "imageUrl": "https://picsum.photos/seed/dokraart/600/400", "imageHint": "metal craft" },
+    { "id": "art-museum", "description": "State Museum Hotwar", "imageUrl": "https://picsum.photos/seed/statemuseum/600/400", "imageHint": "museum gallery" }
   ]
 }

@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const galleryCategories = [
     { name: 'Adventure', imageId: 'gallery-adventure', href: '/gallery/adventure' },
-    { name: 'Art & Culture', imageId: 'gallery-art-culture', href: '#' },
+    { name: 'Art & Culture', imageId: 'gallery-art-culture', href: '/gallery/art-culture' },
     { name: 'Crafts', imageId: 'gallery-crafts', href: '#' },
     { name: 'Cuisine', imageId: 'gallery-cuisine', href: '#' },
     { name: 'Festivals', imageId: 'gallery-festivals', href: '#' },

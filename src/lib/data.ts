@@ -1,4 +1,5 @@
 
+
 export const topDestinations = [
   {
     name: 'Netarhat',
@@ -74,6 +75,33 @@ export const adventureDestinations = [
     slug: 'khandoli-park',
     description: 'An adventure hub offering activities like parasailing, rock climbing, and boating in the shadow of Khandoli Hill.',
     imageId: 'adventure-khandoli',
+  }
+];
+
+export const artAndCultureDestinations = [
+  {
+    name: 'Sohrai Khovar Painting',
+    slug: 'sohrai-khovar-painting',
+    description: 'Explore villages in Hazaribagh where this traditional mural art form, a GI-tagged heritage, adorns the mud walls of homes.',
+    imageId: 'art-sohrai-khovar',
+  },
+  {
+    name: 'Chhau Dance of Seraikela',
+    slug: 'chhau-dance',
+    description: 'Witness the vibrant and martial art form of Chhau dance, with its intricate masks and powerful movements, in its place of origin, Seraikela.',
+    imageId: 'art-chhau',
+  },
+  {
+    name: 'Dokra Art of Dumka',
+    slug: 'dokra-art',
+    description: 'Visit artisan villages in Dumka to see the ancient bell metal casting technique of Dokra, used to create beautiful figurines and jewelry.',
+    imageId: 'art-dokra',
+  },
+  {
+    name: 'State Museum Hotwar',
+    slug: 'state-museum-hotwar',
+    description: 'Located in Ranchi, this museum houses a vast collection of archaeological finds, ethnographic objects, and art that tells the story of Jharkhand.',
+    imageId: 'art-museum',
   }
 ];
 
@@ -177,3 +205,4 @@ export const trainRoutes = [
     { id: 3, trainName: 'Tatanagar-Danapur Express', trainNumber: '18183', route: 'Tatanagar to Danapur', scheduledArrival: '04:00 PM', status: 'Delayed' },
     { id: 4, trainName: 'Howrah - Ranchi Shatabdi Express', trainNumber: '12019', route: 'Howrah to Ranchi', scheduledArrival: '01:15 PM', status: 'Arrived' },
 ];
+
