@@ -16,6 +16,7 @@ import AppLogo from '@/components/app-logo';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { MobileNav } from '@/components/mobile-nav';
+import { DestinationsMenu } from '@/components/destinations-menu';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
@@ -65,7 +66,19 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <span className="sr-only">Jharkhand Explorer</span>
           </Link>
           <nav className="hidden md:flex items-center gap-5 text-sm font-medium lg:gap-6">
-            {navItems.map((item) => (
+            {navItems.slice(0, 1).map((item) => (
+               <Link
+                key={item.label}
+                href={item.href}
+                className={`transition-colors hover:text-foreground ${
+                  pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <DestinationsMenu />
+            {navItems.slice(2).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}

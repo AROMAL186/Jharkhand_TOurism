@@ -2,7 +2,7 @@
 'use client';
 
 import Link from "next/link";
-import { Menu, LogIn, LogOut } from "lucide-react";
+import { Menu, LogIn, LogOut, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,13 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AppLogo from "@/components/app-logo";
 import { navItems } from "@/app/(main)/layout";
 import { useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { topDestinations } from "@/lib/data";
 
 interface MobileNavProps {
   isLoggedIn: boolean;
@@ -32,7 +39,7 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
           <span className="sr-only">Toggle navigation menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left">
+      <SheetContent side="left" className="flex flex-col">
         <nav className="grid gap-6 text-lg font-medium">
           <Link
             href="/"
@@ -42,7 +49,47 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
             <AppLogo />
             <span className="sr-only">Jharkhand Explorer</span>
           </Link>
-          {navItems.map((item) => (
+          {navItems.slice(0, 1).map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors hover:text-foreground ${
+                pathname === item.href ? 'text-foreground bg-muted' : 'text-muted-foreground'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+           <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="destinations" className="border-b-0">
+              <AccordionTrigger className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-muted-foreground hover:no-underline hover:text-foreground hover:bg-muted [&[data-state=open]]:text-foreground [&[data-state=open]]:bg-muted">
+                <span className="flex items-center">Destinations</span>
+              </AccordionTrigger>
+              <AccordionContent className="pb-0">
+                <div className="ml-4 mt-2 flex flex-col space-y-2">
+                  {topDestinations.map(dest => (
+                    <Link
+                      key={dest.slug}
+                      href={`/destinations/${dest.slug}`}
+                      onClick={() => setIsOpen(false)}
+                      className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                    >
+                      {dest.name}
+                    </Link>
+                  ))}
+                  <Link
+                      href="/map"
+                      onClick={() => setIsOpen(false)}
+                      className="block rounded-md px-3 py-2 text-primary font-semibold"
+                    >
+                      View All on Map
+                    </Link>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          {navItems.slice(2).map((item) => (
             <Link
               key={item.label}
               href={item.href}
@@ -55,7 +102,7 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
             </Link>
           ))}
         </nav>
-        <div className="absolute bottom-6 left-6 right-6">
+        <div className="mt-auto">
            {isLoggedIn ? (
               <Button variant="outline" size="sm" onClick={() => {
                 setIsOpen(false);
