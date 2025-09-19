@@ -16,10 +16,14 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar, Users, Mountain, Camera, Sparkles, Utensils, MapPin, Building, Sprout, Handshake } from 'lucide-react';
+import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar as CalendarIcon, Users, Mountain, Camera, Sparkles, Utensils, MapPin, Building, Sprout, Handshake } from 'lucide-react';
 import { generatePersonalizedItinerary, PersonalizedItineraryOutput } from '@/ai/flows/personalized-itinerary';
 import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import { cn } from '@/lib/utils';
+import { format, addDays, differenceInDays } from 'date-fns';
 
 const interests = [
     { id: 'wildlife', label: 'Wildlife & Nature', icon: Sprout },
@@ -43,7 +47,14 @@ const travelPreferences = [
 ]
 
 const formSchema = z.object({
-  duration: z.number().min(1).max(30),
+  dateRange: z.object({
+    from: z.date({
+      required_error: "A start date is required.",
+    }),
+    to: z.date({
+      required_error: "An end date is required.",
+    }),
+  }),
   budget: z.number().min(1000).max(100000),
   groupSize: z.number().min(1).max(20),
   interests: z.array(z.string()).refine(value => value.some(item => item), {
@@ -63,7 +74,10 @@ export function ItineraryForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      duration: 3,
+      dateRange: {
+        from: new Date(),
+        to: addDays(new Date(), 3),
+      },
       budget: 15000,
       groupSize: 2,
       interests: ["eco-tourism", "heritage"],
@@ -77,10 +91,12 @@ export function ItineraryForm() {
     setResult(null);
     setError(null);
 
+    const duration = differenceInDays(values.dateRange.to, values.dateRange.from) + 1;
+
     const submissionData = {
         interests: values.interests.join(', '),
         preferences: values.preferences.join(', '),
-        availableTime: `${values.duration} days`,
+        availableTime: `${duration} days`,
         locationPreferences: '', // This can be added back if needed
         pace: values.pace,
     }
@@ -106,22 +122,50 @@ export function ItineraryForm() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                  <FormField
                     control={form.control}
-                    name="duration"
+                    name="dateRange"
                     render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className="flex items-center gap-2"><Calendar /> Duration: {field.value} days</FormLabel>
-                        <FormControl>
-                            <Slider
-                                value={[field.value]}
-                                onValueChange={(value) => field.onChange(value[0])}
-                                min={1}
-                                max={30}
-                                step={1}
+                      <FormItem className="flex flex-col">
+                        <FormLabel className="flex items-center gap-2"><CalendarIcon /> Travel Dates</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full justify-start text-left font-normal",
+                                  !field.value.from && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value.from ? (
+                                  field.value.to ? (
+                                    <>
+                                      {format(field.value.from, "LLL dd, y")} -{" "}
+                                      {format(field.value.to, "LLL dd, y")}
+                                    </>
+                                  ) : (
+                                    format(field.value.from, "LLL dd, y")
+                                  )
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              initialFocus
+                              mode="range"
+                              defaultMonth={field.value.from}
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              numberOfMonths={2}
                             />
-                        </FormControl>
-                        </FormItem>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
                     )}
-                    />
+                  />
                 <FormField
                     control={form.control}
                     name="budget"
@@ -139,7 +183,7 @@ export function ItineraryForm() {
                         </FormControl>
                         </FormItem>
                     )}
-                    />,
+                    />
                 <FormField
                     control={form.control}
                     name="groupSize"
