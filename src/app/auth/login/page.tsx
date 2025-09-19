@@ -56,6 +56,9 @@ export default function LoginPage() {
     // Mock API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
     // Replace with actual login logic
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('isLoggedIn', 'true');
+    }
     setLoading(false);
     router.push('/');
   }

@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
@@ -20,8 +20,10 @@ import {
   Bus,
   MessageSquare,
   LogIn,
+  LogOut,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
+import { useEffect, useState } from 'react';
 
 const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
@@ -34,6 +36,23 @@ const navItems = [
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      setIsLoggedIn(loggedIn);
+    }
+  }, [pathname]);
+
+  const handleLogout = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('isLoggedIn');
+    }
+    setIsLoggedIn(false);
+    router.push('/auth/login');
+  };
 
   if (pathname.startsWith('/auth')) {
     return <>{children}</>;
@@ -62,6 +81,17 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               </SidebarMenuItem>
             ))}
+            {isLoggedIn ? (
+               <SidebarMenuItem>
+                 <SidebarMenuButton
+                   onClick={handleLogout}
+                   tooltip={"Logout"}
+                 >
+                   <LogOut />
+                   <span>{"Logout"}</span>
+                 </SidebarMenuButton>
+               </SidebarMenuItem>
+            ) : (
              <SidebarMenuItem>
                 <Link href="/auth/login" passHref legacyBehavior>
                   <SidebarMenuButton
@@ -73,6 +103,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>
+            )}
           </SidebarMenu>
         </SidebarContent>
       </Sidebar>
