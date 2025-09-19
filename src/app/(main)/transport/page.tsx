@@ -3,7 +3,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { busRoutes, trainRoutes } from "@/lib/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bus, Train, Car } from "lucide-react";
+import { Bus, Train, Car, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const getStatusVariant = (status: string) => {
   switch (status.toLowerCase()) {
@@ -109,14 +111,15 @@ export default function TransportPage() {
               <CardTitle>Book a Ride</CardTitle>
               <CardDescription>Instantly book a cab or bike to your destination.</CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="aspect-video w-full">
-                <iframe
-                    src="https://book.olacabs.com/"
-                    className="w-full h-full border rounded-lg"
-                    title="Ola Cabs Booking"
-                ></iframe>
-              </div>
+            <CardContent className="flex flex-col items-center justify-center gap-4 text-center p-8">
+                <p className="text-muted-foreground">
+                    To book a ride, please proceed to our partner's website.
+                </p>
+                <Button asChild size="lg">
+                    <Link href="https://book.olacabs.com/" target="_blank" rel="noopener noreferrer">
+                        Book with Ola Cabs <ArrowUpRight className="ml-2 h-5 w-5"/>
+                    </Link>
+                </Button>
             </CardContent>
           </Card>
         </TabsContent>
