@@ -67,7 +67,7 @@ export default function HomePage() {
               return (
                 <CarouselItem key={dest.name} className="md:basis-1/2 lg:basis-1/3">
                   <Card className="overflow-hidden h-full">
-                    <div className="relative h-64 w-full">
+                    <div className="relative h-56 w-full">
                       {img && (
                         <Image
                           src={img.imageUrl}
