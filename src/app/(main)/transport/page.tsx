@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { busRoutes, trainRoutes } from "@/lib/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bus, Train } from "lucide-react";
+import { Bus, Train, Car } from "lucide-react";
 
 const getStatusVariant = (status: string) => {
   switch (status.toLowerCase()) {
@@ -28,15 +28,16 @@ export default function TransportPage() {
           </div>
           <CardTitle className="text-3xl font-headline font-bold">Transport Information</CardTitle>
           <CardDescription className="text-lg">
-            Find real-time information for buses and trains to navigate Jharkhand.
+            Find real-time information for buses, trains, and cabs to navigate Jharkhand.
           </CardDescription>
         </CardHeader>
       </Card>
 
       <Tabs defaultValue="buses" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="buses"><Bus className="mr-2"/> Buses</TabsTrigger>
           <TabsTrigger value="trains"><Train className="mr-2"/> Trains</TabsTrigger>
+          <TabsTrigger value="booking"><Car className="mr-2"/> Cab & Bike Booking</TabsTrigger>
         </TabsList>
         <TabsContent value="buses">
           <Card>
@@ -99,6 +100,23 @@ export default function TransportPage() {
                   ))}
                 </TableBody>
               </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="booking">
+          <Card>
+            <CardHeader>
+              <CardTitle>Book a Ride</CardTitle>
+              <CardDescription>Instantly book a cab or bike to your destination.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="aspect-video w-full">
+                <iframe
+                    src="https://book.olacabs.com/"
+                    className="w-full h-full border rounded-lg"
+                    title="Ola Cabs Booking"
+                ></iframe>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
