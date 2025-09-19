@@ -1,3 +1,4 @@
+
 export const topDestinations = [
   {
     name: 'Netarhat',
@@ -47,6 +48,33 @@ export const topDestinations = [
     imageId: 'dest-dassam',
     coordinates: { lat: 23.1497, lng: 85.4511 },
   },
+];
+
+export const adventureDestinations = [
+  {
+    name: 'Parasnath Hills',
+    slug: 'parasnath-hills',
+    description: 'The highest peak in Jharkhand, a popular pilgrimage site for Jains, and a challenging trekking destination.',
+    imageId: 'adventure-parasnath',
+  },
+  {
+    name: 'Trikut Pahar',
+    slug: 'trikut-pahar',
+    description: 'Known for its thrilling ropeway ride to the top of the hill, offering panoramic views and a trekking path.',
+    imageId: 'adventure-trikut',
+  },
+  {
+    name: 'Canary Hill',
+    slug: 'canary-hill',
+    description: 'Located in Hazaribagh, this hill has a watchtower that provides stunning views of the town and surrounding forests. A great spot for light treks.',
+    imageId: 'adventure-canary',
+  },
+  {
+    name: 'Khandoli Park',
+    slug: 'khandoli-park',
+    description: 'An adventure hub offering activities like parasailing, rock climbing, and boating in the shadow of Khandoli Hill.',
+    imageId: 'adventure-khandoli',
+  }
 ];
 
 export const culturalHighlights = [

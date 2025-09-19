@@ -122,6 +122,10 @@
     { "id": "gallery-pilgrim", "description": "Pilgrimage sites", "imageUrl": "https://picsum.photos/seed/pilg/400/500", "imageHint": "hindu temple" },
     { "id": "gallery-waterfalls", "description": "Majestic Waterfalls", "imageUrl": "https://picsum.photos/seed/wfall/400/500", "imageHint": "waterfall jungle" },
     { "id": "gallery-wellness", "description": "Wellness and Retreats", "imageUrl": "https://picsum.photos/seed/well/400/500", "imageHint": "yoga meditation" },
-    { "id": "gallery-wildlife", "description": "Wildlife Sanctuaries", "imageUrl": "https://picsum.photos/seed/wild/400/500", "imageHint": "elephant forest" }
+    { "id": "gallery-wildlife", "description": "Wildlife Sanctuaries", "imageUrl": "https://picsum.photos/seed/wild/400/500", "imageHint": "elephant forest" },
+    { "id": "adventure-parasnath", "description": "Parasnath Hills", "imageUrl": "https://picsum.photos/seed/parasnath/600/400", "imageHint": "mountain temple" },
+    { "id": "adventure-trikut", "description": "Trikut Pahar Ropeway", "imageUrl": "https://picsum.photos/seed/trikut/600/400", "imageHint": "ropeway mountain" },
+    { "id": "adventure-canary", "description": "Canary Hill", "imageUrl": "https://picsum.photos/seed/canary/600/400", "imageHint": "hilltop view" },
+    { "id": "adventure-khandoli", "description": "Khandoli Park", "imageUrl": "https://picsum.photos/seed/khandoli/600/400", "imageHint": "parasailing lake" }
   ]
 }

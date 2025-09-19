@@ -36,20 +36,20 @@ const facts = [
 ];
 
 const galleryCategories = [
-    { name: 'Adventure', imageId: 'gallery-adventure' },
-    { name: 'Art & Culture', imageId: 'gallery-art-culture' },
-    { name: 'Crafts', imageId: 'gallery-crafts' },
-    { name: 'Cuisine', imageId: 'gallery-cuisine' },
-    { name: 'Festivals', imageId: 'gallery-festivals' },
-    { name: 'Forts', imageId: 'gallery-forts' },
-    { name: 'Hills', imageId: 'gallery-hills' },
-    { name: 'Lakes', imageId: 'gallery-lakes' },
-    { name: 'Monuments', imageId: 'gallery-monuments' },
-    { name: 'Museums', imageId: 'gallery-museums' },
-    { name: 'Pilgrim Centres', imageId: 'gallery-pilgrim' },
-    { name: 'Waterfalls', imageId: 'gallery-waterfalls' },
-    { name: 'Wellness', imageId: 'gallery-wellness' },
-    { name: 'Wildlife', imageId: 'gallery-wildlife' },
+    { name: 'Adventure', imageId: 'gallery-adventure', href: '/gallery/adventure' },
+    { name: 'Art & Culture', imageId: 'gallery-art-culture', href: '#' },
+    { name: 'Crafts', imageId: 'gallery-crafts', href: '#' },
+    { name: 'Cuisine', imageId: 'gallery-cuisine', href: '#' },
+    { name: 'Festivals', imageId: 'gallery-festivals', href: '#' },
+    { name: 'Forts', imageId: 'gallery-forts', href: '#' },
+    { name: 'Hills', imageId: 'gallery-hills', href: '#' },
+    { name: 'Lakes', imageId: 'gallery-lakes', href: '#' },
+    { name: 'Monuments', imageId: 'gallery-monuments', href: '#' },
+    { name: 'Museums', imageId: 'gallery-museums', href: '#' },
+    { name: 'Pilgrim Centres', imageId: 'gallery-pilgrim', href: '#' },
+    { name: 'Waterfalls', imageId: 'gallery-waterfalls', href: '#' },
+    { name: 'Wellness', imageId: 'gallery-wellness', href: '#' },
+    { name: 'Wildlife', imageId: 'gallery-wildlife', href: '#' },
 ];
 
 export default function HomePage() {
@@ -164,7 +164,7 @@ export default function HomePage() {
             {galleryCategories.map(category => {
                 const img = PlaceHolderImages.find(p => p.id === category.imageId);
                 return (
-                    <Link href="#" key={category.name} className="block group">
+                    <Link href={category.href} key={category.name} className="block group">
                         <Card className="overflow-hidden relative h-56">
                              {img && (
                                 <Image
