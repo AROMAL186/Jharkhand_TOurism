@@ -12,7 +12,7 @@ import {
 import { topDestinations } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { cn } from '@/lib/utils';
-import { ChevronRight, Mountain, Trees, Waves } from 'lucide-react';
+import { ChevronRight, Mountain, Trees, Waves, Leaf, Landmark } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -31,10 +31,22 @@ const categories = [
       description: "Cascading natural wonders."
     },
     {
-      title: "Wildlife",
+      title: "Wildlife Sanctuaries",
       icon: Trees,
       href: "/destinations/category/wildlife",
       description: "Lush forests and diverse fauna."
+    },
+    {
+        title: "Eco-tourism Spots",
+        icon: Leaf,
+        href: "/destinations/category/eco-tourism",
+        description: "Sustainable nature experiences."
+    },
+    {
+        title: "Cultural Sites",
+        icon: Landmark,
+        href: "/destinations/category/cultural-sites",
+        description: "Historic and sacred places."
     }
   ];
 
@@ -48,28 +60,28 @@ export function DestinationsMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Destinations</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="grid w-[600px] grid-cols-[1fr_1fr_1fr] gap-4 p-4 md:w-[700px] lg:w-[800px]">
+            <div className="grid w-[600px] grid-cols-[1fr_2fr] gap-4 p-4 md:w-[700px] lg:w-[800px] lg:grid-cols-[1fr_1fr_1fr]">
               <div className="flex flex-col">
-                <h3 className="font-medium text-foreground px-4 mb-2">Popular Destinations</h3>
+                <h3 className="font-medium text-foreground px-3 mb-2 text-sm">Popular Destinations</h3>
                 <ul className="flex flex-col gap-1">
                   {topDestinations.slice(0, 5).map((destination) => (
                     <ListItem key={destination.name} title={destination.name} href={`/destinations/${destination.slug}`} />
                   ))}
                 </ul>
-                <Link href="/map" className="mt-2 text-sm font-medium text-primary hover:underline px-4 flex items-center">
-                    View All <ChevronRight className="h-4 w-4 ml-1" />
-                </Link>
+                <NavigationMenuLink asChild>
+                    <Link href="/map" className="mt-2 text-sm font-medium text-primary hover:underline px-3 flex items-center">
+                        View All on Map <ChevronRight className="h-4 w-4 ml-1" />
+                    </Link>
+                </NavigationMenuLink>
               </div>
 
-              <div className="flex flex-col">
-                <h3 className="font-medium text-foreground px-4 mb-2">Where to Go</h3>
-                <ul className="grid grid-cols-1 gap-2">
+              <ul className="grid grid-cols-2 gap-3 p-2">
                   {categories.map((category) => (
                     <li key={category.title}>
                         <NavigationMenuLink asChild>
-                            <a href="#" className={cn("flex select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-3 no-underline outline-none focus:shadow-md")}>
+                            <a href={category.href} className={cn("flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-4 no-underline outline-none focus:shadow-md")}>
                                 <category.icon className="h-6 w-6 text-primary" />
-                                <div className="mt-2 text-sm font-medium">
+                                <div className="mt-2 mb-0.5 text-sm font-medium">
                                     {category.title}
                                 </div>
                                 <p className="text-xs leading-tight text-muted-foreground">
@@ -80,26 +92,27 @@ export function DestinationsMenu() {
                     </li>
                   ))}
                 </ul>
-              </div>
 
               {featuredDestination && featuredImage && (
-                 <div className="col-span-1 flex flex-col h-full overflow-hidden rounded-md">
+                 <div className="col-span-1 flex flex-col h-full overflow-hidden rounded-lg">
                     <NavigationMenuLink asChild className='h-full'>
-                        <Link href={`/destinations/${featuredDestination.slug}`} className='flex flex-col h-full'>
+                        <Link href={`/destinations/${featuredDestination.slug}`} className='flex flex-col h-full group'>
                             <div className="relative h-48 w-full">
                                 <Image
                                     src={featuredImage.imageUrl}
                                     alt={featuredDestination.name}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                                     data-ai-hint={featuredImage.imageHint}
                                 />
-                                <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent' />
+                                <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent' />
+                                <div className="absolute bottom-0 left-0 p-4">
+                                     <h4 className="text-md font-semibold text-white">{featuredDestination.name}</h4>
+                                </div>
                             </div>
-                            <div className="p-4 bg-card flex-grow">
-                                <h4 className="text-sm font-medium text-foreground">{featuredDestination.name}</h4>
-                                <p className="text-sm text-muted-foreground line-clamp-2">{featuredDestination.shortDescription}</p>
-                                <p className="text-sm font-medium text-primary hover:underline mt-2">Read More →</p>
+                            <div className="p-4 bg-card flex-grow flex flex-col">
+                                <p className="text-sm text-muted-foreground line-clamp-2 flex-grow">{featuredDestination.shortDescription}</p>
+                                <p className="text-sm font-medium text-primary group-hover:underline mt-2 self-start">Read More →</p>
                             </div>
                         </Link>
                     </NavigationMenuLink>
@@ -123,7 +136,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+            'block select-none space-y-1 rounded-md py-2 px-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
             className
           )}
           {...props}
