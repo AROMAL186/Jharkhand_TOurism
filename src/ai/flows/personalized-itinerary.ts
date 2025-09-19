@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -31,7 +32,7 @@ export type PersonalizedItineraryInput = z.infer<
 const PersonalizedItineraryOutputSchema = z.object({
   itinerary: z
     .string()
-    .describe('A personalized travel itinerary for the tourist, including destinations, activities, and estimated time for each activity.'),
+    .describe('A day-by-day, detailed travel itinerary for the tourist, including destinations, activities, and estimated time for each activity. Use Markdown for formatting.'),
   overallTheme: z.string().describe('A short summary of the overall theme of the itinerary.'),
   estimatedCost: z
     .string()
@@ -61,7 +62,7 @@ const prompt = ai.definePrompt({
   Location Preferences: {{{locationPreferences}}}
   Pace: {{{pace}}}
 
-  Provide a detailed itinerary, including destinations, activities, and estimated time for each activity. Also, provide a short summary of the overall theme of the itinerary and an estimated cost for the entire trip.
+  Provide a detailed, day-by-day itinerary, including destinations, activities, and estimated time for each activity. Use Markdown for clear formatting (e.g., headings for days, bullet points for activities). Also, provide a short summary of the overall theme of the itinerary and an estimated cost for the entire trip.
   If no location preferences provided, focus on the most popular tourism locations.`,
 });
 
@@ -76,3 +77,5 @@ const personalizedItineraryFlow = ai.defineFlow(
     return output!;
   }
 );
+
+    

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -13,20 +14,45 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar, Gauge, MapPin } from 'lucide-react';
+import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar, Users, Mountain, Camera, Sparkles, Utensils, MapPin, Building, Sprout, Handshake } from 'lucide-react';
 import { generatePersonalizedItinerary, PersonalizedItineraryOutput } from '@/ai/flows/personalized-itinerary';
+import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
+
+const interests = [
+    { id: 'wildlife', label: 'Wildlife & Nature', icon: Sprout },
+    { id: 'heritage', label: 'Cultural Heritage', icon: Building },
+    { id: 'tribal', label: 'Tribal Experiences', icon: Handshake },
+    { id: 'adventure', label: 'Adventure Sports', icon: Mountain },
+    { id: 'photography', label: 'Photography', icon: Camera },
+    { id: 'handicrafts', label: 'Handicrafts & Art', icon: Sparkles },
+    { id: 'spiritual', label: 'Spiritual Sites', icon: Heart },
+    { id: 'cuisine', label: 'Local Cuisine', icon: Utensils },
+    { id: 'eco-tourism', label: 'Eco-Tourism', icon: Leaf },
+    { id: 'historical', label: 'Historical Sites', icon: MapPin },
+];
+
+const travelPreferences = [
+    { id: 'eco-friendly', label: 'Eco Friendly' },
+    { id: 'cultural', label: 'Cultural' },
+    { id: 'adventure', label: 'Adventure' },
+    { id: 'luxury', label: 'Luxury' },
+    { id: 'budget', label: 'Budget' },
+]
 
 const formSchema = z.object({
-  interests: z.string().min(3, 'Please describe your interests.'),
-  preferences: z.string().min(3, 'Please describe your preferences.'),
-  availableTime: z.string().min(1, 'Please enter your available time.'),
-  locationPreferences: z.string().optional(),
-  pace: z.enum(['relaxed', 'moderate', 'packed']),
+  duration: z.number().min(1).max(30),
+  budget: z.number().min(1000).max(100000),
+  groupSize: z.number().min(1).max(20),
+  interests: z.array(z.string()).refine(value => value.some(item => item), {
+      message: "You have to select at least one interest."
+  }),
+  preferences: z.array(z.string()).refine(value => value.some(item => item), {
+      message: "You have to select at least one preference."
+  }),
+  pace: z.enum(['relaxed', 'moderate', 'packed']), // Keep pace from previous version
 });
 
 export function ItineraryForm() {
@@ -37,10 +63,11 @@ export function ItineraryForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      interests: 'Eco-tourism, cultural sites, waterfalls',
-      preferences: 'Budget-friendly homestays, local food',
-      availableTime: '3 days',
-      locationPreferences: '',
+      duration: 3,
+      budget: 15000,
+      groupSize: 2,
+      interests: ["eco-tourism", "heritage"],
+      preferences: ["budget", "cultural"],
       pace: 'moderate',
     },
   });
@@ -49,8 +76,17 @@ export function ItineraryForm() {
     setLoading(true);
     setResult(null);
     setError(null);
+
+    const submissionData = {
+        interests: values.interests.join(', '),
+        preferences: values.preferences.join(', '),
+        availableTime: `${values.duration} days`,
+        locationPreferences: '', // This can be added back if needed
+        pace: values.pace,
+    }
+
     try {
-      const response = await generatePersonalizedItinerary(values);
+      const response = await generatePersonalizedItinerary(submissionData);
       setResult(response);
     } catch (e) {
       setError('Failed to generate itinerary. Please try again.');
@@ -66,86 +102,163 @@ export function ItineraryForm() {
         <CardContent className="p-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <FormField
-                  control={form.control}
-                  name="interests"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2"><Leaf /> Your Interests</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="e.g., Waterfalls, trekking, temples, local art..." {...field} rows={4} />
-                      </FormControl>
-                      <FormDescription>What do you love to do?</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="preferences"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2"><Heart /> Travel Preferences</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="e.g., Budget, accommodation type, food..." {...field} rows={4} />
-                      </FormControl>
-                      <FormDescription>How do you like to travel?</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <FormField
-                  control={form.control}
-                  name="availableTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2"><Calendar /> Available Time</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., 3 days, 1 week" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="pace"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2"><Gauge /> Pace</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your travel pace" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="relaxed">Relaxed</SelectItem>
-                          <SelectItem value="moderate">Moderate</SelectItem>
-                          <SelectItem value="packed">Packed</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                  <FormField
-                  control={form.control}
-                  name="locationPreferences"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center gap-2"><MapPin /> Location Preferences</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., Ranchi, Netarhat (Optional)" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
+                    control={form.control}
+                    name="duration"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel className="flex items-center gap-2"><Calendar /> Duration: {field.value} days</FormLabel>
+                        <FormControl>
+                            <Slider
+                                value={[field.value]}
+                                onValueChange={(value) => field.onChange(value[0])}
+                                min={1}
+                                max={30}
+                                step={1}
+                            />
+                        </FormControl>
+                        </FormItem>
+                    )}
+                    />
+                <FormField
+                    control={form.control}
+                    name="budget"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel className="flex items-center gap-2"><DollarSign /> Budget: ₹{field.value.toLocaleString()}</FormLabel>
+                        <FormControl>
+                            <Slider
+                                value={[field.value]}
+                                onValueChange={(value) => field.onChange(value[0])}
+                                min={1000}
+                                max={100000}
+                                step={1000}
+                            />
+                        </FormControl>
+                        </FormItem>
+                    )}
+                    />
+                <FormField
+                    control={form.control}
+                    name="groupSize"
+                    render={({ field }) => (
+                        <FormItem>
+                        <FormLabel className="flex items-center gap-2"><Users /> Group Size: {field.value} people</FormLabel>
+                        <FormControl>
+                            <Slider
+                                value={[field.value]}
+                                onValue.nodeValue="[field.value]"
+                                onValueChange={(value) => field.onChange(value[0])}
+                                min={1}
+                                max={20}
+                                step={1}
+                            />
+                        </FormControl>
+                        </FormItem>
+                    )}
                 />
               </div>
+
+               <FormField
+                control={form.control}
+                name="interests"
+                render={() => (
+                    <FormItem>
+                        <div className="mb-4">
+                            <FormLabel className="text-base flex items-center gap-2"><Heart /> Your Interests *</FormLabel>
+                            <FormDescription>Select a few of your interests to help us plan the best trip for you.</FormDescription>
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                        {interests.map((interest) => (
+                            <FormField
+                            key={interest.id}
+                            control={form.control}
+                            name="interests"
+                            render={({ field }) => {
+                                return (
+                                <FormItem
+                                    key={interest.id}
+                                    className="border rounded-lg p-4 flex flex-col items-center justify-center gap-2 has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-colors cursor-pointer"
+                                >
+                                    <FormControl>
+                                    <Checkbox
+                                        className="sr-only"
+                                        checked={field.value?.includes(interest.id)}
+                                        onCheckedChange={(checked) => {
+                                        return checked
+                                            ? field.onChange([...field.value, interest.id])
+                                            : field.onChange(
+                                                field.value?.filter(
+                                                (value) => value !== interest.id
+                                                )
+                                            )
+                                        }}
+                                    />
+                                    </FormControl>
+                                    <interest.icon className="h-8 w-8 text-primary" />
+                                    <FormLabel className="font-normal text-center cursor-pointer">{interest.label}</FormLabel>
+                                </FormItem>
+                                )
+                            }}
+                            />
+                        ))}
+                        </div>
+                        <FormMessage />
+                    </FormItem>
+                )}
+                />
+
+
+                <FormField
+                    control={form.control}
+                    name="preferences"
+                    render={() => (
+                        <FormItem>
+                        <div className="mb-4">
+                            <FormLabel className="text-base flex items-center gap-2"><Sparkles /> Travel Preferences</FormLabel>
+                             <FormDescription>What's your travel style?</FormDescription>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 rounded-lg border p-4">
+                            {travelPreferences.map((item) => (
+                            <FormField
+                                key={item.id}
+                                control={form.control}
+                                name="preferences"
+                                render={({ field }) => {
+                                return (
+                                    <FormItem
+                                    key={item.id}
+                                    className="flex flex-row items-start space-x-3 space-y-0"
+                                    >
+                                    <FormControl>
+                                        <Checkbox
+                                        checked={field.value?.includes(item.id)}
+                                        onCheckedChange={(checked) => {
+                                            return checked
+                                            ? field.onChange([...field.value, item.id])
+                                            : field.onChange(
+                                                field.value?.filter(
+                                                    (value) => value !== item.id
+                                                )
+                                                )
+                                        }}
+                                        />
+                                    </FormControl>
+                                    <FormLabel className="font-normal">
+                                        {item.label}
+                                    </FormLabel>
+                                    </FormItem>
+                                )
+                                }}
+                            />
+                            ))}
+                        </div>
+                        <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
               <Button type="submit" disabled={loading} className="w-full" size="lg">
                 {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
@@ -203,3 +316,5 @@ export function ItineraryForm() {
     </>
   );
 }
+
+    
