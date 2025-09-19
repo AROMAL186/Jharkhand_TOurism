@@ -3,7 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { busRoutes, trainRoutes } from "@/lib/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bus, Train, Car, ArrowUpRight } from "lucide-react";
+import { Bus, Train, Car, ArrowUpRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -111,13 +111,15 @@ export default function TransportPage() {
               <CardTitle>Book a Ride</CardTitle>
               <CardDescription>Instantly book a cab or bike to your destination.</CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col items-center justify-center gap-4 text-center p-8">
-                <p className="text-muted-foreground">
-                    To book a ride, please proceed to our partner's website.
+            <CardContent className="flex flex-col items-center justify-center gap-6 text-center p-8 bg-gradient-to-br from-primary/5 to-transparent">
+                <Sparkles className="h-12 w-12 text-primary animate-pulse" />
+                <p className="text-xl font-medium text-foreground max-w-md">
+                    "The journey of a thousand miles begins with a single click. Your ride is waiting!"
                 </p>
-                <Button asChild size="lg">
+                <Button asChild size="lg" className="group animate-pulse">
                     <Link href="https://book.olacabs.com/" target="_blank" rel="noopener noreferrer">
-                        Book with Ola Cabs <ArrowUpRight className="ml-2 h-5 w-5"/>
+                        Book Your Ride Now
+                        <ArrowUpRight className="ml-2 h-5 w-5 transition-transform group-hover:rotate-45" />
                     </Link>
                 </Button>
             </CardContent>
