@@ -1,4 +1,3 @@
-
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -20,19 +19,18 @@ import { MobileNav } from '@/components/mobile-nav';
 import { DestinationsMenu } from '@/components/destinations-menu';
 import { PlanTripMenu } from '@/components/plan-trip-menu';
 import { UpcomingEventsMenu } from '@/components/upcoming-events-menu';
+import { cn } from '@/lib/utils';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
   // DestinationsMenu is manually placed
   // PlanTripMenu is manually placed
-  { href: '/trip-planner', label: 'Trip Planner', icon: ClipboardList },
   { href: '/map', label: 'Interactive Map', icon: Map },
   { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
   { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
   { href: '/transport', label: 'Transport', icon: Bus },
   // UpcomingEventsMenu is manually placed
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
-  { href: '/route-optimizer', label: 'Route Optimizer', icon: Map },
 ];
 
 export const mobileNavItems = [
@@ -71,10 +69,15 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   if (pathname.startsWith('/auth')) {
     return <>{children}</>;
   }
+  
+  const isTransportPage = pathname.startsWith('/transport');
 
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-background px-4 md:px-6 z-50">
+      <header className={cn("sticky top-0 flex h-16 items-center justify-between gap-4 border-b z-50 px-4 md:px-6", {
+        "bg-transparent border-transparent text-white": isTransportPage,
+        "bg-background": !isTransportPage
+      })}>
         <div className="flex items-center gap-6">
           <Link
               href="/"
@@ -88,7 +91,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 href="/"
                 className={`transition-colors hover:text-foreground ${
                   pathname === '/' ? 'text-foreground' : 'text-muted-foreground'
-                }`}
+                } ${isTransportPage ? 'text-white hover:text-white/90' : ''}`}
               >
                 Home
             </Link>
@@ -98,38 +101,35 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 href="/trip-planner"
                 className={`transition-colors hover:text-foreground ${
                   pathname.startsWith('/trip-planner') ? 'text-foreground' : 'text-muted-foreground'
-                }`}
+                } ${isTransportPage ? 'text-white hover:text-white/90' : ''}`}
               >
                 Trip Planner
               </Link>
-            {navItems.slice(4, 7).map((item) => (
+            {navItems.slice(2, 6).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 className={`transition-colors hover:text-foreground ${
                   pathname.startsWith(item.href) && item.href !== '/' ? 'text-foreground' : 'text-muted-foreground'
-                }`}
+                } ${isTransportPage ? 'text-white hover:text-white/90' : ''}`}
               >
                 {item.label}
               </Link>
             ))}
             <UpcomingEventsMenu />
-            {navItems.slice(8, 9).map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
+             <Link
+                href="/feedback"
                 className={`transition-colors hover:text-foreground ${
-                  pathname.startsWith(item.href) ? 'text-foreground' : 'text-muted-foreground'
-                }`}
+                  pathname.startsWith('/feedback') ? 'text-foreground' : 'text-muted-foreground'
+                } ${isTransportPage ? 'text-white hover:text-white/90' : ''}`}
               >
-                {item.label}
+                Feedback
               </Link>
-            ))}
              <Link
                 href="/route-optimizer"
                 className={`transition-colors hover:text-foreground ${
                   pathname.startsWith('/route-optimizer') ? 'text-foreground' : 'text-muted-foreground'
-                }`}
+                } ${isTransportPage ? 'text-white hover:text-white/90' : ''}`}
               >
                 Route Optimizer
               </Link>
@@ -139,11 +139,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-4">
               {isLoggedIn ? (
-                  <Button variant="outline" size="sm" onClick={handleLogout}>
+                  <Button variant="outline" size="sm" onClick={handleLogout} className={cn(isTransportPage && "bg-transparent text-white border-white/50 hover:bg-white/10")}>
                     <LogOut className="mr-2 h-4 w-4" /> Logout
                   </Button>
               ) : (
-                <Button asChild variant="outline" size="sm">
+                <Button asChild variant="outline" size="sm" className={cn(isTransportPage && "bg-transparent text-white border-white/50 hover:bg-white/10")}>
                   <Link href="/auth/login">
                     <LogIn className="mr-2 h-4 w-4" /> Login
                   </Link>
@@ -153,7 +153,9 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <MobileNav isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         </div>
       </header>
-      <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
+      <main className={cn("flex flex-1 flex-col", {
+          "p-4 md:gap-8 md:p-8": !isTransportPage
+        })}>
         {children}
       </main>
     </div>

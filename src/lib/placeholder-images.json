@@ -3,8 +3,8 @@
   "placeholderImages": [
     {
       "id": "hero-background",
-      "description": "A wide view of a waterfall in Jharkhand.",
-      "imageUrl": "https://picsum.photos/seed/waterfall-wide/1920/1080",
+      "description": "A powerful waterfall in Jharkhand.",
+      "imageUrl": "https://picsum.photos/seed/hero-waterfall/1920/1080",
       "imageHint": "waterfall wide"
     },
     {
@@ -111,7 +111,9 @@
     },
     { "id": "gallery-adventure", "description": "Adventure activities", "imageUrl": "https://picsum.photos/seed/adv/400/500", "imageHint": "rock climbing" },
     { "id": "gallery-art-culture", "description": "Art and Culture", "imageUrl": "https://picsum.photos/seed/art/400/500", "imageHint": "tribal painting" },
+    { "id": "gallery-beaches", "description": "Beaches", "imageUrl": "https://picsum.photos/seed/beach/400/500", "imageHint": "tropical beach" },
     { "id": "gallery-crafts", "description": "Handicrafts", "imageUrl": "https://picsum.photos/seed/craft/400/500", "imageHint": "pottery making" },
+    { "id": "gallery-cuisine", "description": "Local Cuisine", "imageUrl": "https://picsum.photos/seed/cuis/400/500", "imageHint": "indian food" },
     { "id": "gallery-festivals", "description": "Festivals of Jharkhand", "imageUrl": "https://picsum.photos/seed/fest/400/500", "imageHint": "colorful festival" },
     { "id": "gallery-forts", "description": "Ancient Forts", "imageUrl": "https://picsum.photos/seed/fort/400/500", "imageHint": "old fort" },
     { "id": "gallery-hills", "description": "Lush green hills", "imageUrl": "https://picsum.photos/seed/hill/400/500", "imageHint": "green hills" },
@@ -123,6 +125,7 @@
     { "id": "gallery-waterfalls", "description": "Majestic Waterfalls", "imageUrl": "https://picsum.photos/seed/wfall/400/500", "imageHint": "waterfall jungle" },
     { "id": "gallery-wellness", "description": "Wellness and Retreats", "imageUrl": "https://picsum.photos/seed/well/400/500", "imageHint": "yoga meditation" },
     { "id": "gallery-wildlife", "description": "Wildlife Sanctuaries", "imageUrl": "https://picsum.photos/seed/wild/400/500", "imageHint": "elephant forest" },
+    { "id": "gallery-world-heritage", "description": "World Heritage Sites", "imageUrl": "https://picsum.photos/seed/whs/400/500", "imageHint": "ancient ruins" },
     { "id": "adventure-parasnath", "description": "Parasnath Hills", "imageUrl": "https://picsum.photos/seed/parasnath/600/400", "imageHint": "mountain temple" },
     { "id": "adventure-trikut", "description": "Trikut Pahar Ropeway", "imageUrl": "https://picsum.photos/seed/trikut/600/400", "imageHint": "ropeway mountain" },
     { "id": "adventure-canary", "description": "Canary Hill", "imageUrl": "https://picsum.photos/seed/canary/600/400", "imageHint": "hilltop view" },
@@ -154,6 +157,12 @@
       "description": "Wildlife video thumbnail",
       "imageUrl": "https://picsum.photos/seed/vid-wildlife/600/338",
       "imageHint": "tiger forest"
+    },
+    {
+      "id": "transport-bg",
+      "description": "A winding road through the hills of Jharkhand, perfect for a transport page background.",
+      "imageUrl": "https://picsum.photos/seed/transport-road/1920/1080",
+      "imageHint": "winding road"
     }
   ]
 }

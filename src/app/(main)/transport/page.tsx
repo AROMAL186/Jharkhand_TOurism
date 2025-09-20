@@ -6,11 +6,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { busRoutes, trainRoutes } from "@/lib/data";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { Bus, Train, Car, ArrowUpRight, Sparkles, Bike, MapPin, Milestone, DollarSign } from "lucide-react";
+import { Bus, Train, Car, ArrowUpRight, Bike, MapPin, Milestone, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect } from "react";
+import Image from 'next/image';
+import { PlaceHolderImages } from "@/lib/placeholder-images";
 
 const getStatusVariant = (status: string) => {
   switch (status.toLowerCase()) {
@@ -62,7 +64,7 @@ const BookingCard = ({
   }, [distance, baseFare, perKm]);
 
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col bg-background/80 backdrop-blur-sm transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
       <CardHeader className="flex flex-row items-start gap-4 space-y-0">
         <div className="p-3 bg-primary/10 rounded-full">{icon}</div>
         <div>
@@ -111,109 +113,124 @@ const BookingCard = ({
 }
 
 export default function TransportPage() {
-  return (
-    <div className="container mx-auto">
-      <Card className="border-none shadow-none mb-8">
-        <CardHeader className="text-center">
-          <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit mb-4">
-            <Bus className="h-8 w-8 text-primary" />
-          </div>
-          <CardTitle className="text-3xl font-headline font-bold">Transport Information</CardTitle>
-          <CardDescription className="text-lg">
-            Find real-time information for buses, trains, and cabs to navigate Jharkhand.
-          </CardDescription>
-        </CardHeader>
-      </Card>
+    const bgImage = PlaceHolderImages.find(p => p.id === 'transport-bg');
 
-      <Tabs defaultValue="booking" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="buses"><Bus className="mr-2"/> Buses</TabsTrigger>
-          <TabsTrigger value="trains"><Train className="mr-2"/> Trains</TabsTrigger>
-          <TabsTrigger value="booking"><Car className="mr-2"/> Cab & Bike Booking</TabsTrigger>
-        </TabsList>
-        <TabsContent value="buses">
-          <Card>
-            <CardHeader>
-              <CardTitle>Bus Schedules</CardTitle>
-              <CardDescription>Live tracking of inter-city and local bus services.</CardDescription>
+  return (
+    <div className="relative min-h-full">
+        {bgImage && (
+            <Image
+                src={bgImage.imageUrl}
+                alt={bgImage.description}
+                fill
+                className="object-cover -z-10"
+                data-ai-hint={bgImage.imageHint}
+            />
+        )}
+        <div className="absolute inset-0 bg-black/50 -z-10" />
+
+        <div className="container mx-auto">
+        <Card className="border-none shadow-none mb-8 bg-transparent">
+            <CardHeader className="text-center text-white">
+            <div className="mx-auto bg-primary/20 p-3 rounded-full w-fit mb-4 backdrop-blur-sm">
+                <Bus className="h-8 w-8 text-primary" />
+            </div>
+            <CardTitle className="text-3xl font-headline font-bold drop-shadow-lg">Transport Information</CardTitle>
+            <CardDescription className="text-lg text-white/90 drop-shadow-md">
+                Find real-time information for buses, trains, and cabs to navigate Jharkhand.
+            </CardDescription>
             </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Route</TableHead>
-                    <TableHead>Departure</TableHead>
-                    <TableHead>Arrival</TableHead>
-                    <TableHead className="text-right">Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {busRoutes.map((route) => (
-                    <TableRow key={route.id}>
-                      <TableCell className="font-medium">{route.route}</TableCell>
-                      <TableCell>{route.departure}</TableCell>
-                      <TableCell>{route.arrival}</TableCell>
-                      <TableCell className="text-right">
-                        <Badge variant={getStatusVariant(route.status) as any}>{route.status}</Badge>
-                      </TableCell>
+        </Card>
+
+        <Tabs defaultValue="booking" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 bg-background/60 backdrop-blur-md">
+            <TabsTrigger value="buses"><Bus className="mr-2"/> Buses</TabsTrigger>
+            <TabsTrigger value="trains"><Train className="mr-2"/> Trains</TabsTrigger>
+            <TabsTrigger value="booking"><Car className="mr-2"/> Cab & Bike Booking</TabsTrigger>
+            </TabsList>
+            <TabsContent value="buses">
+            <Card className="bg-background/80 backdrop-blur-sm">
+                <CardHeader>
+                <CardTitle>Bus Schedules</CardTitle>
+                <CardDescription>Live tracking of inter-city and local bus services.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                <Table>
+                    <TableHeader>
+                    <TableRow>
+                        <TableHead>Route</TableHead>
+                        <TableHead>Departure</TableHead>
+                        <TableHead>Arrival</TableHead>
+                        <TableHead className="text-right">Status</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="trains">
-          <Card>
-            <CardHeader>
-              <CardTitle>Train Schedules</CardTitle>
-              <CardDescription>Live tracking of trains connecting Jharkhand.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Train Name (Number)</TableHead>
-                    <TableHead>Route</TableHead>
-                    <TableHead>Scheduled Arrival</TableHead>
-                    <TableHead className="text-right">Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {trainRoutes.map((route) => (
-                    <TableRow key={route.id}>
-                      <TableCell className="font-medium">{route.trainName} ({route.trainNumber})</TableCell>
-                      <TableCell>{route.route}</TableCell>
-                      <TableCell>{route.scheduledArrival}</TableCell>
-                      <TableCell className="text-right">
-                        <Badge variant={getStatusVariant(route.status) as any}>{route.status}</Badge>
-                      </TableCell>
+                    </TableHeader>
+                    <TableBody>
+                    {busRoutes.map((route) => (
+                        <TableRow key={route.id} className="hover:bg-muted/50">
+                        <TableCell className="font-medium">{route.route}</TableCell>
+                        <TableCell>{route.departure}</TableCell>
+                        <TableCell>{route.arrival}</TableCell>
+                        <TableCell className="text-right">
+                            <Badge variant={getStatusVariant(route.status) as any}>{route.status}</Badge>
+                        </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+                </CardContent>
+            </Card>
+            </TabsContent>
+            <TabsContent value="trains">
+            <Card className="bg-background/80 backdrop-blur-sm">
+                <CardHeader>
+                <CardTitle>Train Schedules</CardTitle>
+                <CardDescription>Live tracking of trains connecting Jharkhand.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                <Table>
+                    <TableHeader>
+                    <TableRow>
+                        <TableHead>Train Name (Number)</TableHead>
+                        <TableHead>Route</TableHead>
+                        <TableHead>Scheduled Arrival</TableHead>
+                        <TableHead className="text-right">Status</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="booking">
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-              <BookingCard 
-                icon={<Car className="h-6 w-6 text-primary" />}
-                title="Book a Cab"
-                description="Get a comfortable ride to your destination instantly."
-                baseFare={50}
-                perKm={15}
-              />
-              <BookingCard 
-                icon={<Bike className="h-6 w-6 text-primary" />}
-                title="Book a Bike"
-                description="Zip through the city traffic with a quick bike ride."
-                baseFare={25}
-                perKm={7}
-              />
-           </div>
-        </TabsContent>
-      </Tabs>
+                    </TableHeader>
+                    <TableBody>
+                    {trainRoutes.map((route) => (
+                        <TableRow key={route.id} className="hover:bg-muted/50">
+                        <TableCell className="font-medium">{route.trainName} ({route.trainNumber})</TableCell>
+                        <TableCell>{route.route}</TableCell>
+                        <TableCell>{route.scheduledArrival}</TableCell>
+                        <TableCell className="text-right">
+                            <Badge variant={getStatusVariant(route.status) as any}>{route.status}</Badge>
+                        </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+                </CardContent>
+            </Card>
+            </TabsContent>
+            <TabsContent value="booking">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                <BookingCard 
+                    icon={<Car className="h-6 w-6 text-primary" />}
+                    title="Book a Cab"
+                    description="Get a comfortable ride to your destination instantly."
+                    baseFare={50}
+                    perKm={15}
+                />
+                <BookingCard 
+                    icon={<Bike className="h-6 w-6 text-primary" />}
+                    title="Book a Bike"
+                    description="Zip through the city traffic with a quick bike ride."
+                    baseFare={25}
+                    perKm={7}
+                />
+            </div>
+            </TabsContent>
+        </Tabs>
+        </div>
     </div>
   );
 }
