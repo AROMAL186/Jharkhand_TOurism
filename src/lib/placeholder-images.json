@@ -3,9 +3,9 @@
   "placeholderImages": [
     {
       "id": "hero-background",
-      "description": "A scenic view of Jharkhand's landscape.",
-      "imageUrl": "https://picsum.photos/seed/jharkhand-hero/1920/1080",
-      "imageHint": "scenic landscape"
+      "description": "A powerful waterfall in Jharkhand.",
+      "imageUrl": "https://picsum.photos/seed/waterfall-hero/1920/1080",
+      "imageHint": "waterfall rocks"
     },
     {
       "id": "dest-netarhat",
