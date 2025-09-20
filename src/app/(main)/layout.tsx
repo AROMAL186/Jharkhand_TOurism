@@ -100,12 +100,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               >
                 Trip Planner
               </Link>
-             {navItems.slice(4, 7).map((item) => (
+            {navItems.slice(4, 7).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 className={`transition-colors hover:text-foreground ${
-                  pathname.startsWith(item.href) && item.href !=='/' ? 'text-foreground' : 'text-muted-foreground'
+                  pathname.startsWith(item.href) ? 'text-foreground' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
@@ -117,7 +117,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 key={item.label}
                 href={item.href}
                 className={`transition-colors hover:text-foreground ${
-                  pathname.startsWith(item.href) && item.href !=='/' ? 'text-foreground' : 'text-muted-foreground'
+                  pathname.startsWith(item.href) ? 'text-foreground' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
