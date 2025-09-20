@@ -3,9 +3,9 @@
   "placeholderImages": [
     {
       "id": "hero-background",
-      "description": "A powerful waterfall in Jharkhand.",
-      "imageUrl": "https://picsum.photos/seed/waterfall-hero-2/1920/1080",
-      "imageHint": "waterfall rocks"
+      "description": "A wide view of a waterfall in Jharkhand.",
+      "imageUrl": "https://picsum.photos/seed/waterfall-wide/1920/1080",
+      "imageHint": "waterfall wide"
     },
     {
       "id": "dest-netarhat",
@@ -111,7 +111,6 @@
     },
     { "id": "gallery-adventure", "description": "Adventure activities", "imageUrl": "https://picsum.photos/seed/adv/400/500", "imageHint": "rock climbing" },
     { "id": "gallery-art-culture", "description": "Art and Culture", "imageUrl": "https://picsum.photos/seed/art/400/500", "imageHint": "tribal painting" },
-    { "id": "gallery-beaches", "description": "Beaches", "imageUrl": "https://picsum.photos/seed/beach/400/500", "imageHint": "sandy beach" },
     { "id": "gallery-crafts", "description": "Handicrafts", "imageUrl": "https://picsum.photos/seed/craft/400/500", "imageHint": "pottery making" },
     { "id": "gallery-festivals", "description": "Festivals of Jharkhand", "imageUrl": "https://picsum.photos/seed/fest/400/500", "imageHint": "colorful festival" },
     { "id": "gallery-forts", "description": "Ancient Forts", "imageUrl": "https://picsum.photos/seed/fort/400/500", "imageHint": "old fort" },
@@ -124,7 +123,6 @@
     { "id": "gallery-waterfalls", "description": "Majestic Waterfalls", "imageUrl": "https://picsum.photos/seed/wfall/400/500", "imageHint": "waterfall jungle" },
     { "id": "gallery-wellness", "description": "Wellness and Retreats", "imageUrl": "https://picsum.photos/seed/well/400/500", "imageHint": "yoga meditation" },
     { "id": "gallery-wildlife", "description": "Wildlife Sanctuaries", "imageUrl": "https://picsum.photos/seed/wild/400/500", "imageHint": "elephant forest" },
-    { "id": "gallery-world-heritage", "description": "World Heritage Sites", "imageUrl": "https://picsum.photos/seed/heritage/400/500", "imageHint": "ancient ruins" },
     { "id": "adventure-parasnath", "description": "Parasnath Hills", "imageUrl": "https://picsum.photos/seed/parasnath/600/400", "imageHint": "mountain temple" },
     { "id": "adventure-trikut", "description": "Trikut Pahar Ropeway", "imageUrl": "https://picsum.photos/seed/trikut/600/400", "imageHint": "ropeway mountain" },
     { "id": "adventure-canary", "description": "Canary Hill", "imageUrl": "https://picsum.photos/seed/canary/600/400", "imageHint": "hilltop view" },
@@ -132,6 +130,30 @@
     { "id": "art-sohrai-khovar", "description": "Sohrai Khovar Painting", "imageUrl": "https://picsum.photos/seed/sohraikhovar/600/400", "imageHint": "mural painting" },
     { "id": "art-chhau", "description": "Chhau Dance of Seraikela", "imageUrl": "https://picsum.photos/seed/chhaudance/600/400", "imageHint": "masked dance" },
     { "id": "art-dokra", "description": "Dokra Art of Dumka", "imageUrl": "https://picsum.photos/seed/dokraart/600/400", "imageHint": "metal craft" },
-    { "id": "art-museum", "description": "State Museum Hotwar", "imageUrl": "https://picsum.photos/seed/statemuseum/600/400", "imageHint": "museum gallery" }
+    { "id": "art-museum", "description": "State Museum Hotwar", "imageUrl": "https://picsum.photos/seed/statemuseum/600/400", "imageHint": "museum gallery" },
+    {
+      "id": "exp-patratu-boating",
+      "description": "Boating in Patratu Dam",
+      "imageUrl": "https://picsum.photos/seed/patratu-boat/600/800",
+      "imageHint": "lake boating"
+    },
+    {
+      "id": "video-waterfalls",
+      "description": "Waterfalls video thumbnail",
+      "imageUrl": "https://picsum.photos/seed/vid-waterfall/600/338",
+      "imageHint": "waterfall drone"
+    },
+    {
+      "id": "video-culture",
+      "description": "Culture video thumbnail",
+      "imageUrl": "https://picsum.photos/seed/vid-culture/600/338",
+      "imageHint": "tribal dance"
+    },
+    {
+      "id": "video-wildlife",
+      "description": "Wildlife video thumbnail",
+      "imageUrl": "https://picsum.photos/seed/vid-wildlife/600/338",
+      "imageHint": "tiger forest"
+    }
   ]
 }

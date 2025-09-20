@@ -51,6 +51,40 @@ export const topDestinations = [
   },
 ];
 
+export const topExperiences = [
+  {
+    title: 'Boating in Patratu Dam',
+    description: 'Enjoy a serene boat ride amidst the picturesque hills of Patratu Valley.',
+    imageId: 'exp-patratu-boating',
+    href: '#',
+  },
+  {
+    title: 'Sunrise at Netarhat',
+    description: 'Witness a glorious sunrise from Magnolia Point, the "Queen of Chotanagpur".',
+    imageId: 'dest-netarhat',
+    href: '#',
+  },
+  {
+    title: 'Wildlife Safari in Betla',
+    description: 'Embark on a thrilling jungle safari to spot elephants, deer, and maybe a tiger.',
+    imageId: 'dest-betla',
+    href: '#',
+  },
+  {
+    title: 'Trekking to Parasnath',
+    description: 'A spiritual and adventurous trek to the highest peak in Jharkhand.',
+    imageId: 'adventure-parasnath',
+    href: '#',
+  },
+  {
+    title: 'Explore Tribal Art',
+    description: 'Discover the ancient Sohrai and Khovar art forms in local villages.',
+    imageId: 'art-sohrai-khovar',
+    href: '#',
+  }
+];
+
+
 export const adventureDestinations = [
   {
     name: 'Parasnath Hills',
@@ -233,4 +267,22 @@ export const moreMenuItems = [
     { title: 'Tourist Visitors Statistics', href: '#' },
     { title: 'Tourism Calender 2025', href: '#' },
     { title: 'Tourism Projects', href: '#' },
+];
+
+export const videoGallery = [
+    {
+        title: 'The Land of Waterfalls',
+        thumbnailId: 'video-waterfalls',
+        href: '#',
+    },
+    {
+        title: 'Vibrance of Tribal Culture',
+        thumbnailId: 'video-culture',
+        href: '#',
+    },
+    {
+        title: 'Into the Wilds of Betla',
+        thumbnailId: 'video-wildlife',
+        href: '#',
+    }
 ];
