@@ -21,6 +21,7 @@ import { MobileNav } from '@/components/mobile-nav';
 import { DestinationsMenu } from '@/components/destinations-menu';
 import { PlanTripMenu } from '@/components/plan-trip-menu';
 import { UpcomingEventsMenu } from '@/components/upcoming-events-menu';
+import { MoreMenu } from '@/components/more-menu';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
@@ -85,6 +86,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <DestinationsMenu />
             <PlanTripMenu />
             <UpcomingEventsMenu />
+            <MoreMenu />
             {navItems.slice(1).map((item) => (
               <Link
                 key={item.label}

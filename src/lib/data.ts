@@ -220,3 +220,17 @@ export const upcomingEvents = [
     href: '#',
   }
 ];
+
+export const moreMenuItems = [
+    { title: 'About Us', href: '#' },
+    { title: 'Blogs', href: '#' },
+    { title: 'Tourism Awards', href: '#' },
+    { title: 'Contact', href: '#' },
+    { title: 'Certification Programme', href: '#' },
+    { title: 'Tenders', href: '#' },
+    { title: 'Island Ground Tariff', href: '#' },
+    { title: 'Tourism Policy', href: '#' },
+    { title: 'Tourist Visitors Statistics', href: '#' },
+    { title: 'Tourism Calender 2025', href: '#' },
+    { title: 'Tourism Projects', href: '#' },
+];
