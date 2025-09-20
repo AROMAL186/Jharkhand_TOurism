@@ -13,6 +13,7 @@ import {
   LogIn,
   LogOut,
   GalleryHorizontal,
+  CalendarDays,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { useEffect, useState } from 'react';
@@ -21,13 +22,25 @@ import { MobileNav } from '@/components/mobile-nav';
 import { DestinationsMenu } from '@/components/destinations-menu';
 import { PlanTripMenu } from '@/components/plan-trip-menu';
 import { UpcomingEventsMenu } from '@/components/upcoming-events-menu';
-import { MoreMenu } from '@/components/more-menu';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
-  { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
+  // DestinationsMenu is manually placed
+  // PlanTripMenu is manually placed
   { href: '/itinerary', label: 'Itinerary Planner', icon: ClipboardList },
   { href: '/map', label: 'Interactive Map', icon: Map },
+  { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
+  { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
+  { href: '/transport', label: 'Transport', icon: Bus },
+  // UpcomingEventsMenu is manually placed
+  { href: '/feedback', label: 'Feedback', icon: MessageSquare },
+];
+
+export const mobileNavItems = [
+  { href: '/', label: 'Home', icon: LayoutDashboard },
+  { href: '/itinerary', label: 'Itinerary Planner', icon: ClipboardList },
+  { href: '/map', label: 'Interactive Map', icon: Map },
+  { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
   { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
   { href: '/transport', label: 'Transport', icon: Bus },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
@@ -72,27 +85,34 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <span className="sr-only">Jharkhand Explorer</span>
           </Link>
           <nav className="hidden md:flex items-center gap-5 text-sm font-medium lg:gap-6">
-            {navItems.slice(0, 1).map((item) => (
-               <Link
+            <Link
+                href="/"
+                className={`transition-colors hover:text-foreground ${
+                  pathname === '/' ? 'text-foreground' : 'text-muted-foreground'
+                }`}
+              >
+                Home
+            </Link>
+            <DestinationsMenu />
+            <PlanTripMenu />
+             {navItems.slice(1,5).map((item) => (
+              <Link
                 key={item.label}
                 href={item.href}
                 className={`transition-colors hover:text-foreground ${
-                  pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+                  pathname.startsWith(item.href) && item.href !=='/' ? 'text-foreground' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
-            <DestinationsMenu />
-            <PlanTripMenu />
             <UpcomingEventsMenu />
-            <MoreMenu />
-            {navItems.slice(1).map((item) => (
+            {navItems.slice(5).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 className={`transition-colors hover:text-foreground ${
-                  pathname === item.href ? 'text-foreground' : 'text-muted-foreground'
+                  pathname.startsWith(item.href) && item.href !=='/' ? 'text-foreground' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}

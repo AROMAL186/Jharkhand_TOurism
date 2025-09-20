@@ -2,13 +2,13 @@
 'use client';
 
 import Link from "next/link";
-import { Menu, LogIn, LogOut, ChevronDown } from "lucide-react";
+import { Menu, LogIn, LogOut, ChevronDown, CalendarDays } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AppLogo from "@/components/app-logo";
-import { navItems } from "@/app/(main)/layout";
+import { mobileNavItems } from "@/app/(main)/layout";
 import { useState } from "react";
 import {
   Accordion,
@@ -16,7 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { topDestinations } from "@/lib/data";
+import { topDestinations, upcomingEvents } from "@/lib/data";
 
 interface MobileNavProps {
   isLoggedIn: boolean;
@@ -49,7 +49,7 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
             <AppLogo />
             <span className="sr-only">Jharkhand Explorer</span>
           </Link>
-          {navItems.slice(0, 1).map((item) => (
+          {mobileNavItems.slice(0, 1).map((item) => (
             <Link
               key={item.label}
               href={item.href}
@@ -88,8 +88,50 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
                 </div>
               </AccordionContent>
             </AccordionItem>
+            <AccordionItem value="plan-trip" className="border-b-0">
+                 <AccordionTrigger className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-muted-foreground hover:no-underline hover:text-foreground hover:bg-muted [&[data-state=open]]:text-foreground [&[data-state=open]]:bg-muted">Plan Your Trip</AccordionTrigger>
+                 <AccordionContent className="pb-0">
+                   <div className="ml-4 mt-2 flex flex-col space-y-2">
+                     <Link href="/itinerary" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Itinerary Planner</Link>
+                     <Link href="/transport" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Transport</Link>
+                   </div>
+                 </AccordionContent>
+             </AccordionItem>
           </Accordion>
-          {navItems.slice(1).map((item) => (
+          {mobileNavItems.slice(1, 5).map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors hover:text-foreground ${
+                pathname === item.href ? 'text-foreground bg-muted' : 'text-muted-foreground'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="upcoming-events" className="border-b-0">
+                <AccordionTrigger className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-muted-foreground hover:no-underline hover:text-foreground hover:bg-muted [&[data-state=open]]:text-foreground [&[data-state=open]]:bg-muted">
+                    <span className="flex items-center">Upcoming Events</span>
+                </AccordionTrigger>
+                <AccordionContent className="pb-0">
+                    <div className="ml-4 mt-2 flex flex-col space-y-2">
+                        {upcomingEvents.map(event => (
+                        <Link
+                            key={event.title}
+                            href={event.href}
+                            onClick={() => setIsOpen(false)}
+                            className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        >
+                            {event.title}
+                        </Link>
+                        ))}
+                    </div>
+                </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          {mobileNavItems.slice(5).map((item) => (
             <Link
               key={item.label}
               href={item.href}
