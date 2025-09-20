@@ -40,7 +40,6 @@ const galleryCategories = [
     { name: 'Art & Culture', imageId: 'gallery-art-culture', href: '/gallery/art-culture' },
     { name: 'Beaches', imageId: 'gallery-beaches', href: '#' },
     { name: 'Crafts', imageId: 'gallery-crafts', href: '#' },
-    { name: 'Cuisine', imageId: 'gallery-cuisine', href: '#' },
     { name: 'Festivals', imageId: 'gallery-festivals', href: '#' },
     { name: 'Forts', imageId: 'gallery-forts', href: '#' },
     { name: 'Hills', imageId: 'gallery-hills', href: '#' },
