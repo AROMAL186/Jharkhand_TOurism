@@ -2,7 +2,7 @@
 'use client';
 
 import Link from "next/link";
-import { Menu, LogIn, LogOut, ChevronDown, CalendarDays, ClipboardList } from "lucide-react";
+import { Menu, LogIn, LogOut, ChevronDown, CalendarDays, ClipboardList, Map } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -93,6 +93,7 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
                  <AccordionContent className="pb-0">
                    <div className="ml-4 mt-2 flex flex-col space-y-2">
                      <Link href="/trip-planner" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Trip Planner</Link>
+                     <Link href="/route-optimizer" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Route Optimizer</Link>
                      <Link href="/transport" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Transport</Link>
                    </div>
                  </AccordionContent>

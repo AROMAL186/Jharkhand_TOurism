@@ -32,6 +32,7 @@ export const navItems = [
   { href: '/transport', label: 'Transport', icon: Bus },
   // UpcomingEventsMenu is manually placed
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
+  { href: '/route-optimizer', label: 'Route Optimizer', icon: Map },
 ];
 
 export const mobileNavItems = [
@@ -41,6 +42,7 @@ export const mobileNavItems = [
   { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
   { href: '/transport', label: 'Transport', icon: Bus },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
+  { href: '/route-optimizer', label: 'Route Optimizer', icon: Map },
 ];
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
@@ -105,14 +107,14 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 key={item.label}
                 href={item.href}
                 className={`transition-colors hover:text-foreground ${
-                  pathname.startsWith(item.href) ? 'text-foreground' : 'text-muted-foreground'
+                  pathname.startsWith(item.href) && item.href !== '/' ? 'text-foreground' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
               </Link>
             ))}
             <UpcomingEventsMenu />
-            {navItems.slice(8).map((item) => (
+            {navItems.slice(8, 9).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -123,6 +125,14 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 {item.label}
               </Link>
             ))}
+             <Link
+                href="/route-optimizer"
+                className={`transition-colors hover:text-foreground ${
+                  pathname.startsWith('/route-optimizer') ? 'text-foreground' : 'text-muted-foreground'
+                }`}
+              >
+                Route Optimizer
+              </Link>
           </nav>
         </div>
         
