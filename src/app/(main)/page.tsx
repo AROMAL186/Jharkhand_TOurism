@@ -38,6 +38,7 @@ const facts = [
 const galleryCategories = [
     { name: 'Adventure', imageId: 'gallery-adventure', href: '/gallery/adventure' },
     { name: 'Art & Culture', imageId: 'gallery-art-culture', href: '/gallery/art-culture' },
+    { name: 'Beaches', imageId: 'gallery-beaches', href: '#' },
     { name: 'Crafts', imageId: 'gallery-crafts', href: '#' },
     { name: 'Cuisine', imageId: 'gallery-cuisine', href: '#' },
     { name: 'Festivals', imageId: 'gallery-festivals', href: '#' },
@@ -46,10 +47,12 @@ const galleryCategories = [
     { name: 'Lakes', imageId: 'gallery-lakes', href: '#' },
     { name: 'Monuments', imageId: 'gallery-monuments', href: '#' },
     { name: 'Museums', imageId: 'gallery-museums', href: '#' },
+    { name: 'Palaces', imageId: 'gallery-palaces', href: '#' },
     { name: 'Pilgrim Centres', imageId: 'gallery-pilgrim', href: '#' },
     { name: 'Waterfalls', imageId: 'gallery-waterfalls', href: '#' },
     { name: 'Wellness', imageId: 'gallery-wellness', href: '#' },
     { name: 'Wildlife', imageId: 'gallery-wildlife', href: '#' },
+    { name: 'World Heritage Sites', imageId: 'gallery-world-heritage', href: '#' },
 ];
 
 export default function HomePage() {
