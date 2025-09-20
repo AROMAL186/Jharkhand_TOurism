@@ -1,11 +1,16 @@
+
+'use client';
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { busRoutes, trainRoutes } from "@/lib/data";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bus, Train, Car, ArrowUpRight, Sparkles } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Bus, Train, Car, ArrowUpRight, Sparkles, Bike, MapPin, Milestone, DollarSign } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { useState, useEffect } from "react";
 
 const getStatusVariant = (status: string) => {
   switch (status.toLowerCase()) {
@@ -19,6 +24,91 @@ const getStatusVariant = (status: string) => {
       return 'outline';
   }
 };
+
+const BookingCard = ({
+  icon,
+  title,
+  description,
+  baseFare,
+  perKm,
+}: {
+  icon: React.ReactNode,
+  title: string,
+  description: string,
+  baseFare: number,
+  perKm: number,
+}) => {
+  const [destination, setDestination] = useState('');
+  const [distance, setDistance] = useState(0);
+  const [fare, setFare] = useState(0);
+
+  useEffect(() => {
+    if (destination) {
+      // Simulate distance calculation
+      const randomDistance = Math.random() * 25 + 2; // 2km to 27km
+      setDistance(parseFloat(randomDistance.toFixed(1)));
+    } else {
+      setDistance(0);
+    }
+  }, [destination]);
+
+  useEffect(() => {
+    if (distance > 0) {
+      // Simulate fare calculation
+      setFare(baseFare + distance * perKm);
+    } else {
+      setFare(0);
+    }
+  }, [distance, baseFare, perKm]);
+
+  return (
+    <Card className="flex flex-col">
+      <CardHeader className="flex flex-row items-start gap-4 space-y-0">
+        <div className="p-3 bg-primary/10 rounded-full">{icon}</div>
+        <div>
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>{description}</CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent className="flex-grow space-y-4">
+        <div className="space-y-2">
+            <label className="text-sm font-medium flex items-center gap-2 text-muted-foreground"><MapPin className="h-4 w-4"/> Your Location</label>
+            <Input readOnly value="Using your current location" className="bg-muted"/>
+        </div>
+        <div className="space-y-2">
+            <label htmlFor={`destination-${title}`} className="text-sm font-medium flex items-center gap-2 text-muted-foreground"><MapPin className="h-4 w-4"/> Destination</label>
+            <Input 
+                id={`destination-${title}`} 
+                placeholder="Where do you want to go?" 
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+            />
+        </div>
+        
+        {distance > 0 && (
+            <div className="grid grid-cols-2 gap-4 pt-4">
+                <div className="flex flex-col gap-1">
+                    <p className="text-sm text-muted-foreground flex items-center gap-2"><Milestone className="h-4 w-4" /> Distance</p>
+                    <p className="text-lg font-bold">{distance} km</p>
+                </div>
+                 <div className="flex flex-col gap-1">
+                    <p className="text-sm text-muted-foreground flex items-center gap-2"><DollarSign className="h-4 w-4" /> Est. Fare</p>
+                    <p className="text-lg font-bold">₹{fare.toFixed(0)}</p>
+                </div>
+            </div>
+        )}
+      </CardContent>
+      <CardFooter>
+        <Button asChild className="w-full" size="lg" disabled={!destination}>
+             <Link href="https://book.olacabs.com/" target="_blank" rel="noopener noreferrer">
+                Book Your Ride Now
+                <ArrowUpRight className="ml-2 h-5 w-5" />
+            </Link>
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
 
 export default function TransportPage() {
   return (
@@ -35,7 +125,7 @@ export default function TransportPage() {
         </CardHeader>
       </Card>
 
-      <Tabs defaultValue="buses" className="w-full">
+      <Tabs defaultValue="booking" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="buses"><Bus className="mr-2"/> Buses</TabsTrigger>
           <TabsTrigger value="trains"><Train className="mr-2"/> Trains</TabsTrigger>
@@ -106,26 +196,25 @@ export default function TransportPage() {
           </Card>
         </TabsContent>
         <TabsContent value="booking">
-          <Card>
-            <CardHeader>
-              <CardTitle>Book a Ride</CardTitle>
-              <CardDescription>Instantly book a cab or bike to your destination.</CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center justify-center gap-6 text-center p-8 bg-gradient-to-br from-primary/5 to-transparent">
-                <Sparkles className="h-12 w-12 text-primary animate-pulse" />
-                <p className="text-xl font-medium text-foreground max-w-md">
-                    "The journey of a thousand miles begins with a single click. Your ride is waiting!"
-                </p>
-                <Button asChild size="lg" className="group animate-pulse">
-                    <Link href="https://book.olacabs.com/" target="_blank" rel="noopener noreferrer">
-                        Book Your Ride Now
-                        <ArrowUpRight className="ml-2 h-5 w-5 transition-transform group-hover:rotate-45" />
-                    </Link>
-                </Button>
-            </CardContent>
-          </Card>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+              <BookingCard 
+                icon={<Car className="h-6 w-6 text-primary" />}
+                title="Book a Cab"
+                description="Get a comfortable ride to your destination instantly."
+                baseFare={50}
+                perKm={15}
+              />
+              <BookingCard 
+                icon={<Bike className="h-6 w-6 text-primary" />}
+                title="Book a Bike"
+                description="Zip through the city traffic with a quick bike ride."
+                baseFare={25}
+                perKm={7}
+              />
+           </div>
         </TabsContent>
       </Tabs>
     </div>
   );
 }
+
