@@ -15,12 +15,7 @@ import { ArrowRight, Trees, Landmark, Leaf, Mountain, Quote, Gem, Search, PlayCi
 import { culturalHighlights, topDestinations, topExperiences, videoGallery } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-const heroImage = {
-    "id": "hero-background",
-    "description": "A powerful waterfall in Jharkhand.",
-    "imageUrl": "https://picsum.photos/seed/hero-waterfall/1920/1080",
-    "imageHint": "waterfall wide"
-};
+const heroImage = PlaceHolderImages.find(p => p.id === 'hero-background');
 
 
 const facts = [
@@ -61,6 +56,9 @@ const galleryCategories = [
 ];
 
 export default function HomePage() {
+  const plan1Image = PlaceHolderImages.find(p => p.id === 'plan-1');
+  const plan2Image = PlaceHolderImages.find(p => p.id === 'plan-2');
+
   return (
     <div className="flex flex-col gap-16">
       <section className="relative h-[60vh] w-full rounded-lg overflow-hidden">
@@ -285,7 +283,7 @@ export default function HomePage() {
                 <Card className="overflow-hidden group">
                     <Link href="/trip-planner">
                         <div className="relative h-40">
-                             <Image src="https://picsum.photos/seed/plan-1/300/200" alt="Trip Planner" fill className="object-cover group-hover:scale-105 transition-transform" data-ai-hint="map compass" />
+                             {plan1Image && <Image src={plan1Image.imageUrl} alt="Trip Planner" fill className="object-cover group-hover:scale-105 transition-transform" data-ai-hint={plan1Image.imageHint} />}
                         </div>
                         <CardHeader>
                             <CardTitle className="text-lg">Trip Planner</CardTitle>
@@ -295,7 +293,7 @@ export default function HomePage() {
                  <Card className="overflow-hidden group">
                     <Link href="/transport">
                         <div className="relative h-40">
-                             <Image src="https://picsum.photos/seed/plan-2/300/200" alt="Transport" fill className="object-cover group-hover:scale-105 transition-transform" data-ai-hint="bus train" />
+                             {plan2Image && <Image src={plan2Image.imageUrl} alt="Transport" fill className="object-cover group-hover:scale-105 transition-transform" data-ai-hint={plan2Image.imageHint} />}
                         </div>
                         <CardHeader>
                             <CardTitle className="text-lg">Transport</CardTitle>
