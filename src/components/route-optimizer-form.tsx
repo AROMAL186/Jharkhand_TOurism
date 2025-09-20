@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import {
@@ -16,46 +16,17 @@ import {
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, MapPin, X, Plus, Shuffle, Clock, Milestone, Route, Lightbulb } from 'lucide-react';
+import { Loader2, Wand2, MapPin, X, Plus, Clock, Milestone, Route, Lightbulb } from 'lucide-react';
 import { optimizeRoute, RouteOptimizerOutput } from '@/ai/flows/route-optimizer';
-import { topDestinations } from '@/lib/data';
-import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { DndContext, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import { Input } from '@/components/ui/input';
 
 const formSchema = z.object({
-  destinations: z.array(z.string()).refine(value => value.length >= 2, {
-    message: "You must select at least two destinations.",
+  destinations: z.array(z.object({ value: z.string().min(1, "Destination can't be empty.") })).refine(value => value.length >= 2, {
+    message: "You must add at least two destinations.",
   }),
   optimizationMode: z.enum(['fastest', 'shortest']),
 });
-
-function SortableItem({ id, onRemove }: { id: string; onRemove: (id: string) => void }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-  } = useSortable({ id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="flex items-center gap-2 p-2 bg-muted rounded-md touch-none">
-        <Shuffle className="h-5 w-5 text-muted-foreground" />
-      <span className="flex-grow">{id}</span>
-      <Button variant="ghost" size="icon" onClick={() => onRemove(id)} className="h-6 w-6">
-        <X className="h-4 w-4" />
-      </Button>
-    </div>
-  );
-}
 
 export function RouteOptimizerForm() {
   const [loading, setLoading] = useState(false);
@@ -65,48 +36,28 @@ export function RouteOptimizerForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      destinations: ['Ranchi', 'Netarhat'],
+      destinations: [{ value: 'Ranchi' }, { value: 'Netarhat' }, { value: 'Hazaribagh' }],
       optimizationMode: 'fastest',
     },
   });
 
-  const { watch, setValue } = form;
-  const selectedDestinations = watch('destinations');
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-    if (over && active.id !== over.id) {
-      const oldIndex = selectedDestinations.indexOf(active.id as string);
-      const newIndex = selectedDestinations.indexOf(over.id as string);
-      setValue('destinations', arrayMove(selectedDestinations, oldIndex, newIndex), { shouldValidate: true });
-    }
-  }
-
-  const handleAddDestination = (destination: string) => {
-    if (!selectedDestinations.includes(destination)) {
-      setValue('destinations', [...selectedDestinations, destination], { shouldValidate: true });
-    }
-  };
-
-  const handleRemoveDestination = (destination: string) => {
-    setValue('destinations', selectedDestinations.filter(d => d !== destination), { shouldValidate: true });
-  };
-
+  const { fields, append, remove } = useFieldArray({
+    control: form.control,
+    name: 'destinations',
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     setResult(null);
     setError(null);
 
+    const submissionData = {
+      destinations: values.destinations.map(d => d.value),
+      optimizationMode: values.optimizationMode,
+    }
+
     try {
-      const response = await optimizeRoute(values);
+      const response = await optimizeRoute(submissionData);
       setResult(response);
     } catch (e) {
       setError('Failed to optimize route. Please try again.');
@@ -122,56 +73,68 @@ export function RouteOptimizerForm() {
         <CardContent className="p-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <FormField
-                    control={form.control}
-                    name="destinations"
-                    render={() => (
-                        <FormItem>
-                            <FormLabel className="text-base flex items-center gap-2"><MapPin /> Destinations</FormLabel>
-                            <FormDescription>Select at least two destinations. The first one will be your starting point. Drag to reorder.</FormDescription>
-                            <div className="space-y-2 p-2 border rounded-lg h-64 overflow-y-auto">
-                                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                                    <SortableContext items={selectedDestinations} strategy={verticalListSortingStrategy}>
-                                        {selectedDestinations.map(dest => (
-                                            <SortableItem key={dest} id={dest} onRemove={handleRemoveDestination} />
-                                        ))}
-                                    </SortableContext>
-                                </DndContext>
-                            </div>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                
-                <div className="space-y-4">
-                    <h3 className="font-medium text-base">Available Destinations</h3>
-                    <div className="grid grid-cols-2 gap-2">
-                        {topDestinations.map((dest) => {
-                            const isSelected = selectedDestinations.includes(dest.name);
-                            return (
-                                <Button
-                                    key={dest.slug}
-                                    variant={isSelected ? "secondary" : "outline"}
-                                    onClick={() => isSelected ? handleRemoveDestination(dest.name) : handleAddDestination(dest.name)}
-                                    className="justify-start"
-                                >
-                                    {isSelected ? <X className="mr-2 h-4 w-4" /> : <Plus className="mr-2 h-4 w-4" />}
-                                    {dest.name}
-                                </Button>
-                            )
-                        })}
+              
+              <FormField
+                control={form.control}
+                name="destinations"
+                render={() => (
+                  <FormItem>
+                    <FormLabel className="text-base flex items-center gap-2"><MapPin /> Destinations</FormLabel>
+                    <FormDescription>
+                      Add at least two locations. The first will be your starting point. The optimizer will find the best route through all of them.
+                    </FormDescription>
+                    <div className="space-y-3">
+                      {fields.map((field, index) => (
+                        <FormField
+                          key={field.id}
+                          control={form.control}
+                          name={`destinations.${index}.value`}
+                          render={({ field }) => (
+                            <FormItem>
+                              <div className="flex items-center gap-2">
+                                <FormLabel className="w-20">{index === 0 ? 'Start From' : `Stop ${index}`}</FormLabel>
+                                <FormControl>
+                                  <Input placeholder="Enter a city or landmark" {...field} />
+                                </FormControl>
+                                {fields.length > 2 && (
+                                    <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="icon"
+                                    className="shrink-0"
+                                    onClick={() => remove(index)}
+                                    >
+                                    <X className="h-4 w-4" />
+                                    </Button>
+                                )}
+                              </div>
+                               <FormMessage className="ml-24" />
+                            </FormItem>
+                          )}
+                        />
+                      ))}
                     </div>
-                </div>
-
-              </div>
+                     <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="mt-2"
+                        onClick={() => append({ value: '' })}
+                        >
+                        <Plus className="mr-2 h-4 w-4" />
+                        Add Another Stop
+                    </Button>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <FormField
                 control={form.control}
                 name="optimizationMode"
                 render={({ field }) => (
                   <FormItem className="space-y-3">
-                    <FormLabel className="text-base flex items-center gap-2"><Shuffle /> Optimize For</FormLabel>
+                    <FormLabel className="text-base flex items-center gap-2"><Wand2 /> Optimize For</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
@@ -198,7 +161,7 @@ export function RouteOptimizerForm() {
               />
 
               <Button type="submit" disabled={loading} className="w-full" size="lg">
-                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
+                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Route className="mr-2 h-4 w-4" />}
                 Optimize My Route
               </Button>
             </form>
