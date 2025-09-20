@@ -2,7 +2,7 @@
 'use client';
 
 import Link from "next/link";
-import { Menu, LogIn, LogOut, ChevronDown, CalendarDays } from "lucide-react";
+import { Menu, LogIn, LogOut, ChevronDown, CalendarDays, ClipboardList } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -98,7 +98,18 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
                  </AccordionContent>
              </AccordionItem>
           </Accordion>
-          {mobileNavItems.slice(1, 5).map((item) => (
+
+          <Link
+            href="/trip-planner"
+            onClick={() => setIsOpen(false)}
+            className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors hover:text-foreground ${
+              pathname === '/trip-planner' ? 'text-foreground bg-muted' : 'text-muted-foreground'
+            }`}
+          >
+            Trip Planner
+          </Link>
+
+          {mobileNavItems.slice(1).map((item) => (
             <Link
               key={item.label}
               href={item.href}
@@ -131,18 +142,6 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
                 </AccordionContent>
             </AccordionItem>
           </Accordion>
-          {mobileNavItems.slice(5).map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={() => setIsOpen(false)}
-              className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors hover:text-foreground ${
-                pathname === item.href ? 'text-foreground bg-muted' : 'text-muted-foreground'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
         </nav>
         <div className="mt-auto">
            {isLoggedIn ? (

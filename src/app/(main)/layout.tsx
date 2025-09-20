@@ -1,5 +1,4 @@
 
-
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -13,7 +12,6 @@ import {
   LogIn,
   LogOut,
   GalleryHorizontal,
-  CalendarDays,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { useEffect, useState } from 'react';
@@ -38,7 +36,6 @@ export const navItems = [
 
 export const mobileNavItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
-  { href: '/trip-planner', label: 'Trip Planner', icon: ClipboardList },
   { href: '/map', label: 'Interactive Map', icon: Map },
   { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
   { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
@@ -103,7 +100,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               >
                 Trip Planner
               </Link>
-             {navItems.slice(3, 7).map((item) => (
+             {navItems.slice(4, 7).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
