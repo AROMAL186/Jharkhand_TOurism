@@ -81,9 +81,9 @@ export function RouteOptimizerForm() {
                   <FormItem>
                     <FormLabel className="text-base flex items-center gap-2"><MapPin /> Destinations</FormLabel>
                     <FormDescription>
-                      Add at least two locations. The first will be your starting point. The optimizer will find the best route through all of them.
+                      Add at least two locations. The first will be your starting point.
                     </FormDescription>
-                    <div className="space-y-3">
+                    <div className="space-y-3 pt-2">
                       {fields.map((field, index) => (
                         <FormField
                           key={field.id}
@@ -92,7 +92,7 @@ export function RouteOptimizerForm() {
                           render={({ field }) => (
                             <FormItem>
                               <div className="flex items-center gap-2">
-                                <FormLabel className="w-20">{index === 0 ? 'Start From' : `Stop ${index}`}</FormLabel>
+                                <FormLabel className="w-24 text-sm text-muted-foreground">{index === 0 ? 'Start From' : `Stop ${index}`}</FormLabel>
                                 <FormControl>
                                   <Input placeholder="Enter a city or landmark" {...field} />
                                 </FormControl>
@@ -101,14 +101,14 @@ export function RouteOptimizerForm() {
                                     type="button"
                                     variant="ghost"
                                     size="icon"
-                                    className="shrink-0"
+                                    className="shrink-0 text-muted-foreground hover:text-destructive"
                                     onClick={() => remove(index)}
                                     >
                                     <X className="h-4 w-4" />
                                     </Button>
                                 )}
                               </div>
-                               <FormMessage className="ml-24" />
+                               <FormMessage className="ml-24 pl-2" />
                             </FormItem>
                           )}
                         />
@@ -124,7 +124,9 @@ export function RouteOptimizerForm() {
                         <Plus className="mr-2 h-4 w-4" />
                         Add Another Stop
                     </Button>
-                    <FormMessage />
+                    {form.formState.errors.destinations && (
+                      <p className="text-sm font-medium text-destructive">{form.formState.errors.destinations.message}</p>
+                    )}
                   </FormItem>
                 )}
               />
@@ -139,7 +141,7 @@ export function RouteOptimizerForm() {
                       <RadioGroup
                         onValueChange={field.onChange}
                         defaultValue={field.value}
-                        className="flex gap-4"
+                        className="flex gap-4 pt-2"
                       >
                         <FormItem className="flex items-center space-x-2">
                           <FormControl>
@@ -208,17 +210,17 @@ export function RouteOptimizerForm() {
                     <CardTitle className="flex items-center gap-2"><Route/> Optimized Path</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="space-y-6 relative">
-                      <div className="absolute left-4 top-4 bottom-4 w-0.5 bg-primary/20" />
+                    <div className="relative pl-6">
+                      <div className="absolute left-[35px] top-5 h-[calc(100%-2.5rem)] w-0.5 bg-primary/20" />
                        {result.optimizedRoute.map((step, index) => (
-                         <div key={step.order} className="flex items-start gap-4 relative">
+                         <div key={step.order} className="flex items-start gap-4 relative mb-6">
                             <div className="z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">{step.order}</div>
                             <div className="flex-grow pt-1">
                                 <p className="font-bold text-lg">{step.destination}</p>
                                 {index > 0 && (
-                                    <div className="text-sm text-muted-foreground flex gap-4 mt-1">
-                                        <span><Clock className="inline mr-1 h-4 w-4" />{step.estimatedTime}</span>
-                                        <span><Milestone className="inline mr-1 h-4 w-4" />{step.estimatedDistance}</span>
+                                    <div className="text-sm text-muted-foreground flex items-center gap-4 mt-1">
+                                        <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" />{step.estimatedTime}</span>
+                                        <span className="flex items-center gap-1.5"><Milestone className="h-4 w-4" />{step.estimatedDistance}</span>
                                     </div>
                                 )}
                             </div>
