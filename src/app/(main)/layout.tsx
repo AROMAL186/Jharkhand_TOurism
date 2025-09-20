@@ -95,7 +95,15 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <DestinationsMenu />
             <PlanTripMenu />
-             {navItems.slice(2, 7).map((item) => (
+             <Link
+                href="/trip-planner"
+                className={`transition-colors hover:text-foreground ${
+                  pathname.startsWith('/trip-planner') ? 'text-foreground' : 'text-muted-foreground'
+                }`}
+              >
+                Trip Planner
+              </Link>
+             {navItems.slice(3, 7).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
