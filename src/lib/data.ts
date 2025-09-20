@@ -206,3 +206,17 @@ export const trainRoutes = [
     { id: 4, trainName: 'Howrah - Ranchi Shatabdi Express', trainNumber: '12019', route: 'Howrah to Ranchi', scheduledArrival: '01:15 PM', status: 'Arrived' },
 ];
 
+export const upcomingEvents = [
+  {
+    title: 'Jharkhand Tourism Awards - 2025',
+    href: '#',
+  },
+  {
+    title: 'Sarhul Festival Celebration',
+    href: '#',
+  },
+  {
+    title: 'Monsoon Trekking Expedition',
+    href: '#',
+  }
+];

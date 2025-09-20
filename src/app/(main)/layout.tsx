@@ -1,4 +1,5 @@
 
+
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -19,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import { MobileNav } from '@/components/mobile-nav';
 import { DestinationsMenu } from '@/components/destinations-menu';
 import { PlanTripMenu } from '@/components/plan-trip-menu';
+import { UpcomingEventsMenu } from '@/components/upcoming-events-menu';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
@@ -82,6 +84,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             ))}
             <DestinationsMenu />
             <PlanTripMenu />
+            <UpcomingEventsMenu />
             {navItems.slice(1).map((item) => (
               <Link
                 key={item.label}
