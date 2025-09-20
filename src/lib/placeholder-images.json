@@ -4,8 +4,8 @@
     {
       "id": "hero-background",
       "description": "A scenic view of Jharkhand's landscape.",
-      "imageUrl": "https://picsum.photos/seed/hero/1920/1080",
-      "imageHint": "landscape valley"
+      "imageUrl": "https://picsum.photos/seed/jharkhand-hero/1920/1080",
+      "imageHint": "scenic landscape"
     },
     {
       "id": "dest-netarhat",
