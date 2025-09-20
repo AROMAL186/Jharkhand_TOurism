@@ -15,7 +15,13 @@ import { ArrowRight, Trees, Landmark, Leaf, Mountain, Quote, Gem, Search } from 
 import { culturalHighlights, topDestinations } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-const heroImage = PlaceHolderImages.find((img) => img.id === 'hero-background');
+const heroImage = {
+    "id": "hero-background",
+    "description": "A powerful waterfall in Jharkhand.",
+    "imageUrl": "https://picsum.photos/seed/waterfall-hero-2/1920/1080",
+    "imageHint": "waterfall rocks"
+};
+
 
 const facts = [
     {
