@@ -19,7 +19,7 @@ const aboutJharkhand = [
 ]
 
 const essentials = [
-    { title: 'Itinerary Planner', href: '/itinerary' },
+    { title: 'Trip Planner', href: '/trip-planner' },
     { title: 'Travel Tips', href: '#' },
     { title: 'Tourist Guide', href: '#' },
 ]
@@ -29,7 +29,7 @@ const accommodation = [
 ]
 
 const deals = [
-    { title: 'Tour Packages', href: '/itinerary' },
+    { title: 'Tour Packages', href: '/trip-planner' },
 ]
 
 const publications = [

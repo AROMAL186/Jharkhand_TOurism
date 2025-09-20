@@ -94,7 +94,7 @@ const ItineraryTimeline = ({ itinerary }: { itinerary: PersonalizedItineraryOutp
 };
 
 
-export function ItineraryForm() {
+export function TripPlannerForm() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PersonalizedItineraryOutput | null>(null);
   const [error, setError] = useState<string | null>(null);

@@ -27,7 +27,7 @@ export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
   // DestinationsMenu is manually placed
   // PlanTripMenu is manually placed
-  { href: '/itinerary', label: 'Itinerary Planner', icon: ClipboardList },
+  { href: '/trip-planner', label: 'Trip Planner', icon: ClipboardList },
   { href: '/map', label: 'Interactive Map', icon: Map },
   { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
   { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
@@ -38,7 +38,7 @@ export const navItems = [
 
 export const mobileNavItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
-  { href: '/itinerary', label: 'Itinerary Planner', icon: ClipboardList },
+  { href: '/trip-planner', label: 'Trip Planner', icon: ClipboardList },
   { href: '/map', label: 'Interactive Map', icon: Map },
   { href: '/gallery', label: 'Gallery', icon: GalleryHorizontal },
   { href: '/marketplace', label: 'Marketplace', icon: ShoppingBasket },
@@ -95,7 +95,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             </Link>
             <DestinationsMenu />
             <PlanTripMenu />
-             {navItems.slice(1,5).map((item) => (
+             {navItems.slice(2, 7).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -107,7 +107,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               </Link>
             ))}
             <UpcomingEventsMenu />
-            {navItems.slice(5).map((item) => (
+            {navItems.slice(8).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}

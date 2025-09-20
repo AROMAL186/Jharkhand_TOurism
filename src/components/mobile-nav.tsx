@@ -92,7 +92,7 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
                  <AccordionTrigger className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-muted-foreground hover:no-underline hover:text-foreground hover:bg-muted [&[data-state=open]]:text-foreground [&[data-state=open]]:bg-muted">Plan Your Trip</AccordionTrigger>
                  <AccordionContent className="pb-0">
                    <div className="ml-4 mt-2 flex flex-col space-y-2">
-                     <Link href="/itinerary" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Itinerary Planner</Link>
+                     <Link href="/trip-planner" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Trip Planner</Link>
                      <Link href="/transport" onClick={() => setIsOpen(false)} className="block rounded-md px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">Transport</Link>
                    </div>
                  </AccordionContent>

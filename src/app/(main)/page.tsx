@@ -18,7 +18,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 const heroImage = {
     "id": "hero-background",
     "description": "A powerful waterfall in Jharkhand.",
-    "imageUrl": "https://picsum.photos/seed/waterfall-wide/1920/1080",
+    "imageUrl": "https://picsum.photos/seed/hero-waterfall/1920/1080",
     "imageHint": "waterfall wide"
 };
 
@@ -44,6 +44,7 @@ const facts = [
 const galleryCategories = [
     { name: 'Adventure', imageId: 'gallery-adventure', href: '/gallery/adventure' },
     { name: 'Art & Culture', imageId: 'gallery-art-culture', href: '/gallery/art-culture' },
+    { name: 'Beaches', imageId: 'gallery-beaches', href: '#' },
     { name: 'Crafts', imageId: 'gallery-crafts', href: '#' },
     { name: 'Festivals', imageId: 'gallery-festivals', href: '#' },
     { name: 'Forts', imageId: 'gallery-forts', href: '#' },
@@ -56,6 +57,7 @@ const galleryCategories = [
     { name: 'Waterfalls', imageId: 'gallery-waterfalls', href: '#' },
     { name: 'Wellness', imageId: 'gallery-wellness', href: '#' },
     { name: 'Wildlife', imageId: 'gallery-wildlife', href: '#' },
+    { name: 'World Heritage Sites', imageId: 'gallery-world-heritage', href: '#' },
 ];
 
 export default function HomePage() {
@@ -81,7 +83,7 @@ export default function HomePage() {
             "A journey through Jharkhand is a journey through time, where ancient traditions meet stunning natural beauty."
           </p>
           <Button asChild className="mt-8" size="lg">
-            <Link href="/itinerary">
+            <Link href="/trip-planner">
               Plan Your Adventure <ArrowRight className="ml-2" />
             </Link>
           </Button>
@@ -205,29 +207,34 @@ export default function HomePage() {
         </Carousel>
       </section>
 
-      <section className="relative rounded-lg overflow-hidden min-h-[400px] flex items-center justify-center">
-        <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-            poster="https://picsum.photos/seed/video-poster/1920/1080"
-            data-ai-hint="nature video"
-        >
-            <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/60 -z-10" />
-        <div className="text-center text-white p-8">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline flex items-center justify-center gap-2 drop-shadow-lg">
-                <Search className="text-primary" /> Explore Jharkhand
-            </h2>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto mt-2 drop-shadow-md text-primary-foreground/90">Discover the experiences that await you in this beautiful state.</p>
-            <Button asChild className="mt-8" size="lg">
-                <Link href="/gallery">
-                    Visit Photo Gallery <ArrowRight className="ml-2" />
-                </Link>
-            </Button>
+      <section>
+        <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold font-headline">Explore Jharkhand</h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto mt-2">Discover the experiences that await you in this beautiful state.</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {galleryCategories.slice(0, 4).map(category => {
+                 const img = PlaceHolderImages.find(p => p.id === category.imageId);
+                 return (
+                     <Link href={category.href} key={category.name} className="block group">
+                         <Card className="overflow-hidden relative aspect-[4/5]">
+                              {img && (
+                                 <Image
+                                     src={img.imageUrl}
+                                     alt={category.name}
+                                     fill
+                                     className="object-cover transition-transform duration-300 group-hover:scale-110"
+                                     data-ai-hint={img.imageHint}
+                                 />
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                              <div className="absolute bottom-0 left-0 p-4">
+                                  <h3 className="text-white font-bold font-headline text-xl drop-shadow-md">{category.name}</h3>
+                              </div>
+                         </Card>
+                     </Link>
+                 )
+            })}
         </div>
       </section>
 
@@ -269,19 +276,19 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
                 <h2 className="text-3xl font-bold font-headline">Plan Your Perfect Trip</h2>
-                <p className="text-muted-foreground mt-4 text-lg">Use our AI-powered itinerary planner to create a personalized journey through Jharkhand. Tell us your interests, and we'll handle the rest.</p>
+                <p className="text-muted-foreground mt-4 text-lg">Use our AI-powered trip planner to create a personalized journey through Jharkhand. Tell us your interests, and we'll handle the rest.</p>
                 <Button asChild className="mt-6" size="lg">
-                    <Link href="/itinerary">Start Planning Now <ArrowRight className="ml-2" /></Link>
+                    <Link href="/trip-planner">Start Planning Now <ArrowRight className="ml-2" /></Link>
                 </Button>
             </div>
             <div className="grid grid-cols-2 gap-4">
                 <Card className="overflow-hidden group">
-                    <Link href="/itinerary">
+                    <Link href="/trip-planner">
                         <div className="relative h-40">
-                             <Image src="https://picsum.photos/seed/plan-1/300/200" alt="Itinerary Planner" fill className="object-cover group-hover:scale-105 transition-transform" data-ai-hint="map compass" />
+                             <Image src="https://picsum.photos/seed/plan-1/300/200" alt="Trip Planner" fill className="object-cover group-hover:scale-105 transition-transform" data-ai-hint="map compass" />
                         </div>
                         <CardHeader>
-                            <CardTitle className="text-lg">Itinerary Planner</CardTitle>
+                            <CardTitle className="text-lg">Trip Planner</CardTitle>
                         </CardHeader>
                     </Link>
                 </Card>
