@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,8 +6,18 @@ import { marketplaceItems } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ShoppingBasket, ShoppingCart } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useCart } from '@/hooks/use-cart';
+import { useToast } from '@/hooks/use-toast';
 
 export default function MarketplacePage() {
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (item: any) => {
+    addToCart(item);
+    toast({ title: 'Added to cart', description: `${item.name} has been added to your cart.` });
+  };
+
   return (
     <div className="container mx-auto">
        <Card className="border-none shadow-none mb-8">
@@ -46,9 +57,15 @@ export default function MarketplacePage() {
                 <p className="text-2xl font-semibold text-primary">{item.price}</p>
               </CardContent>
               <CardFooter>
-                <Button className="w-full">
-                  <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
-                </Button>
+                {item.inStock ? (
+                  <Button className="w-full" onClick={() => handleAddToCart(item)}>
+                    <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
+                  </Button>
+                ) : (
+                  <Button className="w-full" disabled>
+                    Out of Stock
+                  </Button>
+                )}
               </CardFooter>
             </Card>
           );

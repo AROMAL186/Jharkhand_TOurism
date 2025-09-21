@@ -30,7 +30,7 @@ import AppLogo from '@/components/app-logo';
 import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
-  email: z.string().email('Invalid email address.'),
+  email: z.string().min(1, 'Email or username is required.'),
   password: z.string().min(6, 'Password must be at least 6 characters.'),
   userType: z.enum(['general', 'provider', 'official']),
 });
@@ -49,15 +49,32 @@ export default function LoginPage() {
     },
   });
 
+  const userType = form.watch('userType');
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     setError(null);
-    console.log(values);
+
+    if (values.userType === 'provider') {
+      if (values.email === 'seller' && values.password === 'provide') {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('userType', 'provider');
+        }
+        router.push('/dashboard');
+      } else {
+        setError('Invalid provider credentials');
+      }
+      setLoading(false);
+      return;
+    }
+
     // Mock API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
     // Replace with actual login logic
     if (typeof window !== 'undefined') {
-      localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userType', values.userType);
     }
     setLoading(false);
     router.push('/');
@@ -83,11 +100,11 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{userType === 'provider' ? 'Username' : 'Email'}</FormLabel>
                     <FormControl>
                       <Input
-                        type="email"
-                        placeholder="your@email.com"
+                        type={userType === 'provider' ? 'text' : 'email'}
+                        placeholder={userType === 'provider' ? 'seller' : 'your@email.com'}
                         {...field}
                       />
                     </FormControl>
@@ -120,7 +137,16 @@ export default function LoginPage() {
                     <FormLabel>I am a...</FormLabel>
                     <FormControl>
                       <RadioGroup
-                        onValueChange={field.onChange}
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          if (value === 'provider') {
+                            form.setValue('email', 'seller');
+                            form.setValue('password', 'provide');
+                          } else {
+                            form.setValue('email', '');
+                            form.setValue('password', '');
+                          }
+                        }}
                         defaultValue={field.value}
                         className="flex flex-col space-y-1"
                       >
@@ -154,6 +180,7 @@ export default function LoginPage() {
                   </FormItem>
                 )}
               />
+              {error && <p className="text-sm font-medium text-destructive">{error}</p>}
               <Button
                 type="submit"
                 disabled={loading}
