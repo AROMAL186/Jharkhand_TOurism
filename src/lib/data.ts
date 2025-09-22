@@ -165,7 +165,7 @@ export const marketplaceItems = [
     price: '₹1,500',
     category: 'Handicraft',
     imageId: 'market-dokra',
-    inStock: false,
+    inStock: true,
   },
   {
     id: 2,
@@ -174,7 +174,7 @@ export const marketplaceItems = [
     price: '₹800',
     category: 'Pottery',
     imageId: 'market-sohrai-vase',
-    inStock: false,
+    inStock: true,
   },
   {
     id: 3,
@@ -183,7 +183,7 @@ export const marketplaceItems = [
     price: '₹350',
     category: 'Bamboo Craft',
     imageId: 'market-bamboo',
-    inStock: false,
+    inStock: true,
   },
   {
     id: 4,
@@ -192,7 +192,7 @@ export const marketplaceItems = [
     price: '₹2,200',
     category: 'Textile',
     imageId: 'market-shawl',
-    inStock: false,
+    inStock: true,
   },
   {
     id: 5,
