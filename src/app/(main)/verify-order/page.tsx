@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
+'use client';
 
-const VerifyOrderClient = dynamic(() => import('./VerifyOrderClient'), { ssr: false });
+import { Suspense } from 'react';
+import VerifyOrderClient from './VerifyOrderClient';
 
 export default function VerifyOrderPage() {
   return (
