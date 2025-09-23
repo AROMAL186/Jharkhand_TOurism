@@ -2,11 +2,11 @@
 'use client';
 
 import Link from "next/link";
-import { Menu, LogIn, LogOut, ChevronDown, CalendarDays, ClipboardList, Map } from "lucide-react";
+import { Menu, LogIn, LogOut } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import AppLogo from "@/components/app-logo";
 import { mobileNavItems } from "@/app/(main)/layout";
 import { useState } from "react";
@@ -17,6 +17,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { topDestinations, upcomingEvents } from "@/lib/data";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 interface MobileNavProps {
   isLoggedIn: boolean;
@@ -40,6 +41,11 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="flex flex-col">
+        <SheetHeader>
+          <SheetTitle>
+            <VisuallyHidden>Navigation Menu</VisuallyHidden>
+          </SheetTitle>
+        </SheetHeader>
         <nav className="grid gap-6 text-lg font-medium">
           <Link
             href="/"
