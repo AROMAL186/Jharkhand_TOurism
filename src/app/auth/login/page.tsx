@@ -159,9 +159,6 @@ export default function LoginPage() {
                           <FormControl>
                             <RadioGroupItem value="provider" />
                           </FormControl>
-                          <FormLabel className="font-normal">
-                            Service Provider
-                          </FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>

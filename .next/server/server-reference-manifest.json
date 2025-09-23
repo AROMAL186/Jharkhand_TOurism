@@ -1,5 +1,34 @@
 {
   "node": {
+    "4075e053d0652a69b6780d0a37896e55f0df19f374": {
+      "workers": {
+        "app/(main)/map/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/map/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "multilingualChatbot",
+          "filename": "src/ai/flows/multilingual-chatbot.ts"
+        },
+        "app/(main)/marketplace/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/marketplace/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/ai/flows/marketplace-suggestions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "multilingualChatbot",
+          "filename": "src/ai/flows/multilingual-chatbot.ts"
+        },
+        "app/(main)/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "multilingualChatbot",
+          "filename": "src/ai/flows/multilingual-chatbot.ts"
+        }
+      },
+      "layer": {
+        "app/(main)/map/page": "action-browser",
+        "app/(main)/marketplace/page": "action-browser",
+        "app/(main)/page": "action-browser"
+      },
+      "filename": "src/ai/flows/multilingual-chatbot.ts",
+      "exportedName": "multilingualChatbot"
+    },
     "40c1c7c1f6fa9a2885e19e07b86dc40fbc2265ee64": {
       "workers": {
         "app/(main)/trip-planner/page": {
@@ -14,28 +43,6 @@
       },
       "filename": "src/ai/flows/personalized-itinerary.ts",
       "exportedName": "aiItineraryPlanner"
-    },
-    "4075e053d0652a69b6780d0a37896e55f0df19f374": {
-      "workers": {
-        "app/(main)/map/page": {
-          "moduleId": "[project]/.next-internal/server/app/(main)/map/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "multilingualChatbot",
-          "filename": "src/ai/flows/multilingual-chatbot.ts"
-        },
-        "app/(main)/marketplace/page": {
-          "moduleId": "[project]/.next-internal/server/app/(main)/marketplace/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/ai/flows/marketplace-suggestions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false,
-          "exportedName": "multilingualChatbot",
-          "filename": "src/ai/flows/multilingual-chatbot.ts"
-        }
-      },
-      "layer": {
-        "app/(main)/map/page": "action-browser",
-        "app/(main)/marketplace/page": "action-browser"
-      },
-      "filename": "src/ai/flows/multilingual-chatbot.ts",
-      "exportedName": "multilingualChatbot"
     },
     "40df6e128d2e01fc533bc7c5ba558146f07e24e849": {
       "workers": {
