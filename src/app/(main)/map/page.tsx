@@ -2,18 +2,20 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow } from '@vis.gl/react-google-maps';
 import { destinations } from '@/lib/data';
 import { Card, CardContent } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
+import { Eye } from 'lucide-react';
 
-// Define the type for a destination based on the data structure
 type Destination = typeof destinations[0];
 
 export default function DestinationsPage() {
   const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null);
+  const router = useRouter();
 
-  // Set the initial destination once the component mounts and data is available
   useEffect(() => {
     if (destinations && destinations.length > 0) {
       setSelectedDestination(destinations[0]);
@@ -22,6 +24,10 @@ export default function DestinationsPage() {
 
   const handleDestinationClick = (destination: Destination) => {
     setSelectedDestination(destination);
+  };
+
+  const handleStreetViewClick = () => {
+    router.push('/street-view');
   };
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -45,7 +51,6 @@ export default function DestinationsPage() {
     if (selectedDestination) {
       return selectedDestination.position;
     }
-    // Default center for Jharkhand
     return { lat: 23.6345, lng: 85.3551 }; 
   }, [selectedDestination]);
 
@@ -74,7 +79,7 @@ export default function DestinationsPage() {
                             ))}
                         </div>
                     </ScrollArea>
-                    <div className="md:col-span-2 h-full rounded-r-lg overflow-hidden">
+                    <div className="md:col-span-2 h-full rounded-r-lg overflow-hidden relative">
                          <APIProvider apiKey={apiKey}>
                             <Map
                                 center={mapCenter}
@@ -105,6 +110,12 @@ export default function DestinationsPage() {
                                 )}
                             </Map>
                         </APIProvider>
+                        <Button 
+                            className="absolute top-4 right-4 z-10 bg-primary text-primary-foreground hover:bg-primary/90"
+                            onClick={handleStreetViewClick}
+                        >
+                            <Eye className="mr-2 h-4 w-4" /> Street View
+                        </Button>
                     </div>
                 </div>
             </CardContent>

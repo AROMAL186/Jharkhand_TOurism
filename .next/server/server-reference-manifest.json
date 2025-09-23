@@ -19,12 +19,26 @@
           "async": false,
           "exportedName": "multilingualChatbot",
           "filename": "src/ai/flows/multilingual-chatbot.ts"
+        },
+        "app/(main)/street-view/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/street-view/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "multilingualChatbot",
+          "filename": "src/ai/flows/multilingual-chatbot.ts"
+        },
+        "app/(main)/trip-planner/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/trip-planner/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/ai/flows/personalized-itinerary.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "multilingualChatbot",
+          "filename": "src/ai/flows/multilingual-chatbot.ts"
         }
       },
       "layer": {
         "app/(main)/map/page": "action-browser",
         "app/(main)/marketplace/page": "action-browser",
-        "app/(main)/page": "action-browser"
+        "app/(main)/page": "action-browser",
+        "app/(main)/street-view/page": "action-browser",
+        "app/(main)/trip-planner/page": "action-browser"
       },
       "filename": "src/ai/flows/multilingual-chatbot.ts",
       "exportedName": "multilingualChatbot"
@@ -32,7 +46,7 @@
     "40c1c7c1f6fa9a2885e19e07b86dc40fbc2265ee64": {
       "workers": {
         "app/(main)/trip-planner/page": {
-          "moduleId": "[project]/.next-internal/server/app/(main)/trip-planner/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/personalized-itinerary.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "[project]/.next-internal/server/app/(main)/trip-planner/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/ai/flows/personalized-itinerary.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "aiItineraryPlanner",
           "filename": "src/ai/flows/personalized-itinerary.ts"

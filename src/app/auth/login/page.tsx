@@ -33,7 +33,7 @@ import { useRouter } from 'next/navigation';
 const formSchema = z.object({
   email: z.string().min(1, 'Email or username is required.'),
   password: z.string().min(1, 'Password is required.'),
-  userType: z.enum(['general', 'official', 'provider']),
+  userType: z.enum(['general', 'official']),
 });
 
 export default function LoginPage() {
@@ -76,11 +76,7 @@ export default function LoginPage() {
         localStorage.setItem('userType', values.userType);
       }
       
-      if (values.userType === 'provider') {
-        router.push('/dashboard');
-      } else {
-        router.push('/');
-      }
+      router.push('/');
     }
 
     setLoading(false);
@@ -154,11 +150,6 @@ export default function LoginPage() {
                           <FormLabel className="font-normal">
                             General User
                           </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="provider" />
-                          </FormControl>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
                           <FormControl>

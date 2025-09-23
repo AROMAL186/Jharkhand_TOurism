@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -118,8 +118,8 @@ export function TripPlannerForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       dateRange: {
-        from: new Date(),
-        to: addDays(new Date(), 3),
+        from: undefined,
+        to: undefined,
       },
       budget: 15000,
       groupSize: 2,
@@ -127,6 +127,17 @@ export function TripPlannerForm() {
       preferences: "cultural",
     },
   });
+
+  useEffect(() => {
+    form.reset({
+        ...form.getValues(),
+        dateRange: {
+            from: new Date(),
+            to: addDays(new Date(), 3)
+        }
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
