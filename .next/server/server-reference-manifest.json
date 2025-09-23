@@ -51,6 +51,51 @@
       },
       "filename": "src/ai/flows/marketplace-suggestions.ts",
       "exportedName": "generateMarketplaceSuggestions"
+    },
+    "0058093e924f2f596e943adfd041d080b4f30e37e4": {
+      "workers": {
+        "app/gov-dashboard/page": {
+          "moduleId": "[project]/.next-internal/server/app/gov-dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/data/users.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/data/feedback.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/data/orders.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getRegisteredUsers",
+          "filename": "src/lib/data/users.ts"
+        }
+      },
+      "layer": {
+        "app/gov-dashboard/page": "action-browser"
+      },
+      "filename": "src/lib/data/users.ts",
+      "exportedName": "getRegisteredUsers"
+    },
+    "00837ff926cdf9a49d79eca10811c3cc81d88882b3": {
+      "workers": {
+        "app/gov-dashboard/page": {
+          "moduleId": "[project]/.next-internal/server/app/gov-dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/data/users.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/data/feedback.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/data/orders.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getFeedbackWithSentiment",
+          "filename": "src/lib/data/feedback.ts"
+        }
+      },
+      "layer": {
+        "app/gov-dashboard/page": "action-browser"
+      },
+      "filename": "src/lib/data/feedback.ts",
+      "exportedName": "getFeedbackWithSentiment"
+    },
+    "00cf4d2301d513d3347342cd8c1278e425708a708e": {
+      "workers": {
+        "app/gov-dashboard/page": {
+          "moduleId": "[project]/.next-internal/server/app/gov-dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/lib/data/users.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/lib/data/feedback.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE2 => \"[project]/src/lib/data/orders.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "getOrderDetails",
+          "filename": "src/lib/data/orders.ts"
+        }
+      },
+      "layer": {
+        "app/gov-dashboard/page": "action-browser"
+      },
+      "filename": "src/lib/data/orders.ts",
+      "exportedName": "getOrderDetails"
     }
   },
   "edge": {},

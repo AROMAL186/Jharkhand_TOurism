@@ -1,0 +1,21 @@
+
+[
+  {
+    "id": "USR001",
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@example.com",
+    "signupDate": "2023-10-26"
+  },
+  {
+    "id": "USR002",
+    "name": "Diya Patel",
+    "email": "diya.patel@example.com",
+    "signupDate": "2023-10-25"
+  },
+  {
+    "id": "USR003",
+    "name": "Rohan Das",
+    "email": "rohan.das@example.com",
+    "signupDate": "2023-10-24"
+  }
+]

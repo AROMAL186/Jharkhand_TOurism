@@ -1,0 +1,18 @@
+
+[
+  {
+    "id": "FDB001",
+    "user": "Aarav Sharma",
+    "feedback": "The trip planner was amazing! So easy to use."
+  },
+  {
+    "id": "FDB002",
+    "user": "Diya Patel",
+    "feedback": "The marketplace could have more local crafts."
+  },
+  {
+    "id": "FDB003",
+    "user": "Rohan Das",
+    "feedback": "Had some trouble with the transport booking page."
+  }
+]
