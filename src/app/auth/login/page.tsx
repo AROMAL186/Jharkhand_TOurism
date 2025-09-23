@@ -32,7 +32,7 @@ import { useRouter } from 'next/navigation';
 const formSchema = z.object({
   email: z.string().min(1, 'Email or username is required.'),
   password: z.string().min(6, 'Password must be at least 6 characters.'),
-  userType: z.enum(['general', 'provider', 'official']),
+  userType: z.enum(['general', 'official']),
 });
 
 export default function LoginPage() {
@@ -54,20 +54,6 @@ export default function LoginPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     setError(null);
-
-    if (values.userType === 'provider') {
-      if (values.email === 'seller' && values.password === 'provide') {
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('isLoggedIn', 'true');
-          localStorage.setItem('userType', 'provider');
-        }
-        router.push('/dashboard');
-      } else {
-        setError('Invalid provider credentials');
-      }
-      setLoading(false);
-      return;
-    }
 
     // Mock API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -100,11 +86,11 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{userType === 'provider' ? 'Username' : 'Email'}</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
-                        type={userType === 'provider' ? 'text' : 'email'}
-                        placeholder={userType === 'provider' ? 'seller' : 'your@email.com'}
+                        type='email'
+                        placeholder='your@email.com'
                         {...field}
                       />
                     </FormControl>
@@ -137,16 +123,7 @@ export default function LoginPage() {
                     <FormLabel>I am a...</FormLabel>
                     <FormControl>
                       <RadioGroup
-                        onValueChange={(value) => {
-                          field.onChange(value);
-                          if (value === 'provider') {
-                            form.setValue('email', 'seller');
-                            form.setValue('password', 'provide');
-                          } else {
-                            form.setValue('email', '');
-                            form.setValue('password', '');
-                          }
-                        }}
+                        onValueChange={field.onChange}
                         defaultValue={field.value}
                         className="flex flex-col space-y-1"
                       >
@@ -156,14 +133,6 @@ export default function LoginPage() {
                           </FormControl>
                           <FormLabel className="font-normal">
                             General User
-                          </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="provider" />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            Product Provider
                           </FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">

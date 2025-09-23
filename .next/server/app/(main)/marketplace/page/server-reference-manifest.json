@@ -1,0 +1,16 @@
+{
+  "node": {
+    "40df6e128d2e01fc533bc7c5ba558146f07e24e849": {
+      "workers": {
+        "app/(main)/marketplace/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/marketplace/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/marketplace-suggestions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(main)/marketplace/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

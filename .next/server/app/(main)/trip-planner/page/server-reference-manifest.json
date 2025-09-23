@@ -1,0 +1,16 @@
+{
+  "node": {
+    "40a584cdd5e558a6e7e0ad1b4006b772f08ffabedd": {
+      "workers": {
+        "app/(main)/trip-planner/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/trip-planner/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/personalized-itinerary.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(main)/trip-planner/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

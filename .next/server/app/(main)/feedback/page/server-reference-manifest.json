@@ -1,0 +1,16 @@
+{
+  "node": {
+    "4016edf32b80d2cd705e3b17b4169e8df6b9483ea0": {
+      "workers": {
+        "app/(main)/feedback/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/feedback/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/ai-sentiment-analysis.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(main)/feedback/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}
