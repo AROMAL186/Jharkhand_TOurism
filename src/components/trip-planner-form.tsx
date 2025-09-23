@@ -15,15 +15,19 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, DollarSign, Lightbulb, Leaf, Heart, Calendar as CalendarIcon, Users, Mountain, Camera, Sparkles, Utensils, MapPin, Building, Sprout, Handshake, Clock, Flag } from 'lucide-react';
-import { generatePersonalizedItinerary, PersonalizedItineraryOutput } from '@/ai/flows/personalized-itinerary';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Loader2, Wand2, DollarSign, Leaf, Heart, Calendar as CalendarIcon, Users, Mountain, Camera, Sparkles, Utensils, MapPin, Building, Sprout, Handshake } from 'lucide-react';
+import { aiItineraryPlanner, AIItineraryPlannerOutput } from '@/ai/flows/personalized-itinerary';
 import { Slider } from '@/components/ui/slider';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { cn } from '@/lib/utils';
 import { format, addDays, differenceInDays } from 'date-fns';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 const interests = [
     { id: 'wildlife', label: 'Wildlife & Nature', icon: Sprout },
@@ -44,7 +48,7 @@ const travelPreferences = [
     { id: 'adventure', label: 'Adventure' },
     { id: 'luxury', label: 'Luxury' },
     { id: 'budget', label: 'Budget' },
-]
+];
 
 const formSchema = z.object({
   dateRange: z.object({
@@ -60,43 +64,54 @@ const formSchema = z.object({
   interests: z.array(z.string()).refine(value => value.some(item => item), {
       message: "You have to select at least one interest."
   }),
-  preferences: z.array(z.string()).refine(value => value.some(item => item), {
-      message: "You have to select at least one preference."
+  preferences: z.string().refine(value => value, {
+      message: "You have to select one preference."
   }),
-  pace: z.enum(['relaxed', 'moderate', 'packed']), // Keep pace from previous version
 });
 
-const ItineraryTimeline = ({ itinerary }: { itinerary: PersonalizedItineraryOutput['itinerary'] }) => {
-  if (!itinerary || itinerary.length === 0) return null;
+const ItineraryDisplay = ({ plan, title }: { plan: AIItineraryPlannerOutput['plan'], title: string }) => {
+  if (!plan || plan.length === 0) return null;
 
   return (
-    <div className="space-y-8">
-      {itinerary.map((day) => (
-        <div key={day.day}>
-          <h3 className="text-2xl font-bold font-headline text-primary mb-4 flex items-center gap-2">
-            <CalendarIcon className="h-6 w-6" />
-            Day {day.day}: {day.title}
-          </h3>
-          <div className="border-l-2 border-primary/20 pl-6 space-y-6">
-            {day.activities.map((activity, index) => (
-              <div key={index} className="relative">
-                <div className="absolute -left-[34px] top-1.5 h-4 w-4 rounded-full bg-primary/20 border-4 border-background" />
-                <p className="font-semibold text-green-600 flex items-center gap-2"><Clock className="h-4 w-4" />{activity.time}</p>
-                <p className="font-semibold text-foreground mt-1 flex items-center gap-2"><MapPin className="h-4 w-4 text-muted-foreground" />{activity.location}</p>
-                <p className="text-muted-foreground mt-1 ml-6 flex items-start gap-2"><Flag className="h-4 w-4 mt-1 flex-shrink-0" />{activity.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
+    <Card>
+        <CardHeader>
+            <CardTitle>{title}</CardTitle>
+            <CardDescription>Here is a plan crafted just for you by our AI Assistant.</CardDescription>
+        </CardHeader>
+        <CardContent>
+            <Accordion type="single" collapsible defaultValue="day-1" className="w-full">
+                {plan.map((dayPlan) => (
+                    <AccordionItem value={`day-${dayPlan.day}`} key={dayPlan.day}>
+                        <AccordionTrigger>
+                            <div className="flex items-center gap-3">
+                                <Badge className="h-8 w-8 flex items-center justify-center text-base shrink-0">
+                                    {dayPlan.day}
+                                </Badge>
+                                <span className="font-semibold text-lg">{dayPlan.title}</span>
+                            </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="pl-4 border-l-2 border-primary ml-4">
+                            <ul className="space-y-4 text-muted-foreground">
+                                {dayPlan.activities.map((activity, index) => (
+                                    <li key={index} className="flex items-start gap-3">
+                                        <div className="mt-1 h-2 w-2 rounded-full bg-primary" />
+                                        <span>{activity}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </AccordionContent>
+                    </AccordionItem>
+                ))}
+            </Accordion>
+        </CardContent>
+    </Card>
   );
 };
 
 
 export function TripPlannerForm() {
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<PersonalizedItineraryOutput | null>(null);
+  const [result, setResult] = useState<AIItineraryPlannerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -108,9 +123,8 @@ export function TripPlannerForm() {
       },
       budget: 15000,
       groupSize: 2,
-      interests: ["eco-tourism", "heritage"],
-      preferences: ["budget", "cultural"],
-      pace: 'moderate',
+      interests: ["heritage", "eco-tourism"],
+      preferences: "cultural",
     },
   });
 
@@ -120,17 +134,20 @@ export function TripPlannerForm() {
     setError(null);
 
     const duration = differenceInDays(values.dateRange.to, values.dateRange.from) + 1;
+    const interestsText = values.interests.join(', ');
 
-    const submissionData = {
-        interests: values.interests.join(', '),
-        preferences: values.preferences.join(', '),
-        availableTime: `${duration} days`,
-        locationPreferences: '', // This can be added back if needed
-        pace: values.pace,
-    }
+    const query = `
+        Plan a ${duration}-day trip to Jharkhand.
+        The trip is from ${format(values.dateRange.from, "PPP")} to ${format(values.dateRange.to, "PPP")}.
+        It's for ${values.groupSize} traveler(s).
+        The budget is around Rs.${values.budget.toLocaleString()}.
+        Their interests are: ${interestsText}.
+        Their travel style is: ${values.preferences}.
+        Please provide a detailed, day-by-day itinerary.
+      `;
 
     try {
-      const response = await generatePersonalizedItinerary(submissionData);
+      const response = await aiItineraryPlanner({ query });
       setResult(response);
     } catch (e) {
       setError('Failed to generate itinerary. Please try again.');
@@ -153,7 +170,7 @@ export function TripPlannerForm() {
                     name="dateRange"
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel className="flex items-center gap-2"><CalendarIcon /> Travel Dates</FormLabel>
+                        <FormLabel className="flex items-center gap-2"><CalendarIcon className="h-4 w-4"/> Travel Dates</FormLabel>
                         <Popover>
                           <PopoverTrigger asChild>
                             <FormControl>
@@ -199,14 +216,13 @@ export function TripPlannerForm() {
                     name="budget"
                     render={({ field }) => (
                         <FormItem>
-                        <FormLabel className="flex items-center gap-2"><DollarSign /> Budget: ₹{field.value.toLocaleString()}</FormLabel>
+                        <FormLabel className="flex items-center gap-2"><DollarSign className="h-4 w-4" /> Budget: Rs. {field.value.toLocaleString()}</FormLabel>
                         <FormControl>
-                            <Slider
-                                value={[field.value]}
-                                onValueChange={(value) => field.onChange(value[0])}
-                                min={1000}
-                                max={100000}
-                                step={1000}
+                           <Input
+                                type="number"
+                                value={field.value}
+                                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                                placeholder="15000"
                             />
                         </FormControl>
                         </FormItem>
@@ -217,7 +233,7 @@ export function TripPlannerForm() {
                     name="groupSize"
                     render={({ field }) => (
                         <FormItem>
-                        <FormLabel className="flex items-center gap-2"><Users /> Group Size: {field.value} people</FormLabel>
+                        <FormLabel className="flex items-center gap-2"><Users className="h-4 w-4"/> Group Size: {field.value} people</FormLabel>
                         <FormControl>
                             <Slider
                                 value={[field.value]}
@@ -235,45 +251,30 @@ export function TripPlannerForm() {
                <FormField
                 control={form.control}
                 name="interests"
-                render={() => (
+                render={({ field }) => (
                     <FormItem>
                         <div className="mb-4">
-                            <FormLabel className="text-base flex items-center gap-2"><Heart /> Your Interests *</FormLabel>
+                            <FormLabel className="text-base flex items-center gap-2"><Heart className="h-5 w-5" /> Your Interests *</FormLabel>
                             <FormDescription>Select a few of your interests to help us plan the best trip for you.</FormDescription>
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                         {interests.map((interest) => (
-                            <FormField
-                            key={interest.id}
-                            control={form.control}
-                            name="interests"
-                            render={({ field }) => {
-                                return (
-                                <FormItem
-                                    key={interest.id}
-                                    className="border rounded-lg p-4 flex flex-col items-center justify-center gap-2 has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-colors cursor-pointer"
+                           <Card
+                                key={interest.id}
+                                onClick={() => {
+                                    const updatedInterests = field.value.includes(interest.id)
+                                        ? field.value.filter(i => i !== interest.id)
+                                        : [...field.value, interest.id];
+                                    field.onChange(updatedInterests);
+                                }}
+                                className={cn(
+                                    "p-4 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors hover:bg-amber-50",
+                                    field.value.includes(interest.id) && "bg-amber-100 border-amber-400 ring-2 ring-amber-400"
+                                )}
                                 >
-                                    <FormControl>
-                                    <Checkbox
-                                        className="sr-only"
-                                        checked={field.value?.includes(interest.id)}
-                                        onCheckedChange={(checked) => {
-                                        return checked
-                                            ? field.onChange([...field.value, interest.id])
-                                            : field.onChange(
-                                                field.value?.filter(
-                                                (value) => value !== interest.id
-                                                )
-                                            )
-                                        }}
-                                    />
-                                    </FormControl>
-                                    <interest.icon className="h-8 w-8 text-primary" />
-                                    <FormLabel className="font-normal text-center cursor-pointer">{interest.label}</FormLabel>
-                                </FormItem>
-                                )
-                            }}
-                            />
+                                <interest.icon className="h-8 w-8 text-amber-700" />
+                                <p className="text-sm font-medium text-center">{interest.label}</p>
+                            </Card>
                         ))}
                         </div>
                         <FormMessage />
@@ -285,47 +286,23 @@ export function TripPlannerForm() {
                 <FormField
                     control={form.control}
                     name="preferences"
-                    render={() => (
+                    render={({ field }) => (
                         <FormItem>
                         <div className="mb-4">
-                            <FormLabel className="text-base flex items-center gap-2"><Sparkles /> Travel Preferences</FormLabel>
+                            <FormLabel className="text-base flex items-center gap-2"><Sparkles className="h-5 w-5" /> Travel Preferences</FormLabel>
                              <FormDescription>What's your travel style?</FormDescription>
                         </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 rounded-lg border p-4">
-                            {travelPreferences.map((item) => (
-                            <FormField
-                                key={item.id}
-                                control={form.control}
-                                name="preferences"
-                                render={({ field }) => {
-                                return (
-                                    <FormItem
-                                    key={item.id}
-                                    className="flex flex-row items-start space-x-3 space-y-0"
-                                    >
-                                    <FormControl>
-                                        <Checkbox
-                                        checked={field.value?.includes(item.id)}
-                                        onCheckedChange={(checked) => {
-                                            return checked
-                                            ? field.onChange([...field.value, item.id])
-                                            : field.onChange(
-                                                field.value?.filter(
-                                                    (value) => value !== item.id
-                                                )
-                                                )
-                                        }}
-                                        />
-                                    </FormControl>
-                                    <FormLabel className="font-normal">
-                                        {item.label}
-                                    </FormLabel>
-                                    </FormItem>
-                                )
-                                }}
-                            />
+                        <RadioGroup 
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            className="flex flex-wrap gap-x-6 gap-y-4">
+                            {travelPreferences.map((pref) => (
+                                <div key={pref.id} className="flex items-center space-x-2">
+                                <RadioGroupItem value={pref.id} id={pref.id} />
+                                <Label htmlFor={pref.id} className="font-normal">{pref.label}</Label>
+                                </div>
                             ))}
-                        </div>
+                        </RadioGroup>
                         <FormMessage />
                         </FormItem>
                     )}
@@ -349,37 +326,18 @@ export function TripPlannerForm() {
         </Card>
       )}
 
+      {loading && (
+          <Card className="mt-8">
+              <CardContent className="p-6 flex items-center justify-center">
+                  <Loader2 className="mr-2 h-6 w-6 animate-spin" />
+                  <p className="text-muted-foreground">Generating your personalized itinerary...</p>
+              </CardContent>
+          </Card>
+      )}
+
       {result && (
         <div className="mt-8 space-y-6">
-            <h2 className="text-3xl font-bold text-center font-headline">Your Custom Itinerary</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                 <Card>
-                    <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-medium">Overall Theme</CardTitle>
-                        <Lightbulb className="h-4 w-4 text-muted-foreground"/>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">{result.overallTheme}</div>
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-medium">Estimated Cost</CardTitle>
-                        <DollarSign className="h-4 w-4 text-muted-foreground"/>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">{result.estimatedCost}</div>
-                    </CardContent>
-                </Card>
-            </div>
-            <Card>
-                <CardHeader>
-                    <CardTitle>Detailed Plan</CardTitle>
-                </CardHeader>
-                <CardContent>
-                   <ItineraryTimeline itinerary={result.itinerary} />
-                </CardContent>
-            </Card>
+            <ItineraryDisplay plan={result.plan} title={result.title}/>
         </div>
       )}
     </>

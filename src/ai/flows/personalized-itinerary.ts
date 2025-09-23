@@ -1,93 +1,58 @@
+// A Genkit flow for the AI Itinerary Planner, using Mistral 7B to generate personalized travel plans.
 
 'use server';
 
 /**
- * @fileOverview Generates personalized travel itineraries for tourists in Jharkhand based on their interests, preferences, and available time.
+ * @fileOverview AI Itinerary Planner flow using Mistral 7B for personalized travel plans.
  *
- * - generatePersonalizedItinerary - A function that generates a personalized travel itinerary.
- * - PersonalizedItineraryInput - The input type for the generatePersonalizedItinerary function.
- * - PersonalizedItineraryOutput - The return type for the generatePersonalizedItinerary function.
+ * - aiItineraryPlanner - A function that handles the itinerary planning process.
+ * - AIItineraryPlannerInput - The input type for the aiItineraryPlanner function.
+ * - AIItineraryPlannerOutput - The return type for the aiItineraryPlanner function.
  */
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
-const PersonalizedItineraryInputSchema = z.object({
-  interests: z
-    .string()
-    .describe('The interests of the tourist, such as eco-tourism, cultural sites, historical landmarks, or adventure activities.'),
-  preferences: z
-    .string()
-    .describe('The preferences of the tourist, such as budget, accommodation type, food preferences, and travel style.'),
-  availableTime: z
-    .string()
-    .describe('The available time the tourist has for the trip, specified in days or hours.'),
-  locationPreferences: z.string().describe('Preferred locations or regions within Jharkhand, if any.'),
-  pace: z.string().describe('Desired pace of the itinerary (e.g., relaxed, moderate, packed).'),
+const AIItineraryPlannerInputSchema = z.object({
+  query: z.string().describe("The user query for itinerary planning, e.g., 'Plan a 3-day trip to Ranchi for a family with kids.'"),
 });
-export type PersonalizedItineraryInput = z.infer<
-  typeof PersonalizedItineraryInputSchema
->;
+export type AIItineraryPlannerInput = z.infer<typeof AIItineraryPlannerInputSchema>;
 
-const ItineraryActivitySchema = z.object({
-    time: z.string().describe("The time of day for the activity (e.g., Morning, Late Morning, Afternoon, Evening)."),
-    location: z.string().describe("The name of the location or destination for the activity."),
-    description: z.string().describe("A short description of the activity to be performed.")
+const DayPlanSchema = z.object({
+    day: z.number().describe("The day number, e.g., 1"),
+    title: z.string().describe("A short title for the day's plan, e.g., 'Arrival and Local Exploration'"),
+    activities: z.array(z.string()).describe("A list of activities with brief descriptions planned for the day."),
 });
 
-const ItineraryDaySchema = z.object({
-    day: z.number().describe("The day number of the itinerary (e.g., 1, 2, 3)."),
-    title: z.string().describe("A catchy title for the day's plan."),
-    activities: z.array(ItineraryActivitySchema).describe("A list of activities for the day.")
+const AIItineraryPlannerOutputSchema = z.object({
+  title: z.string().describe("The overall title of the itinerary."),
+  plan: z.array(DayPlanSchema).describe('The day-by-day generated travel plan.'),
 });
+export type AIItineraryPlannerOutput = z.infer<typeof AIItineraryPlannerOutputSchema>;
 
-
-const PersonalizedItineraryOutputSchema = z.object({
-  itinerary: z.array(ItineraryDaySchema).describe("A day-by-day, detailed travel itinerary for the tourist."),
-  overallTheme: z.string().describe('A short summary of the overall theme of the itinerary.'),
-  estimatedCost: z
-    .string()
-    .describe('An estimated cost for the entire itinerary, including transportation, accommodation, and activities.'),
-});
-export type PersonalizedItineraryOutput = z.infer<
-  typeof PersonalizedItineraryOutputSchema
->;
-
-export async function generatePersonalizedItinerary(
-  input: PersonalizedItineraryInput
-): Promise<PersonalizedItineraryOutput> {
-  return personalizedItineraryFlow(input);
+export async function aiItineraryPlanner(input: AIItineraryPlannerInput): Promise<AIItineraryPlannerOutput> {
+  return aiItineraryPlannerFlow(input);
 }
 
 const prompt = ai.definePrompt({
-  name: 'personalizedItineraryPrompt',
-  input: {schema: PersonalizedItineraryInputSchema},
-  output: {schema: PersonalizedItineraryOutputSchema},
-  prompt: `You are an expert travel planner specializing in Jharkhand tourism.
+  name: 'aiItineraryPlannerPrompt',
+  input: {schema: AIItineraryPlannerInputSchema},
+  output: {schema: AIItineraryPlannerOutputSchema},
+  prompt: `You are a travel expert specializing in Jharkhand tourism. Generate a personalized, day-by-day travel plan based on the user's query.
 
-  Based on the tourist's interests, preferences, and available time, create a personalized travel itinerary for exploring Jharkhand's eco and cultural tourism spots.
+Query: {{{query}}}
 
-  Interests: {{{interests}}}
-  Preferences: {{{preferences}}}
-  Available Time: {{{availableTime}}}
-  Location Preferences: {{{locationPreferences}}}
-  Pace: {{{pace}}}
-
-  Provide a detailed, day-by-day itinerary. For each day, provide a title and a list of activities. Each activity should have a time (like Morning, Afternoon), a location, and a description.
-  Also, provide a short summary of the overall theme of the itinerary and an estimated cost for the entire trip.
-  If no location preferences provided, focus on the most popular tourism locations.`,
+Please provide the output in a structured format with a main title and a list of daily plans. Each day should have a day number, a title, and a list of activities.`,
 });
 
-const personalizedItineraryFlow = ai.defineFlow(
+const aiItineraryPlannerFlow = ai.defineFlow(
   {
-    name: 'personalizedItineraryFlow',
-    inputSchema: PersonalizedItineraryInputSchema,
-    outputSchema: PersonalizedItineraryOutputSchema,
+    name: 'aiItineraryPlannerFlow',
+    inputSchema: AIItineraryPlannerInputSchema,
+    outputSchema: AIItineraryPlannerOutputSchema,
   },
   async input => {
     const {output} = await prompt(input);
     return output!;
   }
 );
-
-    

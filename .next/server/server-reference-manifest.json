@@ -1,5 +1,21 @@
 {
-  "node": {},
+  "node": {
+    "40c1c7c1f6fa9a2885e19e07b86dc40fbc2265ee64": {
+      "workers": {
+        "app/(main)/trip-planner/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/trip-planner/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/personalized-itinerary.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "aiItineraryPlanner",
+          "filename": "src/ai/flows/personalized-itinerary.ts"
+        }
+      },
+      "layer": {
+        "app/(main)/trip-planner/page": "action-browser"
+      },
+      "filename": "src/ai/flows/personalized-itinerary.ts",
+      "exportedName": "aiItineraryPlanner"
+    }
+  },
   "edge": {},
   "encryptionKey": "qTNmsEF8zNzc8oqyASK04H5XPD9/t3VXGrdnGU5C5gs="
 }
