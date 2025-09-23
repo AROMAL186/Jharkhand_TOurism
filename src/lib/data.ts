@@ -166,6 +166,7 @@ export const marketplaceItems = [
     category: 'Handicraft',
     imageId: 'market-dokra',
     inStock: true,
+    location: 'Ranchi'
   },
   {
     id: 2,
@@ -175,6 +176,7 @@ export const marketplaceItems = [
     category: 'Pottery',
     imageId: 'market-sohrai-vase',
     inStock: true,
+    location: 'Hazaribagh'
   },
   {
     id: 3,
@@ -184,6 +186,7 @@ export const marketplaceItems = [
     category: 'Bamboo Craft',
     imageId: 'market-bamboo',
     inStock: true,
+    location: 'Ranchi'
   },
   {
     id: 4,
@@ -193,6 +196,7 @@ export const marketplaceItems = [
     category: 'Textile',
     imageId: 'market-shawl',
     inStock: true,
+    location: 'Deoghar'
   },
   {
     id: 5,
@@ -202,6 +206,7 @@ export const marketplaceItems = [
     category: 'Eco-tour',
     imageId: 'market-tour-netarhat',
     inStock: true,
+    location: 'Netarhat'
   },
   {
     id: 6,
@@ -211,6 +216,7 @@ export const marketplaceItems = [
     category: 'Handicraft',
     imageId: 'market-chhau-mask',
     inStock: true,
+    location: 'Seraikela'
   },
   {
     id: 7,
@@ -220,6 +226,7 @@ export const marketplaceItems = [
     category: 'Homestay',
     imageId: 'market-homestay',
     inStock: true,
+    location: 'Hazaribagh'
   },
   {
     id: 8,
@@ -229,6 +236,7 @@ export const marketplaceItems = [
     category: 'Local Produce',
     imageId: 'market-honey',
     inStock: true,
+    location: 'Ranchi'
   },
 ];
 

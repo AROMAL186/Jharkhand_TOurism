@@ -555,7 +555,8 @@ const marketplaceItems = [
         price: '₹1,500',
         category: 'Handicraft',
         imageId: 'market-dokra',
-        inStock: true
+        inStock: true,
+        location: 'Ranchi'
     },
     {
         id: 2,
@@ -564,7 +565,8 @@ const marketplaceItems = [
         price: '₹800',
         category: 'Pottery',
         imageId: 'market-sohrai-vase',
-        inStock: true
+        inStock: true,
+        location: 'Hazaribagh'
     },
     {
         id: 3,
@@ -573,7 +575,8 @@ const marketplaceItems = [
         price: '₹350',
         category: 'Bamboo Craft',
         imageId: 'market-bamboo',
-        inStock: true
+        inStock: true,
+        location: 'Ranchi'
     },
     {
         id: 4,
@@ -582,7 +585,8 @@ const marketplaceItems = [
         price: '₹2,200',
         category: 'Textile',
         imageId: 'market-shawl',
-        inStock: true
+        inStock: true,
+        location: 'Deoghar'
     },
     {
         id: 5,
@@ -591,7 +595,8 @@ const marketplaceItems = [
         price: '₹5,000 / person',
         category: 'Eco-tour',
         imageId: 'market-tour-netarhat',
-        inStock: true
+        inStock: true,
+        location: 'Netarhat'
     },
     {
         id: 6,
@@ -600,7 +605,8 @@ const marketplaceItems = [
         price: '₹3,000',
         category: 'Handicraft',
         imageId: 'market-chhau-mask',
-        inStock: true
+        inStock: true,
+        location: 'Seraikela'
     },
     {
         id: 7,
@@ -609,7 +615,8 @@ const marketplaceItems = [
         price: '₹1,200 / night',
         category: 'Homestay',
         imageId: 'market-homestay',
-        inStock: true
+        inStock: true,
+        location: 'Hazaribagh'
     },
     {
         id: 8,
@@ -618,7 +625,8 @@ const marketplaceItems = [
         price: '₹600',
         category: 'Local Produce',
         imageId: 'market-honey',
-        inStock: true
+        inStock: true,
+        location: 'Ranchi'
     }
 ];
 const localServices = [
@@ -1153,16 +1161,6 @@ function MobileNav({ isLoggedIn, handleLogout }) {
                                 lineNumber: 64,
                                 columnNumber: 12
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/trip-planner",
-                                onClick: ()=>setIsOpen(false),
-                                className: `-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors hover:text-foreground ${pathname === '/trip-planner' ? 'text-foreground bg-muted' : 'text-muted-foreground'}`,
-                                children: "Trip Planner"
-                            }, void 0, false, {
-                                fileName: "[project]/src/components/mobile-nav.tsx",
-                                lineNumber: 103,
-                                columnNumber: 11
-                            }, this),
                             __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f28$main$292f$layout$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["mobileNavItems"].slice(1).map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                     href: item.href,
                                     onClick: ()=>setIsOpen(false),
@@ -1170,7 +1168,7 @@ function MobileNav({ isLoggedIn, handleLogout }) {
                                     children: item.label
                                 }, item.label, false, {
                                     fileName: "[project]/src/components/mobile-nav.tsx",
-                                    lineNumber: 114,
+                                    lineNumber: 104,
                                     columnNumber: 13
                                 }, this)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$accordion$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Accordion"], {
@@ -1188,12 +1186,12 @@ function MobileNav({ isLoggedIn, handleLogout }) {
                                                 children: "Upcoming Events"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/mobile-nav.tsx",
-                                                lineNumber: 128,
+                                                lineNumber: 118,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/mobile-nav.tsx",
-                                            lineNumber: 127,
+                                            lineNumber: 117,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$accordion$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AccordionContent"], {
@@ -1207,28 +1205,28 @@ function MobileNav({ isLoggedIn, handleLogout }) {
                                                         children: event.title
                                                     }, event.title, false, {
                                                         fileName: "[project]/src/components/mobile-nav.tsx",
-                                                        lineNumber: 133,
+                                                        lineNumber: 123,
                                                         columnNumber: 25
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/mobile-nav.tsx",
-                                                lineNumber: 131,
+                                                lineNumber: 121,
                                                 columnNumber: 21
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/mobile-nav.tsx",
-                                            lineNumber: 130,
+                                            lineNumber: 120,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/mobile-nav.tsx",
-                                    lineNumber: 126,
+                                    lineNumber: 116,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/mobile-nav.tsx",
-                                lineNumber: 125,
+                                lineNumber: 115,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -1252,14 +1250,14 @@ function MobileNav({ isLoggedIn, handleLogout }) {
                                     className: "mr-2 h-4 w-4"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/mobile-nav.tsx",
-                                    lineNumber: 153,
+                                    lineNumber: 143,
                                     columnNumber: 17
                                 }, this),
                                 " Logout"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/mobile-nav.tsx",
-                            lineNumber: 149,
+                            lineNumber: 139,
                             columnNumber: 15
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                             asChild: true,
@@ -1274,24 +1272,24 @@ function MobileNav({ isLoggedIn, handleLogout }) {
                                         className: "mr-2 h-4 w-4"
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/mobile-nav.tsx",
-                                        lineNumber: 158,
+                                        lineNumber: 148,
                                         columnNumber: 17
                                     }, this),
                                     " Login"
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/mobile-nav.tsx",
-                                lineNumber: 157,
+                                lineNumber: 147,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/components/mobile-nav.tsx",
-                            lineNumber: 156,
+                            lineNumber: 146,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/mobile-nav.tsx",
-                        lineNumber: 147,
+                        lineNumber: 137,
                         columnNumber: 9
                     }, this)
                 ]
@@ -2414,11 +2412,6 @@ const mobileNavItems = [
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$message$2d$square$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__MessageSquare$3e$__["MessageSquare"]
     },
     {
-        href: '/route-optimizer',
-        label: 'Route Optimizer',
-        icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Map$3e$__["Map"]
-    },
-    {
         href: '/cart',
         label: 'Cart',
         icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shopping$2d$cart$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ShoppingCart$3e$__["ShoppingCart"]
@@ -2470,7 +2463,7 @@ function LayoutContent({ children }) {
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$app$2d$logo$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 99,
+                                        lineNumber: 98,
                                         columnNumber: 21
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2478,13 +2471,13 @@ function LayoutContent({ children }) {
                                         children: "Jharkhand Explorer"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 100,
+                                        lineNumber: 99,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(main)/layout.tsx",
-                                lineNumber: 95,
+                                lineNumber: 94,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -2496,17 +2489,17 @@ function LayoutContent({ children }) {
                                         children: "Home"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 103,
+                                        lineNumber: 102,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$destinations$2d$menu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["DestinationsMenu"], {}, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 111,
+                                        lineNumber: 110,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$plan$2d$trip$2d$menu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["PlanTripMenu"], {}, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 112,
+                                        lineNumber: 111,
                                         columnNumber: 17
                                     }, this),
                                     navItems.slice(1, 6).map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2515,12 +2508,12 @@ function LayoutContent({ children }) {
                                             children: item.label
                                         }, item.label, false, {
                                             fileName: "[project]/src/app/(main)/layout.tsx",
-                                            lineNumber: 114,
+                                            lineNumber: 113,
                                             columnNumber: 24
                                         }, this)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$upcoming$2d$events$2d$menu$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["UpcomingEventsMenu"], {}, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 124,
+                                        lineNumber: 123,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -2529,28 +2522,19 @@ function LayoutContent({ children }) {
                                         children: "Feedback"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 125,
-                                        columnNumber: 17
-                                    }, this),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                        href: "/route-optimizer",
-                                        className: `transition-colors hover:text-foreground ${pathname.startsWith('/route-optimizer') ? 'text-foreground' : 'text-muted-foreground'} ${isTransportPage ? 'text-black hover:text-black/90' : ''}`,
-                                        children: "Route Optimizer"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 133,
+                                        lineNumber: 124,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(main)/layout.tsx",
-                                lineNumber: 102,
+                                lineNumber: 101,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(main)/layout.tsx",
-                        lineNumber: 94,
+                        lineNumber: 93,
                         columnNumber: 13
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2571,7 +2555,7 @@ function LayoutContent({ children }) {
                                                     className: "h-5 w-5"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(main)/layout.tsx",
-                                                    lineNumber: 148,
+                                                    lineNumber: 139,
                                                     columnNumber: 25
                                                 }, this),
                                                 cart.length > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2579,7 +2563,7 @@ function LayoutContent({ children }) {
                                                     children: cart.reduce((acc, item)=>acc + item.quantity, 0)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(main)/layout.tsx",
-                                                    lineNumber: 150,
+                                                    lineNumber: 141,
                                                     columnNumber: 29
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2587,18 +2571,18 @@ function LayoutContent({ children }) {
                                                     children: "Cart"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(main)/layout.tsx",
-                                                    lineNumber: 154,
+                                                    lineNumber: 145,
                                                     columnNumber: 25
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(main)/layout.tsx",
-                                            lineNumber: 147,
+                                            lineNumber: 138,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 146,
+                                        lineNumber: 137,
                                         columnNumber: 21
                                     }, this),
                                     isLoggedIn ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
@@ -2611,14 +2595,14 @@ function LayoutContent({ children }) {
                                                 className: "mr-2 h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(main)/layout.tsx",
-                                                lineNumber: 159,
+                                                lineNumber: 150,
                                                 columnNumber: 25
                                             }, this),
                                             " Logout"
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 158,
+                                        lineNumber: 149,
                                         columnNumber: 25
                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Button"], {
                                         asChild: true,
@@ -2632,25 +2616,25 @@ function LayoutContent({ children }) {
                                                     className: "mr-2 h-4 w-4"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(main)/layout.tsx",
-                                                    lineNumber: 164,
+                                                    lineNumber: 155,
                                                     columnNumber: 25
                                                 }, this),
                                                 " Login"
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(main)/layout.tsx",
-                                            lineNumber: 163,
+                                            lineNumber: 154,
                                             columnNumber: 25
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(main)/layout.tsx",
-                                        lineNumber: 162,
+                                        lineNumber: 153,
                                         columnNumber: 21
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(main)/layout.tsx",
-                                lineNumber: 145,
+                                lineNumber: 136,
                                 columnNumber: 17
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$mobile$2d$nav$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["MobileNav"], {
@@ -2658,19 +2642,19 @@ function LayoutContent({ children }) {
                                 handleLogout: handleLogout
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(main)/layout.tsx",
-                                lineNumber: 169,
+                                lineNumber: 160,
                                 columnNumber: 17
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(main)/layout.tsx",
-                        lineNumber: 144,
+                        lineNumber: 135,
                         columnNumber: 13
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(main)/layout.tsx",
-                lineNumber: 90,
+                lineNumber: 89,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -2680,13 +2664,13 @@ function LayoutContent({ children }) {
                 children: children
             }, void 0, false, {
                 fileName: "[project]/src/app/(main)/layout.tsx",
-                lineNumber: 172,
+                lineNumber: 163,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(main)/layout.tsx",
-        lineNumber: 89,
+        lineNumber: 88,
         columnNumber: 9
     }, this);
 }
@@ -2696,12 +2680,12 @@ function MainLayout({ children }) {
             children: children
         }, void 0, false, {
             fileName: "[project]/src/app/(main)/layout.tsx",
-            lineNumber: 184,
+            lineNumber: 175,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/(main)/layout.tsx",
-        lineNumber: 183,
+        lineNumber: 174,
         columnNumber: 5
     }, this);
 }

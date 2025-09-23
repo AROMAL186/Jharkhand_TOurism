@@ -1,4 +1,16 @@
 {
-  "node": {},
+  "node": {
+    "40ad88fb108386a33c151ba11913e2f037d56df981": {
+      "workers": {
+        "app/(main)/route-optimizer/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/route-optimizer/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/route-optimizer.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(main)/route-optimizer/page": "action-browser"
+      }
+    }
+  },
   "edge": {}
 }

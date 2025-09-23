@@ -41,7 +41,6 @@ export const mobileNavItems = [
   { href: '/transport', label: 'Transport', icon: Bus },
   { href: '/local-services', label: 'Services', icon: Users },
   { href: '/feedback', label: 'Feedback', icon: MessageSquare },
-  { href: '/route-optimizer', label: 'Route Optimizer', icon: Map },
   { href: '/cart', label: 'Cart', icon: ShoppingCart },
 ];
 
@@ -129,14 +128,6 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
                     } ${isTransportPage ? 'text-black hover:text-black/90' : ''}`}
                     >
                     Feedback
-                </Link>
-                <Link
-                    href="/route-optimizer"
-                    className={`transition-colors hover:text-foreground ${
-                        pathname.startsWith('/route-optimizer') ? 'text-foreground' : 'text-muted-foreground'
-                    } ${isTransportPage ? 'text-black hover:text-black/90' : ''}`}
-                    >
-                    Route Optimizer
                 </Link>
                 </nav>
             </div>

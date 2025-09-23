@@ -446,7 +446,8 @@ const marketplaceItems = [
         price: '₹1,500',
         category: 'Handicraft',
         imageId: 'market-dokra',
-        inStock: true
+        inStock: true,
+        location: 'Ranchi'
     },
     {
         id: 2,
@@ -455,7 +456,8 @@ const marketplaceItems = [
         price: '₹800',
         category: 'Pottery',
         imageId: 'market-sohrai-vase',
-        inStock: true
+        inStock: true,
+        location: 'Hazaribagh'
     },
     {
         id: 3,
@@ -464,7 +466,8 @@ const marketplaceItems = [
         price: '₹350',
         category: 'Bamboo Craft',
         imageId: 'market-bamboo',
-        inStock: true
+        inStock: true,
+        location: 'Ranchi'
     },
     {
         id: 4,
@@ -473,7 +476,8 @@ const marketplaceItems = [
         price: '₹2,200',
         category: 'Textile',
         imageId: 'market-shawl',
-        inStock: true
+        inStock: true,
+        location: 'Deoghar'
     },
     {
         id: 5,
@@ -482,7 +486,8 @@ const marketplaceItems = [
         price: '₹5,000 / person',
         category: 'Eco-tour',
         imageId: 'market-tour-netarhat',
-        inStock: true
+        inStock: true,
+        location: 'Netarhat'
     },
     {
         id: 6,
@@ -491,7 +496,8 @@ const marketplaceItems = [
         price: '₹3,000',
         category: 'Handicraft',
         imageId: 'market-chhau-mask',
-        inStock: true
+        inStock: true,
+        location: 'Seraikela'
     },
     {
         id: 7,
@@ -500,7 +506,8 @@ const marketplaceItems = [
         price: '₹1,200 / night',
         category: 'Homestay',
         imageId: 'market-homestay',
-        inStock: true
+        inStock: true,
+        location: 'Hazaribagh'
     },
     {
         id: 8,
@@ -509,7 +516,8 @@ const marketplaceItems = [
         price: '₹600',
         category: 'Local Produce',
         imageId: 'market-honey',
-        inStock: true
+        inStock: true,
+        location: 'Ranchi'
     }
 ];
 const localServices = [

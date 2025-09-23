@@ -100,16 +100,6 @@ export function MobileNav({ isLoggedIn, handleLogout }: MobileNavProps) {
              </AccordionItem>
           </Accordion>
 
-          <Link
-            href="/trip-planner"
-            onClick={() => setIsOpen(false)}
-            className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 transition-colors hover:text-foreground ${
-              pathname === '/trip-planner' ? 'text-foreground bg-muted' : 'text-muted-foreground'
-            }`}
-          >
-            Trip Planner
-          </Link>
-
           {mobileNavItems.slice(1).map((item) => (
             <Link
               key={item.label}
