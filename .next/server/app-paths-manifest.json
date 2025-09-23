@@ -1,4 +1,6 @@
 {
+  "/(main)/map/page": "app/(main)/map/page.js",
+  "/(main)/marketplace/page": "app/(main)/marketplace/page.js",
   "/(main)/page": "app/(main)/page.js",
   "/(main)/trip-planner/page": "app/(main)/trip-planner/page.js",
   "/_not-found/page": "app/_not-found/page.js",

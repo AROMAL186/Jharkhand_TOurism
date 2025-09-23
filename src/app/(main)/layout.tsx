@@ -22,6 +22,7 @@ import { PlanTripMenu } from '@/components/plan-trip-menu';
 import { UpcomingEventsMenu } from '@/components/upcoming-events-menu';
 import { cn } from '@/lib/utils';
 import { CartProvider, useCart } from '@/hooks/use-cart';
+import { Chatbot } from '@/components/chatbot/Chatbot';
 
 export const navItems = [
   { href: '/', label: 'Home', icon: LayoutDashboard },
@@ -165,6 +166,7 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
             })}>
             {children}
             </main>
+            <Chatbot />
         </div>
     );
 }
