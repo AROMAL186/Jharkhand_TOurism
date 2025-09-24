@@ -27,7 +27,10 @@ export default function DestinationsPage() {
   };
 
   const handleStreetViewClick = () => {
-    router.push('/street-view');
+    if (selectedDestination) {
+        const { lat, lng } = selectedDestination.position;
+        router.push(`/street-view?lat=${lat}&lng=${lng}`);
+    }
   };
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -113,6 +116,7 @@ export default function DestinationsPage() {
                         <Button 
                             className="absolute top-4 right-4 z-10 bg-primary text-primary-foreground hover:bg-primary/90"
                             onClick={handleStreetViewClick}
+                            disabled={!selectedDestination}
                         >
                             <Eye className="mr-2 h-4 w-4" /> Street View
                         </Button>

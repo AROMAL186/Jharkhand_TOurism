@@ -1,11 +1,7 @@
 {
   "/(main)/map/page": "app/(main)/map/page.js",
-  "/(main)/marketplace/page": "app/(main)/marketplace/page.js",
   "/(main)/page": "app/(main)/page.js",
   "/(main)/street-view/page": "app/(main)/street-view/page.js",
-  "/(main)/trip-planner/page": "app/(main)/trip-planner/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
-  "/auth/login/page": "app/auth/login/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/gov-dashboard/page": "app/gov-dashboard/page.js"
+  "/api/streetview-check/route": "app/api/streetview-check/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
 }
