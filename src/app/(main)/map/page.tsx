@@ -1,5 +1,5 @@
 
-"use client";
+'use client';
 
 import { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -28,8 +28,7 @@ export default function DestinationsPage() {
 
   const handleStreetViewClick = () => {
     if (selectedDestination) {
-        const { lat, lng } = selectedDestination.position;
-        router.push(`/street-view?lat=${lat}&lng=${lng}`);
+      router.push(`/street-view?name=${encodeURIComponent(selectedDestination.name)}`);
     }
   };
 

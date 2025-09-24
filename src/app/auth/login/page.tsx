@@ -70,7 +70,7 @@ export default function LoginPage() {
         setError('Invalid credentials for Government Official.');
       }
     } else {
-      // Mock login for general and provider users
+      // Mock login for general users
       if (typeof window !== 'undefined') {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userType', values.userType);
@@ -149,14 +149,6 @@ export default function LoginPage() {
                           </FormControl>
                           <FormLabel className="font-normal">
                             General User
-                          </FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="provider" />
-                          </FormControl>
-                          <FormLabel className="font-normal">
-                            Service Provider
                           </FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-3 space-y-0">
