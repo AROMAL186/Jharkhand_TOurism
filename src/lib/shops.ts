@@ -1,64 +1,60 @@
-
 export interface Shop {
   id: string;
   name: string;
   description: string;
-  position: { lat: number; lng: number };
-  rating: number; // Out of 5
-  visitCount: number;
-  category: string;
   imageUrl: string;
+  rating: number;
+  visitCount: number;
+  position: {
+    lat: number;
+    lng: number;
+  };
 }
 
 export const shops: Shop[] = [
   {
-    id: 'shop1',
-    name: 'Ambalikas Paitkar Paintings',
-    description: 'Authentic Paitkar paintings from the Amadubi village, known for their narrative scroll paintings.',
-    position: { lat: 22.6916, lng: 86.1556 }, // Near Jamshedpur
+    id: '1',
+    name: 'Paitkar Paintings',
+    description: 'Ancient scroll paintings from the Amadubi village.',
+    imageUrl: '/images/shops/paitkar.jpg',
     rating: 4.8,
     visitCount: 1250,
-    category: 'Art & Handicrafts',
-    imageUrl: '/images/shops/paitkar.jpg',
+    position: { lat: 22.58, lng: 86.20 },
   },
   {
-    id: 'shop2',
-    name: 'Dhokra Crafts of Sadeikela',
-    description: 'Exquisite Dhokra (lost-wax casting) metal crafts made by artisans from the Sadeikela region.',
-    position: { lat: 22.7956, lng: 86.0442 }, // Saraikela
-    rating: 4.9,
-    visitCount: 2300,
-    category: 'Metalwork',
+    id: '2',
+    name: 'Dhokra Crafts',
+    description: 'Exquisite lost-wax casting metalwork.',
     imageUrl: '/images/shops/dhokra.jpg',
-  },
-  {
-    id: 'shop3',
-    name: 'Ranchi Wooden Toys',
-    description: 'Hand-carved wooden toys and decorative items, a specialty of Ranchi local craftsmen.',
-    position: { lat: 23.3441, lng: 85.3096 }, // Ranchi
-    rating: 4.5,
-    visitCount: 980,
-    category: 'Toys & Decor',
-    imageUrl: '/images/shops/wooden_toys.jpg',
-  },
-  {
-    id: 'shop4',
-    name: 'Bamboo Wonders of Dumka',
-    description: 'A wide range of bamboo products, from furniture to decorative pieces, sourced from Dumka.',
-    position: { lat: 24.2655, lng: 87.2464 }, // Dumka
-    rating: 4.6,
-    visitCount: 1500,
-    category: 'Home Goods',
-    imageUrl: '/images/shops/bamboo.jpg',
-  },
-  {
-    id: 'shop5',
-    name: 'Hazaribagh Terracotta',
-    description: 'Beautiful terracotta pottery and sculptures from the Hazaribagh region.',
-    position: { lat: 23.9994, lng: 85.3657 }, // Hazaribagh
     rating: 4.7,
-    visitCount: 1800,
-    category: 'Pottery',
+    visitCount: 1500,
+    position: { lat: 23.3441, lng: 85.3096 },
+  },
+  {
+    id: '3',
+    name: 'Wooden Toys of Jharkhand',
+    description: 'Traditional handmade wooden toys for all ages.',
+    imageUrl: '/images/shops/wooden_toys.jpg',
+    rating: 4.6,
+    visitCount: 980,
+    position: { lat: 23.35, lng: 85.32 },
+  },
+  {
+    id: '4',
+    name: 'Bamboo Workshop',
+    description: 'Beautifully crafted bamboo items and furniture.',
+    imageUrl: '/images/shops/bamboo.jpg',
+    rating: 4.9,
+    visitCount: 2100,
+    position: { lat: 24.21, lng: 84.45 },
+  },
+    {
+    id: '5',
+    name: 'Terracotta Pottery',
+    description: 'Handmade terracotta pots and decorative items.',
     imageUrl: '/images/shops/terracotta.jpg',
+    rating: 4.5,
+    visitCount: 850,
+    position: { lat: 23.99, lng: 86.42 },
   },
 ];

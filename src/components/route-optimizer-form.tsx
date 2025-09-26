@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -24,7 +24,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { routeOptimizer, RouteOptimizerOutput } from '@/ai/flows/route-optimizer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-const destinations = [
+const initialDestinations = [
   "Dassam Falls", 
   "Hundru Falls", 
   "Netarhat", 
@@ -49,8 +49,8 @@ const destinations = [
 ];
 
 const formSchema = z.object({
-  selectedDestinations: z.array(z.string()).refine(value => value.length >= 2, {
-    message: "Please select at least two destinations.",
+  selectedDestinations: z.array(z.string()).refine(value => value.length >= 1, {
+    message: "Please select at least one destination.",
   }),
   travelMode: z.enum(['Driving', 'Biking', 'Train']),
   startPoint: z.string().optional(),
@@ -60,20 +60,38 @@ const formSchema = z.object({
   analyzeTraffic: z.boolean(),
 });
 
-export function RouteOptimizerForm() {
+interface RouteOptimizerFormProps {
+  origin?: string;
+  destination?: string;
+  name?: string;
+}
+
+export function RouteOptimizerForm({ origin, destination, name }: RouteOptimizerFormProps) {
   const [loading, setLoading] = useState(false);
   const [route, setRoute] = useState<RouteOptimizerOutput | null>(null);
+  const [destinations, setDestinations] = useState(initialDestinations);
+
+  useEffect(() => {
+    if (name && !initialDestinations.includes(name)) {
+      setDestinations(prev => {
+        if (prev.includes(name)) return prev;
+        return [...prev, name];
+      });
+    }
+  }, [name]);
+
+  const sortedDestinations = useMemo(() => [...destinations].sort(), [destinations]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      selectedDestinations: [],
+      selectedDestinations: name ? [name] : [],
       travelMode: 'Driving',
-      startPoint: '',
-      endPoint: '',
-      estimateCost: false,
-      getWeather: false,
-      analyzeTraffic: false,
+      startPoint: origin || '',
+      endPoint: destination || '',
+      estimateCost: true,
+      getWeather: true,
+      analyzeTraffic: true,
     },
   });
 
@@ -103,8 +121,24 @@ export function RouteOptimizerForm() {
 
   const handleNewTrip = () => {
     setRoute(null);
-    form.reset();
+    form.reset({
+        selectedDestinations: [],
+        travelMode: 'Driving',
+        startPoint: '',
+        endPoint: '',
+        estimateCost: false,
+        getWeather: false,
+        analyzeTraffic: false,
+    });
   }
+
+  // Automatically submit the form if we have a pre-filled destination
+  useEffect(() => {
+    if (origin && destination && name) {
+      form.handleSubmit(onSubmit)();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [origin, destination, name]);
 
   return (
     <div className="grid md:grid-cols-2 gap-8 items-start">
@@ -120,10 +154,10 @@ export function RouteOptimizerForm() {
               render={() => (
                 <FormItem>
                   <FormLabel className="font-semibold">Destinations</FormLabel>
-                  <FormDescription>Select at least two places to visit.</FormDescription>
+                  <FormDescription>Select the places you want to visit.</FormDescription>
                   <ScrollArea className="h-48 mt-2 border rounded-md p-4">
                     <div className="space-y-2">
-                    {destinations.sort().map((item) => (
+                    {sortedDestinations.map((item) => (
                       <FormField
                         key={item}
                         control={form.control}
@@ -183,15 +217,16 @@ export function RouteOptimizerForm() {
             />
 
             <div>
-              <FormLabel className="font-semibold">Start & End Points (Optional)</FormLabel>
+              <FormLabel className="font-semibold">Start & End Points</FormLabel>
               <div className="grid md:grid-cols-2 gap-4 mt-2">
                 <FormField
                   control={form.control}
                   name="startPoint"
                   render={({ field }) => (
                     <FormItem>
+                       <FormLabel className="text-xs text-muted-foreground">From</FormLabel>
                       <FormControl>
-                        <Input placeholder="Start Point" {...field} />
+                        <Input placeholder="Current Location" {...field} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -201,8 +236,9 @@ export function RouteOptimizerForm() {
                   name="endPoint"
                   render={({ field }) => (
                     <FormItem>
+                      <FormLabel className="text-xs text-muted-foreground">To</FormLabel>
                       <FormControl>
-                        <Input placeholder="End Point" {...field} />
+                        <Input placeholder="Final Destination" {...field} />
                       </FormControl>
                     </FormItem>
                   )}
@@ -258,7 +294,7 @@ export function RouteOptimizerForm() {
                 </div>
             </div>
             
-            <Button type="submit" disabled={loading || form.getValues("selectedDestinations").length < 2} size="lg" className="w-full">
+            <Button type="submit" disabled={loading || form.getValues("selectedDestinations").length < 1} size="lg" className="w-full">
               {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               Generate Optimized Route
             </Button>
