@@ -1,9 +1,6 @@
 {
-  "/(main)/map/page": "app/(main)/map/page.js",
+  "/(main)/marketplace/page": "app/(main)/marketplace/page.js",
   "/(main)/page": "app/(main)/page.js",
-  "/(main)/street-view/page": "app/(main)/street-view/page.js",
-  "/api/geocode/route": "app/api/geocode/route.js",
-  "/api/streetview-check/route": "app/api/streetview-check/route.js",
-  "/auth/login/page": "app/auth/login/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/(main)/route-optimizer/page": "app/(main)/route-optimizer/page.js",
+  "/_not-found/page": "app/_not-found/page.js"
 }

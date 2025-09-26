@@ -2,8 +2,8 @@
   "node": {
     "4075e053d0652a69b6780d0a37896e55f0df19f374": {
       "workers": {
-        "app/(main)/map/page": {
-          "moduleId": "[project]/.next-internal/server/app/(main)/map/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+        "app/(main)/marketplace/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/marketplace/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "multilingualChatbot",
           "filename": "src/ai/flows/multilingual-chatbot.ts"
@@ -14,20 +14,35 @@
           "exportedName": "multilingualChatbot",
           "filename": "src/ai/flows/multilingual-chatbot.ts"
         },
-        "app/(main)/street-view/page": {
-          "moduleId": "[project]/.next-internal/server/app/(main)/street-view/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+        "app/(main)/route-optimizer/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/route-optimizer/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/ai/flows/route-optimizer.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false,
           "exportedName": "multilingualChatbot",
           "filename": "src/ai/flows/multilingual-chatbot.ts"
         }
       },
       "layer": {
-        "app/(main)/map/page": "action-browser",
+        "app/(main)/marketplace/page": "action-browser",
         "app/(main)/page": "action-browser",
-        "app/(main)/street-view/page": "action-browser"
+        "app/(main)/route-optimizer/page": "action-browser"
       },
       "filename": "src/ai/flows/multilingual-chatbot.ts",
       "exportedName": "multilingualChatbot"
+    },
+    "40ad88fb108386a33c151ba11913e2f037d56df981": {
+      "workers": {
+        "app/(main)/route-optimizer/page": {
+          "moduleId": "[project]/.next-internal/server/app/(main)/route-optimizer/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/ai/flows/multilingual-chatbot.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/ai/flows/route-optimizer.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "routeOptimizer",
+          "filename": "src/ai/flows/route-optimizer.ts"
+        }
+      },
+      "layer": {
+        "app/(main)/route-optimizer/page": "action-browser"
+      },
+      "filename": "src/ai/flows/route-optimizer.ts",
+      "exportedName": "routeOptimizer"
     }
   },
   "edge": {},
